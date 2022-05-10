@@ -2,7 +2,7 @@
   "name": "team-project-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "memx86-team-project-wallet.netlify.app",
+  "homepage": "https://memx86-team-project-wallet.netlify.app/",
   "dependencies": {
     "@nateradebaugh/react-datetime": "^4.4.11",
     "@reduxjs/toolkit": "^1.8.1",
