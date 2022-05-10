@@ -7,18 +7,22 @@ import Home from "pages/Home";
 import Registration from "pages/Registration";
 import Login from "pages/Login";
 import DiagramTab from "components/DiagramTab";
+import Header from "components/Header";
+import Container from "components/Container";
 
 const App = () => {
   return (
     <Fragment>
-      App
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Registration />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/diagram" element={<DiagramTab />} />
-        <Route path="*" element={<Home />} />
-      </Routes>
+      <Header />
+      <Container>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Registration />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/diagram" element={<DiagramTab />} />
+          <Route path="*" element={<Home />} />
+        </Routes>
+      </Container>
       <ToastContainer hideProgressBar />
     </Fragment>
   );
