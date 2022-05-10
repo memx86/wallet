@@ -8,10 +8,13 @@ import Registration from "pages/Registration";
 import Login from "pages/Login";
 import DiagramTab from "components/DiagramTab";
 
+import AuthForm from "components/AuthForm"; // Do not forget to remove
+
 const App = () => {
   return (
     <Fragment>
       App
+      <AuthForm />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Registration />} />
