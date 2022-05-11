@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/query";
 import {
   persistStore,
   persistReducer,
@@ -10,7 +11,9 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+
 import { sessionReducer } from "./session";
+import { walletApi } from "./wallet";
 
 const persistSession = {
   key: "wallet/session",
@@ -20,6 +23,7 @@ const persistSession = {
 const store = configureStore({
   reducer: {
     session: persistReducer(persistSession, sessionReducer),
+    [walletApi.reducerPath]: walletApi.reducer,
   },
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({
@@ -27,9 +31,12 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
+    walletApi.middleware,
   ],
   devTools: process.env.NODE_ENV === "development",
 });
+
+setupListeners(store.dispatch);
 
 const persistor = persistStore(store);
 

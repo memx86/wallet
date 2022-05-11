@@ -14,11 +14,11 @@ const sessionSlice = createSlice({
       state.isAuth = false;
       state.token = null;
     },
-    token(state, { payload }) {
+    setToken(state, { payload }) {
       state.token = payload;
     },
   },
 });
 
-export const { loggedIn, loggedOff, token } = sessionSlice.actions;
+export const { loggedIn, loggedOff, setToken } = sessionSlice.actions;
 export const sessionReducer = sessionSlice.reducer;
