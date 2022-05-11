@@ -9,29 +9,65 @@
   min-height: 174px;
   background-color: var(--household-cl);
   background-image: url(../../assets/images/currency/vector-mb-1x.png);
+  background-image: -webkit-image-set(
+    url(../../assets/images/currency/vector-mb-1x.webp) 1x
+  );
+  background-image: image-set(
+    url(../../assets/images/currency/vector-mb-1x.webp) 1x
+  );
   background-repeat: no-repeat;
   background-size: contain;
   background-position: bottom;
 
   @include mq(retina) {
     background-image: url(../../assets/images/currency/vector-mb-2x.png);
+    background-image: -webkit-image-set(
+      url(../../assets/images/currency/vector-mb-2x.webp) 2x
+    );
+    background-image: image-set(
+      url(../../assets/images/currency/vector-mb-2x.webp) 2x
+    );
   }
 
   @include mq(tablet) {
     min-height: 182px;
     background-image: url(../../assets/images/currency/vector-tab-1x.png);
+    background-image: -webkit-image-set(
+      url(../../assets/images/currency/vector-tab-1x.webp) 1x
+    );
+    background-image: image-set(
+      url(../../assets/images/currency/vector-tab-1x.webp) 1x
+    );
 
     @include mq(retina) {
       background-image: url(../../assets/images/currency/vector-tab-2x.png);
+      background-image: -webkit-image-set(
+        url(../../assets/images/currency/vector-tab-2x.webp) 2x
+      );
+      background-image: image-set(
+        url(../../assets/images/currency/vector-tab-2x.webp) 2x
+      );
     }
   }
 
   @include mq(desktop) {
     min-height: 347px;
     background-image: url(../../assets/images/currency/vector-desk-1x.png);
+    background-image: -webkit-image-set(
+      url(../../assets/images/currency/vector-desk-1x.webp) 1x
+    );
+    background-image: image-set(
+      url(../../assets/images/currency/vector-desk-1x.webp) 1x
+    );
 
     @include mq(retina) {
       background-image: url(../../assets/images/currency/vector-desk-2x.png);
+      background-image: -webkit-image-set(
+        url(../../assets/images/currency/vector-desk-2x.webp) 2x
+      );
+      background-image: image-set(
+        url(../../assets/images/currency/vector-desk-2x.webp) 2x
+      );
     }
   }
 }

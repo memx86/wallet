@@ -5,7 +5,7 @@ async function fetchCurrency() {
   if (res.ok) {
     return res.json();
   }
-  return await Promise.reject(new Error("not found"));
+  return Promise.reject(new Error("not found"));
 }
 
 export default fetchCurrency;
