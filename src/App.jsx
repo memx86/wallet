@@ -10,6 +10,10 @@ import DiagramTab from "components/DiagramTab";
 import Header from "components/Header";
 import Container from "components/Container";
 
+// Для примера
+import Currency from "components/Currency";
+//
+
 const App = () => {
   return (
     <Fragment>
@@ -23,6 +27,9 @@ const App = () => {
           <Route path="*" element={<Home />} />
         </Routes>
       </Container>
+      {/*  */}
+      <Currency />
+      {/*  */}
       <ToastContainer hideProgressBar />
     </Fragment>
   );
