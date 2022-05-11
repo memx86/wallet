@@ -10,16 +10,14 @@ import { useRefreshQuery } from "redux/wallet";
 import Header from "components/Header";
 import Home from "pages/Home";
 import DiagramTab from "components/DiagramTab";
+import Dashboard from "components/Dashboard";
 import Registration from "pages/Registration";
 import Login from "pages/Login";
 import Container from "components/Container";
 import Loader from "components/Loader";
 import PublicRoute from "components/PublicRoute";
 import PrivateRoute from "components/PrivateRoute";
-
-// Для примера
 import Currency from "components/Currency";
-//
 
 const App = () => {
   const token = useSelector(tokenSelector);
@@ -42,6 +40,14 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
+            path="/home"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
             path="/diagram"
             element={
               <PrivateRoute>
@@ -49,6 +55,7 @@ const App = () => {
               </PrivateRoute>
             }
           />
+          <Route path="/currency" element={<Currency />} />
           <Route
             path="/register"
             element={
@@ -68,9 +75,6 @@ const App = () => {
           <Route path="*" element={<Home />} />
         </Routes>
       </Container>
-      {/*  */}
-      <Currency />
-      {/*  */}
       <ToastContainer hideProgressBar />
     </Fragment>
   );
