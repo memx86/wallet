@@ -1,8 +1,13 @@
-export const SMOBILE_ONLY = { minWidth: 320, maxWidth: 479 };
-export const SMOBILE = { minWidth: 320 };
-export const MOBILE_ONLY = { maxWidth: 767 };
-export const MOBILE = { minWidth: 480 };
-export const TABLET_ONLY = { minWidth: 768, maxWidth: 1279 };
-export const TABLET = { minWidth: 768 };
-export const DESKTOP = { minWidth: 1280 };
-export const NOT_DESKTOP = { maxWidth: 1279 };
+const sMobile = 320;
+const mobile = 480;
+const tablet = 768;
+const desktop = 1280;
+
+export const SMOBILE_ONLY = { minWidth: sMobile, maxWidth: tablet - 1 };
+export const SMOBILE = { minWidth: sMobile };
+export const MOBILE_ONLY = { maxWidth: tablet - 1 };
+export const MOBILE = { minWidth: mobile };
+export const TABLET_ONLY = { minWidth: tablet, maxWidth: desktop - 1 };
+export const TABLET = { minWidth: tablet };
+export const DESKTOP = { minWidth: desktop };
+export const NOT_DESKTOP = { maxWidth: desktop - 1 };
