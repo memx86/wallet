@@ -17,6 +17,10 @@ import Loader from "components/Loader";
 import PublicRoute from "components/PublicRoute";
 import PrivateRoute from "components/PrivateRoute";
 
+// Для примера
+import Currency from "components/Currency";
+//
+
 const App = () => {
   const token = useSelector(tokenSelector);
   const isAuth = useSelector(isAuthSelector);
@@ -64,6 +68,9 @@ const App = () => {
           <Route path="*" element={<Home />} />
         </Routes>
       </Container>
+      {/*  */}
+      <Currency />
+      {/*  */}
       <ToastContainer hideProgressBar />
     </Fragment>
   );
