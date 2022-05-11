@@ -10,13 +10,10 @@ import DiagramTab from "components/DiagramTab";
 import Header from "components/Header";
 import Container from "components/Container";
 
-import AuthForm from "components/AuthForm"; // Do not forget to remove
-
 const App = () => {
   return (
     <Fragment>
       <Header />
-      <AuthForm />
       <Container>
         <Routes>
           <Route path="/" element={<Home />} />

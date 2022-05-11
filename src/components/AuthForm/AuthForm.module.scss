@@ -3,23 +3,33 @@
 .form {
   display: flex;
   flex-direction: column;
-  padding-top: 107px;
-  padding-bottom: 107px;
+  align-items: center;
+  justify-content: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  min-height: 568px;
 
   @include m.mq(tablet) {
-    align-items: center;
     width: 533px;
     min-height: 468px;
+    border-radius: 20px;
     padding-top: 40px;
     padding-bottom: 60px;
-    padding-left: 60px;
-    padding-right: 60px;
-    border-radius: 20px;
   }
 }
 
-.image {
-  width: 10px;
+.titleWrapper {
+  position: relative;
+  margin-bottom: 60px;
+  margin-left: 40px;
+}
+
+.walletSvg {
+  display: block;
+  margin: 0;
+  position: absolute;
+  top: calc(100% / 2 - 75px);
+  left: calc(100% / 2 - 100px);
 }
 
 .title {
@@ -30,11 +40,25 @@
   color: var(--main-text-cl);
   text-transform: capitalize;
   text-align: center;
-  margin-bottom: 60px;
+}
+
+.inputWrapper {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.iconSvg {
+  composes: walletSvg;
+  top: calc(100% / 2 - 76px);
+  left: calc(100% / 2 - 130px);
+
+  @include m.mq(tablet) {
+    top: calc(100% / 2 - 76px);
+    left: calc(100% / 2 - 195px);
+  }
 }
 
 .input {
-  margin-bottom: 40px;
   padding-left: 50px;
   padding-right: 50px;
   padding-top: 8px;
@@ -42,7 +66,7 @@
   width: 280px;
   border: transparent;
   outline: transparent;
-  border-bottom: 1px solid var(--input-border-cl);
+  border-bottom: 1px solid var(--faded-secondary-cl);
 
   font-family: Raleway;
   font-weight: 400;
@@ -51,16 +75,20 @@
   color: var(--accept-cl);
 
   &::placeholder {
-    color: var(--input-placeholder-cl);
+    color: var(--faded-cl);
   }
 
   &::placeholder::first-letter {
     text-transform: capitalize;
-    color: var(--input-placeholder-cl);
+    color: var(--faded-cl);
   }
 
   &:focus {
     border-bottom: 1px solid var(--accept-cl);
+  }
+
+  &:focus + .iconSvg {
+    --color1: var(--accept-cl);
   }
 
   @include m.mq(tablet) {
@@ -68,13 +96,20 @@
   }
 }
 
-.enter {
+.inputError {
+  border-bottom: 1px solid var(--reject-cl);
+  --color1: var(--reject-cl);
+}
+
+.enterBtn {
+  display: block;
   width: 280px;
   min-height: 50px;
   padding-left: 30px;
   padding-right: 30px;
   padding-top: 10px;
   padding-bottom: 10px;
+  margin: 0 auto;
   margin-bottom: 20px;
   border: none;
   background-color: var(--accept-cl);
@@ -94,14 +129,26 @@
   }
 }
 
-.login {
-  composes: enter;
+.loginBtn {
+  composes: enterBtn;
   margin-bottom: 0;
   border: 1px solid var(--accent-cl);
   background-color: var(--main-bg-cl);
   color: var(--accent-cl);
 }
 
+.errorWrapper {
+  position: relative;
+}
+
 .error {
-  color: red;
+  position: absolute;
+  top: calc(100% / 2 - 31px);
+  left: 0;
+  color: var(--reject-cl);
+
+  font-family: Raleway;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.5;
 }

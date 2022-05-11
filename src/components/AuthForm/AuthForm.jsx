@@ -1,6 +1,12 @@
 import s from "./AuthForm.module.scss";
 import { Formik } from "formik";
 import * as yup from "yup";
+import spriteSvg from "assets/images/form-images/sprite.svg";
+
+export const authType = {
+  login: "login",
+  registration: "registration",
+};
 
 const validationsSchema = yup.object().shape({
   name: yup
@@ -12,6 +18,11 @@ const validationsSchema = yup.object().shape({
   password: yup
     .string()
     .min(6, "Password must be at least 6 characters")
+    .max(12, "Password must not contain more than 12 characters")
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
+      "Password must contain six characters, at least one letter and one number"
+    )
     .required("Password is required"),
   confirmPassword: yup
     .string()
@@ -20,8 +31,10 @@ const validationsSchema = yup.object().shape({
 });
 
 const AuthForm = ({ type }) => {
+  const isRegister = type === authType.registration;
+
   return (
-    <>
+    <div className={s.form}>
       <Formik
         initialValues={{
           name: "",
@@ -46,83 +59,120 @@ const AuthForm = ({ type }) => {
           handleSubmit,
           dirty,
         }) => (
-          <div className={s.form}>
-            <div>
-              <img src="" alt="" className={s.image} />
+          <div>
+            <div className={s.titleWrapper}>
+              <svg className={s.walletSvg} style={{ width: "30px" }}>
+                <use href={`${spriteSvg}#wallet`}></use>
+              </svg>
               <h1 className={s.title}>Wallet</h1>
             </div>
-
-            <label htmlFor="name"></label>
-            <input
-              className={s.input}
-              id="name"
-              type="name"
-              name="name"
-              placeholder="Enter your name"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.name}
-            />
-            {touched.name && errors.name && (
-              <p className={s.error}>{errors.name}</p>
-            )}
-            <label htmlFor="email"></label>
-            <input
-              className={s.input}
-              id="email"
-              type="email"
-              name="email"
-              placeholder="E-mail"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
-            />
+            <div className={s.inputWrapper}>
+              <label htmlFor="email"></label>
+              <input
+                className={s.input}
+                id="email"
+                type="email"
+                name="email"
+                placeholder="E-mail"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+              />
+              <svg className={s.iconSvg} style={{ width: "24px" }}>
+                <use href={`${spriteSvg}#email`}></use>
+              </svg>
+            </div>
             {touched.email && errors.email && (
-              <p className={s.error}>{errors.email}</p>
+              <div className={s.errorWrapper}>
+                <p className={s.error}>{errors.email}</p>
+              </div>
             )}
-            <label htmlFor="password"></label>
-            <input
-              className={s.input}
-              id="password"
-              type="password"
-              name="password"
-              placeholder="Password"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
-            />
+            <div className={s.inputWrapper}>
+              <label htmlFor="password"></label>
+              <input
+                className={s.input}
+                id="password"
+                type="password"
+                name="password"
+                placeholder="Password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+              />
+              <svg className={s.iconSvg} style={{ width: "24px" }}>
+                <use href={`${spriteSvg}#lock`}></use>
+              </svg>
+            </div>
             {touched.password && errors.password && (
-              <p className={s.error}>{errors.password}</p>
+              <div className={s.errorWrapper}>
+                <p className={s.error}>{errors.password}</p>
+              </div>
             )}
-            <label htmlFor="confirmPassword"></label>
-            <input
-              className={s.input}
-              id="confirmPassword"
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm password"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.confirmPassword}
-            />
-            {touched.confirmPassword && errors.confirmPassword && (
-              <p className={s.error}>{errors.confirmPassword}</p>
-            )}
+            {isRegister ? (
+              <>
+                <div className={s.inputWrapper}>
+                  <label htmlFor="confirmPassword"></label>
+                  <input
+                    className={s.input}
+                    id="confirmPassword"
+                    type="password"
+                    name="confirmPassword"
+                    placeholder="Confirm password"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.confirmPassword}
+                  />
+                  <svg className={s.iconSvg} style={{ width: "24px" }}>
+                    <use href={`${spriteSvg}#lock`}></use>
+                  </svg>
+                </div>
+                {touched.confirmPassword && errors.confirmPassword && (
+                  <div className={s.errorWrapper}>
+                    <p className={s.error}>{errors.confirmPassword}</p>
+                  </div>
+                )}
+              </>
+            ) : null}
+            {isRegister ? (
+              <>
+                <div className={s.inputWrapper}>
+                  <label htmlFor="name"></label>
+                  <input
+                    className={s.input}
+                    id="name"
+                    type="name"
+                    name="name"
+                    placeholder="Enter your name"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.name}
+                  />
+                  <svg className={s.iconSvg} style={{ width: "24px" }}>
+                    <use href={`${spriteSvg}#account-box`}></use>
+                  </svg>
+                </div>
+                {touched.name && errors.name && (
+                  <div className={s.errorWrapper}>
+                    <p className={s.error}>{errors.name}</p>
+                  </div>
+                )}
+              </>
+            ) : null}
             <button
-              className={s.enter}
+              className={s.enterBtn}
               type="submit"
               disabled={!isValid && !dirty}
               onClick={handleSubmit}
             >
-              Login
+              {isRegister ? "Register" : "Login"}
             </button>
-            <button className={s.login} type="button">
-              Sign Up
+            <button className={s.loginBtn} type="button">
+              {isRegister ? "Login" : "Sign Up"}
             </button>
           </div>
         )}
       </Formik>
-    </>
+    </div>
   );
 };
 export default AuthForm;
