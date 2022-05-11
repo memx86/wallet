@@ -7,21 +7,25 @@ import Home from "pages/Home";
 import Registration from "pages/Registration";
 import Login from "pages/Login";
 import DiagramTab from "components/DiagramTab";
+import Header from "components/Header";
+import Container from "components/Container";
 
 import AuthForm from "components/AuthForm"; // Do not forget to remove
 
 const App = () => {
   return (
     <Fragment>
-      App
+      <Header />
       <AuthForm />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Registration />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/diagram" element={<DiagramTab />} />
-        <Route path="*" element={<Home />} />
-      </Routes>
+      <Container>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Registration />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/diagram" element={<DiagramTab />} />
+          <Route path="*" element={<Home />} />
+        </Routes>
+      </Container>
       <ToastContainer hideProgressBar />
     </Fragment>
   );
