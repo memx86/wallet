@@ -1,0 +1,22 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--faded-cl);
+    font-size: 18px;
+
+}
+
+.name {
+    text-transform: capitalize;
+}
+
+.button {
+    padding: 0;
+    border: 0;
+    display: inline-flex;
+    align-items: center;
+    color: var(--faded-cl);
+    background-color: transparent;
+    cursor: pointer;
+}
