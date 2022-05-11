@@ -33,7 +33,7 @@
   margin-bottom: 60px;
 }
 
-.email {
+.input {
   margin-bottom: 40px;
   padding-left: 50px;
   padding-right: 50px;
@@ -68,10 +68,6 @@
   }
 }
 
-.password {
-  composes: email;
-}
-
 .enter {
   width: 280px;
   min-height: 50px;
@@ -101,9 +97,9 @@
 .login {
   composes: enter;
   margin-bottom: 0;
-  border: 1px solid var(--secondary-button-cl);
+  border: 1px solid var(--accent-cl);
   background-color: var(--main-bg-cl);
-  color: var(--secondary-button-cl);
+  color: var(--accent-cl);
 }
 
 .error {

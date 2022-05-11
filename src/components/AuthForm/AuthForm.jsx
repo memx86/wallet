@@ -2,26 +2,26 @@ import s from "./AuthForm.module.scss";
 import { Formik } from "formik";
 import * as yup from "yup";
 
-const AuthForm = () => {
-  const validationsSchema = yup.object().shape({
-    name: yup
-      .string()
-      .min(1, "Name must be at least 1 characters")
-      .max(12, "Name must not contain more than 12 characters")
-      .required("Name is required"),
-    email: yup.string().email("Email is invalid").required("Email is required"),
-    password: yup
-      .string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
-    confirmPassword: yup
-      .string()
-      .oneOf([yup.ref("password"), null], "Password must match")
-      .required("Confirm password is required"),
-  });
+const validationsSchema = yup.object().shape({
+  name: yup
+    .string()
+    .min(1, "Name must be at least 1 characters")
+    .max(12, "Name must not contain more than 12 characters")
+    .required("Name is required"),
+  email: yup.string().email("Email is invalid").required("Email is required"),
+  password: yup
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password")], "Password must match")
+    .required("Confirm password is required"),
+});
 
+const AuthForm = ({ type }) => {
   return (
-    <div>
+    <>
       <Formik
         initialValues={{
           name: "",
@@ -52,9 +52,23 @@ const AuthForm = () => {
               <h1 className={s.title}>Wallet</h1>
             </div>
 
+            <label htmlFor="name"></label>
+            <input
+              className={s.input}
+              id="name"
+              type="name"
+              name="name"
+              placeholder="Enter your name"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.name}
+            />
+            {touched.name && errors.name && (
+              <p className={s.error}>{errors.name}</p>
+            )}
             <label htmlFor="email"></label>
             <input
-              className={s.email}
+              className={s.input}
               id="email"
               type="email"
               name="email"
@@ -68,12 +82,13 @@ const AuthForm = () => {
             )}
             <label htmlFor="password"></label>
             <input
-              className={s.password}
+              className={s.input}
               id="password"
               type="password"
               name="password"
               placeholder="Password"
               onChange={handleChange}
+              onBlur={handleBlur}
               value={values.password}
             />
             {touched.password && errors.password && (
@@ -81,12 +96,13 @@ const AuthForm = () => {
             )}
             <label htmlFor="confirmPassword"></label>
             <input
-              className={s.password}
+              className={s.input}
               id="confirmPassword"
               type="password"
               name="confirmPassword"
               placeholder="Confirm password"
               onChange={handleChange}
+              onBlur={handleBlur}
               value={values.confirmPassword}
             />
             {touched.confirmPassword && errors.confirmPassword && (
@@ -106,7 +122,7 @@ const AuthForm = () => {
           </div>
         )}
       </Formik>
-    </div>
+    </>
   );
 };
 export default AuthForm;
