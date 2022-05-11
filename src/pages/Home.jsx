@@ -1,4 +1,18 @@
+import { Fragment } from "react";
+import { useSelector } from "react-redux";
+
+import { isAuthSelector } from "redux/session";
+
+import Dashboard from "./Dashboard";
+import Login from "./Login";
+
 const Home = () => {
-  return <div>Home</div>;
+  const isAuth = useSelector(isAuthSelector);
+  return (
+    <Fragment>
+      {isAuth && <Dashboard />}
+      {!isAuth && <Login />}
+    </Fragment>
+  );
 };
 export default Home;
