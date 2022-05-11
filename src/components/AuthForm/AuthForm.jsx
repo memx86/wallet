@@ -34,136 +34,134 @@ const AuthForm = ({ type }) => {
   const isRegister = type === authType.registration;
 
   return (
-    <div className={s.form}>
-      <Formik
-        initialValues={{
-          name: "",
-          email: "",
-          password: "",
-          confirmPassword: "",
-        }}
-        validateOnBlur
-        onSubmit={(values) => {
-          alert(JSON.stringify(values, null, 2));
-          console.log(values);
-        }}
-        validationSchema={validationsSchema}
-      >
-        {({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          isValid,
-          handleSubmit,
-          dirty,
-        }) => (
-          <form onSubmit={handleSubmit}>
-            <div className={s.titleWrapper}>
-              <svg className={s.walletSvg} style={{ width: "30px" }}>
-                <use href={`${spriteSvg}#wallet`}></use>
-              </svg>
-              <h1 className={s.title}>Wallet</h1>
+    <Formik
+      initialValues={{
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      }}
+      validateOnBlur
+      onSubmit={(values) => {
+        alert(JSON.stringify(values, null, 2));
+        console.log(values);
+      }}
+      validationSchema={validationsSchema}
+    >
+      {({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        isValid,
+        handleSubmit,
+        dirty,
+      }) => (
+        <form onSubmit={handleSubmit} className={s.form}>
+          <div className={s.titleWrapper}>
+            <svg style={{ width: "30px", height: "30px" }}>
+              <use href={`${spriteSvg}#wallet`}></use>
+            </svg>
+            <h1 className={s.title}>Wallet</h1>
+          </div>
+          <div className={s.inputWrapper}>
+            <input
+              className={s.input}
+              type="email"
+              name="email"
+              placeholder="E-mail"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.email}
+            />
+            <svg className={s.iconSvg} style={{ width: "24px" }}>
+              <use href={`${spriteSvg}#email`}></use>
+            </svg>
+          </div>
+          {touched.email && errors.email && (
+            <div className={s.errorWrapper}>
+              <p className={s.error}>{errors.email}</p>
             </div>
-            <div className={s.inputWrapper}>
-              <input
-                className={s.input}
-                type="email"
-                name="email"
-                placeholder="E-mail"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-              />
-              <svg className={s.iconSvg} style={{ width: "24px" }}>
-                <use href={`${spriteSvg}#email`}></use>
-              </svg>
+          )}
+          <div className={s.inputWrapper}>
+            <input
+              className={s.input}
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.password}
+            />
+            <svg className={s.iconSvg} style={{ width: "24px" }}>
+              <use href={`${spriteSvg}#lock`}></use>
+            </svg>
+          </div>
+          {touched.password && errors.password && (
+            <div className={s.errorWrapper}>
+              <p className={s.error}>{errors.password}</p>
             </div>
-            {touched.email && errors.email && (
-              <div className={s.errorWrapper}>
-                <p className={s.error}>{errors.email}</p>
+          )}
+          {isRegister ? (
+            <>
+              <div className={s.inputWrapper}>
+                <input
+                  className={s.input}
+                  type="password"
+                  name="confirmPassword"
+                  placeholder="Confirm password"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.confirmPassword}
+                />
+                <svg className={s.iconSvg} style={{ width: "24px" }}>
+                  <use href={`${spriteSvg}#lock`}></use>
+                </svg>
               </div>
-            )}
-            <div className={s.inputWrapper}>
-              <input
-                className={s.input}
-                type="password"
-                name="password"
-                placeholder="Password"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.password}
-              />
-              <svg className={s.iconSvg} style={{ width: "24px" }}>
-                <use href={`${spriteSvg}#lock`}></use>
-              </svg>
-            </div>
-            {touched.password && errors.password && (
-              <div className={s.errorWrapper}>
-                <p className={s.error}>{errors.password}</p>
+              {touched.confirmPassword && errors.confirmPassword && (
+                <div className={s.errorWrapper}>
+                  <p className={s.error}>{errors.confirmPassword}</p>
+                </div>
+              )}
+            </>
+          ) : null}
+          {isRegister ? (
+            <>
+              <div className={s.inputWrapper}>
+                <input
+                  className={s.input}
+                  type="name"
+                  name="name"
+                  placeholder="Enter your name"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.name}
+                />
+                <svg className={s.iconSvg} style={{ width: "24px" }}>
+                  <use href={`${spriteSvg}#account-box`}></use>
+                </svg>
               </div>
-            )}
-            {isRegister ? (
-              <>
-                <div className={s.inputWrapper}>
-                  <input
-                    className={s.input}
-                    type="password"
-                    name="confirmPassword"
-                    placeholder="Confirm password"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.confirmPassword}
-                  />
-                  <svg className={s.iconSvg} style={{ width: "24px" }}>
-                    <use href={`${spriteSvg}#lock`}></use>
-                  </svg>
+              {touched.name && errors.name && (
+                <div className={s.errorWrapper}>
+                  <p className={s.error}>{errors.name}</p>
                 </div>
-                {touched.confirmPassword && errors.confirmPassword && (
-                  <div className={s.errorWrapper}>
-                    <p className={s.error}>{errors.confirmPassword}</p>
-                  </div>
-                )}
-              </>
-            ) : null}
-            {isRegister ? (
-              <>
-                <div className={s.inputWrapper}>
-                  <input
-                    className={s.input}
-                    type="name"
-                    name="name"
-                    placeholder="Enter your name"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.name}
-                  />
-                  <svg className={s.iconSvg} style={{ width: "24px" }}>
-                    <use href={`${spriteSvg}#account-box`}></use>
-                  </svg>
-                </div>
-                {touched.name && errors.name && (
-                  <div className={s.errorWrapper}>
-                    <p className={s.error}>{errors.name}</p>
-                  </div>
-                )}
-              </>
-            ) : null}
-            <button
-              className={s.enterBtn}
-              type="submit"
-              disabled={!isValid && !dirty}
-            >
-              {isRegister ? "Register" : "Login"}
-            </button>
-            <button className={s.loginBtn} type="button">
-              {isRegister ? "Login" : "Sign Up"}
-            </button>
-          </form>
-        )}
-      </Formik>
-    </div>
+              )}
+            </>
+          ) : null}
+          <button
+            className={s.enterBtn}
+            type="submit"
+            disabled={!isValid && !dirty}
+          >
+            {isRegister ? "Register" : "Login"}
+          </button>
+          <button className={s.loginBtn} type="button">
+            {isRegister ? "Login" : "Sign Up"}
+          </button>
+        </form>
+      )}
+    </Formik>
   );
 };
 export default AuthForm;
