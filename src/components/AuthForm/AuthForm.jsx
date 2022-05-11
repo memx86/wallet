@@ -59,7 +59,7 @@ const AuthForm = ({ type }) => {
           handleSubmit,
           dirty,
         }) => (
-          <div>
+          <form onSubmit={handleSubmit}>
             <div className={s.titleWrapper}>
               <svg className={s.walletSvg} style={{ width: "30px" }}>
                 <use href={`${spriteSvg}#wallet`}></use>
@@ -67,10 +67,8 @@ const AuthForm = ({ type }) => {
               <h1 className={s.title}>Wallet</h1>
             </div>
             <div className={s.inputWrapper}>
-              <label htmlFor="email"></label>
               <input
                 className={s.input}
-                id="email"
                 type="email"
                 name="email"
                 placeholder="E-mail"
@@ -88,10 +86,8 @@ const AuthForm = ({ type }) => {
               </div>
             )}
             <div className={s.inputWrapper}>
-              <label htmlFor="password"></label>
               <input
                 className={s.input}
-                id="password"
                 type="password"
                 name="password"
                 placeholder="Password"
@@ -111,10 +107,8 @@ const AuthForm = ({ type }) => {
             {isRegister ? (
               <>
                 <div className={s.inputWrapper}>
-                  <label htmlFor="confirmPassword"></label>
                   <input
                     className={s.input}
-                    id="confirmPassword"
                     type="password"
                     name="confirmPassword"
                     placeholder="Confirm password"
@@ -136,10 +130,8 @@ const AuthForm = ({ type }) => {
             {isRegister ? (
               <>
                 <div className={s.inputWrapper}>
-                  <label htmlFor="name"></label>
                   <input
                     className={s.input}
-                    id="name"
                     type="name"
                     name="name"
                     placeholder="Enter your name"
@@ -162,14 +154,13 @@ const AuthForm = ({ type }) => {
               className={s.enterBtn}
               type="submit"
               disabled={!isValid && !dirty}
-              onClick={handleSubmit}
             >
               {isRegister ? "Register" : "Login"}
             </button>
             <button className={s.loginBtn} type="button">
               {isRegister ? "Login" : "Sign Up"}
             </button>
-          </div>
+          </form>
         )}
       </Formik>
     </div>

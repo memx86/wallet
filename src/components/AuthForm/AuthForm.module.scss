@@ -1,4 +1,4 @@
-@use "../../stylesheet/mixin" as m;
+@import "stylesheet/mixin.scss";
 
 .form {
   display: flex;
@@ -9,7 +9,7 @@
   padding-bottom: 30px;
   min-height: 568px;
 
-  @include m.mq(tablet) {
+  @include mq(tablet) {
     width: 533px;
     min-height: 468px;
     border-radius: 20px;
@@ -36,7 +36,6 @@
   font-family: Poppins;
   font-weight: 700;
   font-size: 30px;
-  line-height: 1.5;
   color: var(--main-text-cl);
   text-transform: capitalize;
   text-align: center;
@@ -52,7 +51,7 @@
   top: calc(100% / 2 - 76px);
   left: calc(100% / 2 - 130px);
 
-  @include m.mq(tablet) {
+  @include mq(tablet) {
     top: calc(100% / 2 - 76px);
     left: calc(100% / 2 - 195px);
   }
@@ -91,7 +90,7 @@
     --color1: var(--accept-cl);
   }
 
-  @include m.mq(tablet) {
+  @include mq(tablet) {
     width: 410px;
   }
 }
@@ -124,7 +123,7 @@
   text-transform: uppercase;
   color: var(--main-bg-cl);
 
-  @include m.mq(tablet) {
+  @include mq(tablet) {
     width: 300px;
   }
 }
@@ -143,12 +142,10 @@
 
 .error {
   position: absolute;
-  top: calc(100% / 2 - 31px);
+  top: calc(100% / 2 - 35px);
   left: 0;
   color: var(--reject-cl);
 
   font-family: Raleway;
-  font-weight: 400;
   font-size: 12px;
-  line-height: 1.5;
 }
