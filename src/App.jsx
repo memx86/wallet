@@ -36,46 +36,46 @@ const App = () => {
   return (
     <Fragment>
       {isAuth && <Header />}
-      <Container>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route
-              path="/home"
-              element={
-                <PrivateRoute>
-                  <HomeTab />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/diagram"
-              element={
-                <PrivateRoute>
-                  <DiagramTab />
-                </PrivateRoute>
-              }
-            />
-            <Route path="/currency" element={<Currency />} />
-          </Route>
+      {/* <Container> */}
+      <Routes>
+        <Route path="/" element={<Home />}>
           <Route
-            path="/register"
+            path="/home"
             element={
-              <PublicRoute>
-                <Registration />
-              </PublicRoute>
+              <PrivateRoute>
+                <HomeTab />
+              </PrivateRoute>
             }
           />
           <Route
-            path="/login"
+            path="/diagram"
             element={
-              <PublicRoute>
-                <Login />
-              </PublicRoute>
+              <PrivateRoute>
+                <DiagramTab />
+              </PrivateRoute>
             }
           />
-          <Route path="*" element={<Home />} />
-        </Routes>
-      </Container>
+          <Route path="/currency" element={<Currency />} />
+        </Route>
+        <Route
+          path="/register"
+          element={
+            <PublicRoute>
+              <Registration />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
+        <Route path="*" element={<Home />} />
+      </Routes>
+      {/* </Container> */}
       <ToastContainer hideProgressBar />
     </Fragment>
   );
