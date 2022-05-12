@@ -3,31 +3,49 @@ import { useMediaQuery } from "react-responsive";
 
 import sprite from "assets/images/sprite.svg";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
-// import s from "./Navigation.module.scss";
+import s from "./Navigation.module.scss";
 
 const Navigation = () => {
   const isMobile = useMediaQuery(MOBILE_ONLY);
   return (
-    <ul>
+    <ul className={s.list}>
       <li>
-        <NavLink to="/home" aria-label="Home">
-          <svg width="38" height="38">
+        <NavLink
+          to="/home"
+          aria-label="Home"
+          className={({ isActive }) => (isActive ? s.active : s.link)}
+        >
+          <svg width="38" height="38" className={s.icon}>
             <use href={`${sprite}#home`}></use>
           </svg>
           {!isMobile && "Home"}
         </NavLink>
-        <NavLink to="/diagram" aria-label="Diagram">
-          <svg width="38" height="38">
+      </li>
+      <li>
+        <NavLink
+          to="/diagram"
+          aria-label="Diagram"
+          className={({ isActive }) => (isActive ? s.active : s.link)}
+        >
+          <svg width="38" height="38" className={s.icon}>
             <use href={`${sprite}#diagram`}></use>
           </svg>
           {!isMobile && "Diagram"}
         </NavLink>
-        <NavLink to="/currency" aria-label="Currency">
-          <svg width="38" height="38">
-            <use href={`${sprite}#currency`}></use>
-          </svg>
-          {!isMobile && "Currency"}
-        </NavLink>
+      </li>
+      <li>
+        {isMobile && (
+          <NavLink
+            to="/currency"
+            aria-label="Currency"
+            className={({ isActive }) => (isActive ? s.active : s.link)}
+          >
+            <svg width="38" height="38" className={s.icon}>
+              <use href={`${sprite}#currency`}></use>
+            </svg>
+            {!isMobile && "Currency"}
+          </NavLink>
+        )}
       </li>
     </ul>
   );
