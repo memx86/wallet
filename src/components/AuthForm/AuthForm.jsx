@@ -1,7 +1,7 @@
 import s from "./AuthForm.module.scss";
 import { Formik } from "formik";
 import * as yup from "yup";
-import spriteSvg from "assets/images/form-images/sprite.svg";
+import spriteSvg from "assets/images/sprite.svg";
 
 export const authType = {
   login: "login",
