@@ -4,9 +4,11 @@
   margin-left: auto;
   margin-right: auto;
   min-height: 568px;
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding-top: 107px;
+  padding-bottom: 107px;
   width: 280px;
+
+  background-color: var(--main-bg-cl);
 
   @include mq(tablet) {
     width: 533px;
@@ -16,6 +18,10 @@
     padding-bottom: 60px;
     padding-left: 60px;
     padding-right: 60px;
+  }
+
+  @include mq(desktop) {
+    margin-left: 107px;
   }
 }
 
@@ -81,7 +87,7 @@
     border-bottom: 1px solid var(--accept-cl);
   }
 
-  &:focus+.iconSvg {
+  &:focus + .iconSvg {
     --color1: var(--accept-cl);
   }
 

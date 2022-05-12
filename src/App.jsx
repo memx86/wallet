@@ -36,45 +36,45 @@ const App = () => {
   return (
     <Fragment>
       {isAuth && <Header />}
-      <Container>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/home"
-            element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/diagram"
-            element={
-              <PrivateRoute>
-                <DiagramTab />
-              </PrivateRoute>
-            }
-          />
-          <Route path="/currency" element={<Currency />} />
-          <Route
-            path="/register"
-            element={
-              <PublicRoute>
-                <Registration />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <PublicRoute>
-                <Login />
-              </PublicRoute>
-            }
-          />
-          <Route path="*" element={<Home />} />
-        </Routes>
-      </Container>
+      {/* <Container> */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/home"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/diagram"
+          element={
+            <PrivateRoute>
+              <DiagramTab />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/currency" element={<Currency />} />
+        <Route
+          path="/register"
+          element={
+            <PublicRoute>
+              <Registration />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
+        <Route path="*" element={<Home />} />
+      </Routes>
+      {/* </Container> */}
       <ToastContainer hideProgressBar />
     </Fragment>
   );
