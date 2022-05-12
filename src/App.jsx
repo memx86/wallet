@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { loggedIn, tokenSelector, isAuthSelector } from "redux/session";
 import { useRefreshQuery } from "redux/wallet";
 
-import { setToken } from "redux/session";
 import Header from "components/Header";
 import Home from "pages/Home";
 import HomeTab from "components/HomeTab";
@@ -25,14 +24,6 @@ const App = () => {
   const isAuth = useSelector(isAuthSelector);
   const { isSuccess, isFetching } = useRefreshQuery(null, { skip: !token });
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(
-      setToken(
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzaWQiOiJhZjE2ZGZjNC02NGY4LTRlZDgtOGM3NS1iYzBkNTI1NzY1ODUiLCJpYXQiOjE2NTIzNTY4MjMsImV4cCI6MTAwMDAwMDE2NTIzNTY4MjR9.Mu55acbG5E-7v_PZLmk0-Zxr7aHpiPp6vgM_CSEjZ2I"
-      )
-    );
-  }, [dispatch]);
 
   useEffect(() => {
     if (isSuccess) {
