@@ -12,14 +12,6 @@ const DiagramTab = () => {
   const dispatch = useDispatch();
   const { diagData } = useSelector((state) => state.diagram);
   const { diagLoader } = useSelector((state) => state);
-  // console.log(Boolean({}));
-
-  let person = {
-    name: "John Doe",
-    age: 35,
-  };
-
-  person.occupation = "Web Designer";
 
   function changeData(data, colorsObj) {
     if (!Object.keys(data).length) {
@@ -37,10 +29,22 @@ const DiagramTab = () => {
     };
   }
 
+  console.log("first");
+
   const changedData = changeData(diagData, colorsChange);
 
+  function selectDate(month, year) {
+    const obj = { month: 0, year: 0 };
+    if (!isNaN(month) && !isNaN(year)) {
+      obj.month = month;
+      obj.year = year;
+    }
+
+    return obj;
+  }
+
   useEffect(() => {
-    dispatch(getTransactionSummary());
+    dispatch(getTransactionSummary(selectDate()));
   }, [dispatch]);
 
   return (
@@ -49,10 +53,13 @@ const DiagramTab = () => {
       {diagLoader ? (
         <h3>Loading...</h3>
       ) : (
-        <div className={s.diagram}>
-          <Chart data={changedData} />
-          <Table data={changedData} />
-        </div>
+        <>
+          <h2>Statistic</h2>
+          <div className={s.diagram}>
+            <Chart data={changedData} />
+            <Table data={changedData} selectDate={selectDate} />
+          </div>
+        </>
       )}
     </div>
   );

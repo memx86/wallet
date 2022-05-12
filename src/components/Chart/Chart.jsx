@@ -14,7 +14,8 @@ const Chart = ({ data: { categoriesSummary, periodTotal } }) => {
   const data = {
     datasets: [
       {
-        label: nameCat?.slice(1),
+        // label: nameCat?.slice(1),
+        id: nameCat?.slice(1),
         data: amountCat ? amountCat?.slice(1) : [1],
         backgroundColor: colorCat?.slice(1),
         borderWidth: 0,

@@ -16,14 +16,33 @@ const token = {
 };
 
 export const getTransactionSummary = createAsyncThunk(
-  "transaction",
-  async (_, thunkApi) => {
+  "transSum",
+  async (date, thunkApi) => {
+    const { month, year } = date;
     try {
       token.set(thunkApi.getState().session.token);
-      const res = await axios.get("/api/transactions-summary");
+      const res = await axios.get(
+        `/api/transactions-summary${
+          month && year ? `?month=${month}&year=${year}` : ""
+        }`
+      );
       return res.data;
     } catch (error) {
-      return thunkApi.rejectWithValue("bad");
+      return thunkApi.rejectWithValue("");
+    }
+  }
+);
+
+export const getTransactions = createAsyncThunk(
+  "transactions",
+  async (_, thunkApi) => {
+    try {
+      // console.log("first");
+      token.set(thunkApi.getState().session.token);
+      const res = await axios.get(`/api/transactions`);
+      return res.data;
+    } catch (error) {
+      return thunkApi.rejectWithValue("");
     }
   }
 );

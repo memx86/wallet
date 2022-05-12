@@ -1,3 +1,12 @@
+@import "stylesheet/mixin.scss";
+
 .diagram{
-    display: flex;
+    @include mq(tablet){
+
+        display: flex;
+    }
+    @include mq(desktop) {
+
+        width: 800px;
+    }
 }

@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getTransactionSummary } from "./diagramThunk";
+import { getTransactionSummary, getTransactions } from "./diagramThunk";
 
 const initialState = {
   diagData: {},
+  transactions: [],
   diagLoading: false,
 };
 
@@ -20,6 +21,19 @@ export const diagramReducer = createSlice({
       return {
         ...state,
         diagData: payload,
+        diagLoading: false,
+      };
+    },
+    [getTransactions.pending]: (state, _) => {
+      return { ...state, diagLoading: true };
+    },
+    [getTransactions.rejected]: (state, _) => {
+      return { ...state, diagLoading: false };
+    },
+    [getTransactions.fulfilled]: (state, { payload }) => {
+      return {
+        ...state,
+        transactions: payload,
         diagLoading: false,
       };
     },

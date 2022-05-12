@@ -18,11 +18,11 @@ const yearsGenerate = function (startYear) {
   let years = [];
   startYear = startYear || 1980;
 
-  for (let i = startYear; i < currentYear; i++) {
-    years.push(i);
+  for (let i = startYear; i <= currentYear; i++) {
+    years.unshift(i);
   }
 
   return years;
 };
 
-export const years = yearsGenerate(2020 - 10);
+export const years = yearsGenerate(2022 - 10);
