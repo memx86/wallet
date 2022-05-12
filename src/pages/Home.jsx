@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import { isAuthSelector } from "redux/session";
 
-import Dashboard from "./Dashboard";
+import Dashboard from "components/Dashboard";
 import Login from "./Login";
 
 const Home = () => {
