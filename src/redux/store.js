@@ -11,6 +11,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import diagramReducer from "./diagram/diagramSlice";
 
 import { sessionReducer } from "./session";
 import { walletApi } from "./wallet";
@@ -20,8 +21,10 @@ const persistSession = {
   storage,
   whitelist: ["token"],
 };
+
 const store = configureStore({
   reducer: {
+    diagram: diagramReducer,
     session: persistReducer(persistSession, sessionReducer),
     [walletApi.reducerPath]: walletApi.reducer,
   },
