@@ -29,8 +29,6 @@ const DiagramTab = () => {
     };
   }
 
-  console.log("first");
-
   const changedData = changeData(diagData, colorsChange);
 
   function selectDate(month, year) {

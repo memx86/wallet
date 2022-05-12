@@ -1,6 +1,6 @@
 @import "stylesheet/mixin.scss";
 
-.table{
+.table {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9,15 +9,17 @@
     // border: 1px solid var(--main-text-cl);
     border-radius: 30px;
     margin: 0 auto;
+
     @include mq(tablet) {
         width: 330px;
     }
+
     @include mq(desktop) {
         width: 400px;
     }
 }
 
-.main{
+.main {
     display: flex;
     justify-content: space-between;
     padding: 0 15px;
@@ -25,7 +27,7 @@
     font-weight: 700;
 }
 
-.item{
+.item {
     display: flex;
     justify-content: space-between;
     padding: 5px 15px;
@@ -35,42 +37,47 @@
     font-size: 16px;
     font-weight: 400;
     margin: 0 auto;
+
     @include mq(tablet) {
         width: 330px;
     }
+
     @include mq(desktop) {
         width: 400px;
     }
 }
 
-.expenses, .incomes{
+.expenses,
+.incomes {
     display: flex;
     justify-content: space-between;
     padding: 5px 15px;
     font-weight: 700;
     width: 280px;
     margin: 0 auto;
+
     @include mq(tablet) {
         width: 330px;
     }
+
     @include mq(desktop) {
         width: 400px;
     }
 }
 
-.amountExpenses{
-    color: var(--expenses-cl);
+.amountExpenses {
+    color: var(--reject-cl);
 }
 
 .amountIncomes {
-    color: var(--incomes-cl);
+    color: var(--accept-cl);
 }
 
-.listColor{
+.listColor {
     display: flex;
 }
 
-.color{
+.color {
     height: 24px;
     width: 24px;
     margin-right: 15px;

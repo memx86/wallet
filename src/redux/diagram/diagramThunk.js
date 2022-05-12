@@ -3,9 +3,6 @@ import axios from "axios";
 
 axios.defaults.baseURL = " https://wallet.goit.ua";
 
-// const tok =
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzaWQiOiIzMTQ0ZjQzMy0wYzA4LTQxYTUtYjQ3Zi01NDBhOTNjNzc2NDYiLCJpYXQiOjE2NTIzMzI4ODUsImV4cCI6MTAwMDAwMDE2NTIzMzI4ODR9.WJqzbDD6HstQdODAs50cUDjfRnEM1YI7z6ohvnnG8RU";
-
 const token = {
   set(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -37,7 +34,6 @@ export const getTransactions = createAsyncThunk(
   "transactions",
   async (_, thunkApi) => {
     try {
-      // console.log("first");
       token.set(thunkApi.getState().session.token);
       const res = await axios.get(`/api/transactions`);
       return res.data;
