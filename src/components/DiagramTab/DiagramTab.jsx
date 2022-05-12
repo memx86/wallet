@@ -12,6 +12,7 @@ const DiagramTab = () => {
   const dispatch = useDispatch();
   const { diagData } = useSelector((state) => state.diagram);
   const { diagLoader } = useSelector((state) => state);
+  // console.log('')
 
   function changeData(data, colorsObj) {
     if (!Object.keys(data).length) {
