@@ -1,6 +1,10 @@
 // import s from './HomeTab.module.scss'
+import { useMediaQuery } from "react-responsive";
+import { MOBILE_ONLY } from "assets/constants/MEDIA";
 
 import NewTable from "components/NewTable";
+import Balance from "components/Balance";
+
 const arr = [
   {
     id: "d907ac87-21cc-452b-bcde-54ce335dbeb9",
@@ -102,10 +106,12 @@ const category = [
 ];
 
 const HomeTab = () => {
+  const isMobile = useMediaQuery(MOBILE_ONLY);
   return (
-    <div>
+    <>
+      {isMobile && <Balance />}
       <NewTable data={arr} categories={category} />
-    </div>
+    </>
   );
 };
 export default HomeTab;

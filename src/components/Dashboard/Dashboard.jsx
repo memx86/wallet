@@ -1,5 +1,5 @@
-import { useMediaQuery } from "react-responsive";
 import { Outlet } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 import Balance from "components/Balance";
 import Currency from "components/Currency";
@@ -15,7 +15,7 @@ const Dashboard = () => {
       <div className={s.sidebar}>
         <div className={s.wrapper}>
           <Navigation />
-          <Balance />
+          {!isMobile && <Balance />}
         </div>
         {!isMobile && <Currency />}
       </div>
