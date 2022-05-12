@@ -1,7 +1,7 @@
 import * as yup from "yup";
 
 const validationsRegister = yup.object().shape({
-  name: yup
+  username: yup
     .string()
     .min(1, "Name must be at least 1 characters")
     .max(12, "Name must not contain more than 12 characters")

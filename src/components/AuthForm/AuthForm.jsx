@@ -1,6 +1,6 @@
 import s from "./AuthForm.module.scss";
 import { Formik } from "formik";
-import spriteSvg from "assets/images/form-images/sprite.svg";
+import spriteSvg from "assets/images/sprite.svg";
 import { useRegisterMutation, useLoginMutation } from "redux/wallet/wallet-api";
 import { useDispatch } from "react-redux";
 import { loggedIn, setToken } from "redux/session";
@@ -9,6 +9,7 @@ import {
   validationLogin,
   validationsRegister,
 } from "assets/schemas/authFormSchemas";
+import { Link } from "react-router-dom";
 
 export const authType = {
   login: "login",
@@ -21,7 +22,7 @@ const AuthForm = ({ type }) => {
 
   const initialValues = isRegister
     ? {
-        name: "",
+        username: "",
         email: "",
         password: "",
         confirmPassword: "",
@@ -40,9 +41,9 @@ const AuthForm = ({ type }) => {
       validateOnBlur
       onSubmit={async (values) => {
         try {
-          const { name, email, password } = values;
+          const { username, email, password } = values;
           const data = isRegister
-            ? { name, email, password }
+            ? { username, email, password }
             : { email, password };
 
           const callFunction = isRegister ? registerAcc : loginAcc;
@@ -145,21 +146,21 @@ const AuthForm = ({ type }) => {
               <div className={s.inputWrapper}>
                 <input
                   className={s.input}
-                  type="name"
-                  name="name"
+                  type="username"
+                  name="username"
                   placeholder="Enter your name"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.name}
-                  autoComplete="name"
+                  value={values.username}
+                  autoComplete="off"
                 />
                 <svg className={s.iconSvg} style={{ width: "24px" }}>
                   <use href={`${spriteSvg}#account-box`}></use>
                 </svg>
               </div>
-              {touched.name && errors.name && (
+              {touched.username && errors.username && (
                 <div className={s.errorWrapper}>
-                  <p className={s.error}>{errors.name}</p>
+                  <p className={s.error}>{errors.username}</p>
                 </div>
               )}
             </>
@@ -171,9 +172,15 @@ const AuthForm = ({ type }) => {
           >
             {isRegister ? "Register" : "Login"}
           </button>
-          <button className={s.loginBtn} type="button">
-            {isRegister ? "Login" : "Sign Up"}
-          </button>
+          {isRegister ? (
+            <Link className={s.loginBtn} to="/login">
+              Login
+            </Link>
+          ) : (
+            <Link className={s.loginBtn} to="/register">
+              Sign Up
+            </Link>
+          )}
         </form>
       )}
     </Formik>
