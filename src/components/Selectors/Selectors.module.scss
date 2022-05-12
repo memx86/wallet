@@ -1,0 +1,102 @@
+.selectors {
+    width: 100%;
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: space-between;
+}
+
+.selectMonth {
+    border-radius: 5px;
+    color: red;
+
+    option {
+        color: blue;
+    }
+}
+
+.select_box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.option_container {
+    top: 55px;
+
+    position: absolute;
+    border: solid 1px black;
+    background-color: #fff;
+    min-height: 0;
+    max-height: 0;
+    width: 100%;
+    opacity: 0;
+    transition: all 0.4s;
+    border-radius: 8px;
+    overflow: hidden;
+    order: 1;
+    z-index: 2;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+        background-color: #0d141f;
+        border-radius: 0 8px 8px 0;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #525861;
+        border-radius: 8px;
+    }
+
+}
+
+.active {
+    composes: option_container;
+    max-height: 150px;
+    opacity: 0.9;
+    overflow-y: scroll;
+}
+
+
+.selected {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 180px;
+    height: 50px;
+    padding: 2px;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 25px;
+    margin-bottom: 3px;
+    position: relative;
+    order: 0;
+
+    b {
+        margin-left: 10px;
+    }
+
+}
+
+.item {
+    padding: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+        background-color: gray;
+    }
+}
+
+.icon {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    width: 20px;
+    height: 100%;
+    fill: red;
+    transition: all 0.4s;
+}
+
+// .select_box .option_container.active + .selected{
+//     transform: rotateX(180deg);
+// }

@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTransactionSummary } from "./../../redux/diagram/diagramThunk";
+import { getTransactionSummary } from "redux/diagram/diagramThunk";
 
-import { colorsArray, colorsChange } from "assets/constants/COLORS";
-import Chart from "../Chart/Chart";
-import Table from "../Table/Table";
+import { colorsChange } from "assets/constants/COLORS";
+import Chart from "components/Chart";
+import Table from "components/Table";
 
 import s from "./DiagramTab.module.scss";
 
@@ -22,6 +22,9 @@ const DiagramTab = () => {
   person.occupation = "Web Designer";
 
   function changeData(data, colorsObj) {
+    if (!Object.keys(data).length) {
+      return false;
+    }
     return {
       ...data,
       categoriesSummary: data?.categoriesSummary.map((el) => {
@@ -35,11 +38,6 @@ const DiagramTab = () => {
   }
 
   const changedData = changeData(diagData, colorsChange);
-
-  // console.log(
-  //   "changedData(diagData, colorsChange)",
-  //   changedData(diagData, colorsChange)
-  // );
 
   useEffect(() => {
     dispatch(getTransactionSummary());

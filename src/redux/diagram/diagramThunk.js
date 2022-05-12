@@ -16,7 +16,7 @@ const token = {
 };
 
 export const getTransactionSummary = createAsyncThunk(
-  "refresh",
+  "transaction",
   async (_, thunkApi) => {
     try {
       token.set(thunkApi.getState().session.token);

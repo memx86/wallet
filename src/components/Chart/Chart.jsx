@@ -6,17 +6,10 @@ import s from "./Chart.module.scss";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const Chart = ({
-  data: { categoriesSummary, incomeSummary, expenseSummary, periodTotal },
-}) => {
+const Chart = ({ data: { categoriesSummary, periodTotal } }) => {
   const amountCat = categoriesSummary?.map((item) => item.total);
   const nameCat = categoriesSummary?.map((item) => item.name);
   const colorCat = categoriesSummary?.map((item) => item.color);
-
-  // console.log("colorCat", colorCat);
-
-  // console.log("colorsArray", colorsArray);
-  // console.log("amountCat", amountCat);
 
   const data = {
     datasets: [

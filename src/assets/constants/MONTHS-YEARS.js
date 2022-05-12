@@ -14,12 +14,14 @@ export const month = [
 ];
 
 const yearsGenerate = function (startYear) {
-  var currentYear = new Date().getFullYear(),
-    years = [];
+  const currentYear = new Date().getFullYear();
+  let years = [];
   startYear = startYear || 1980;
-  while (startYear <= currentYear) {
-    years.push(startYear++);
+
+  for (let i = startYear; i < currentYear; i++) {
+    years.push(i);
   }
+
   return years;
 };
 
