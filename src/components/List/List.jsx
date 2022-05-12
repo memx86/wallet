@@ -2,6 +2,7 @@ import s from "./List.module.scss";
 
 const List = ({ data }) => {
   const array = data?.categoriesSummary?.slice(1) || [];
+  // console.log("array", array);
   return (
     <div>
       <div className={s.table}>
@@ -17,7 +18,7 @@ const List = ({ data }) => {
                 <div className={s.listColor}>
                   <div
                     className={s.color}
-                    style={{ backgroundColor: "red" }}
+                    style={{ backgroundColor: el.color }}
                   ></div>
                   <p>{el.name}</p>
                 </div>

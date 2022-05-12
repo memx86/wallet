@@ -32,7 +32,7 @@ const Table = ({ data }) => {
           )}
           <div
             className="selected"
-            onClick={(e) => setIsActiveMonth(!activeMonth)}
+            onClick={() => setIsActiveMonth(!activeMonth)}
           >
             <b>{selectMonth}</b>
             <svg className="icon">
@@ -59,7 +59,7 @@ const Table = ({ data }) => {
           )}
           <div
             className="selected"
-            onClick={(e) => setIsActiveYear(!activeYear)}
+            onClick={() => setIsActiveYear(!activeYear)}
           >
             <b>{selectYear}</b>
             <svg className="icon">

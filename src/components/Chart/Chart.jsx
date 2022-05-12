@@ -2,7 +2,6 @@ import React from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 
-import { colorsArray, colorsChange } from "assets/constants/COLORS";
 import s from "./Chart.module.scss";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -12,8 +11,9 @@ const Chart = ({
 }) => {
   const amountCat = categoriesSummary?.map((item) => item.total);
   const nameCat = categoriesSummary?.map((item) => item.name);
+  const colorCat = categoriesSummary?.map((item) => item.color);
 
-  // console.log("categoriesSummary", categoriesSummary);
+  // console.log("colorCat", colorCat);
 
   // console.log("colorsArray", colorsArray);
   // console.log("amountCat", amountCat);
@@ -23,7 +23,7 @@ const Chart = ({
       {
         label: nameCat?.slice(1),
         data: amountCat ? amountCat?.slice(1) : [1],
-        backgroundColor: colorsArray,
+        backgroundColor: colorCat?.slice(1),
         borderWidth: 0,
       },
     ],

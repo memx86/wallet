@@ -12,14 +12,34 @@ const DiagramTab = () => {
   const dispatch = useDispatch();
   const { diagData } = useSelector((state) => state.diagram);
   const { diagLoader } = useSelector((state) => state);
+  // console.log(Boolean({}));
 
-  function changedData(data, colorsObj) {
-    // const test = Data.categoriesSummary.map((el) => {});
-    const test = data;
-    return test;
+  let person = {
+    name: "John Doe",
+    age: 35,
+  };
+
+  person.occupation = "Web Designer";
+
+  function changeData(data, colorsObj) {
+    return {
+      ...data,
+      categoriesSummary: data?.categoriesSummary.map((el) => {
+        const colorKey = el.name.toLowerCase().replace(/ /g, "");
+        return {
+          ...el,
+          color: colorsObj[colorKey],
+        };
+      }),
+    };
   }
 
-  console.log("diagData", changedData(diagData, colorsChange));
+  const changedData = changeData(diagData, colorsChange);
+
+  // console.log(
+  //   "changedData(diagData, colorsChange)",
+  //   changedData(diagData, colorsChange)
+  // );
 
   useEffect(() => {
     dispatch(getTransactionSummary());
@@ -32,8 +52,8 @@ const DiagramTab = () => {
         <h3>Loading...</h3>
       ) : (
         <div className={s.diagram}>
-          <Chart data={diagData} />
-          <Table data={diagData} />
+          <Chart data={changedData} />
+          <Table data={changedData} />
         </div>
       )}
     </div>
