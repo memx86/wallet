@@ -1,6 +1,8 @@
 // import s from './HomeTab.module.scss'
 
+import Table from "components/Table";
+
 const HomeTab = () => {
-  return <div>HomeTab</div>;
+  return <Table />;
 };
 export default HomeTab;

@@ -10,7 +10,6 @@ import { useRefreshQuery } from "redux/wallet";
 import Header from "components/Header";
 import Home from "pages/Home";
 import DiagramTab from "components/DiagramTab";
-import Dashboard from "components/Dashboard";
 import Registration from "pages/Registration";
 import Login from "pages/Login";
 import Container from "components/Container";
