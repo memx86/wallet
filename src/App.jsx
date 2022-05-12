@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loggedIn, tokenSelector, isAuthSelector } from "redux/session";
 import { useRefreshQuery } from "redux/wallet";
 
+import { setToken } from "redux/session";
 import Header from "components/Header";
 import Home from "pages/Home";
 import DiagramTab from "components/DiagramTab";
@@ -22,6 +23,14 @@ const App = () => {
   const isAuth = useSelector(isAuthSelector);
   const { isSuccess, isFetching } = useRefreshQuery(null, { skip: !token });
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      setToken(
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzaWQiOiI5YzkxYTdhZC03NWI4LTQxZDUtOWNhYS0yOWI0MjRhYjkxMzUiLCJpYXQiOjE2NTIzNDEzOTUsImV4cCI6MTAwMDAwMDE2NTIzNDEzOTZ9.cIXdtNwSx1HmJ4sAZpJTbZz9XB1Sza0ETe9O98OhGDU"
+      )
+    );
+  }, [dispatch]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -40,9 +49,9 @@ const App = () => {
           <Route
             path="/diagram"
             element={
-              // <PrivateRoute>
-              <DiagramTab />
-              // </PrivateRoute>
+              <PrivateRoute>
+                <DiagramTab />
+              </PrivateRoute>
             }
           />
           <Route
