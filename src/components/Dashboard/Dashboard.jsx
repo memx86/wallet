@@ -15,7 +15,7 @@ const Dashboard = () => {
       <div className={s.sidebar}>
         <div className={s.wrapper}>
           <Navigation />
-          <Balance />
+          {!isMobile && <Balance />}
         </div>
         {!isMobile && <Currency />}
       </div>
