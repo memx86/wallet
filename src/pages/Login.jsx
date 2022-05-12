@@ -1,4 +1,6 @@
+import AuthForm, { authType } from "components/AuthForm/AuthForm";
+
 const Login = () => {
-  return <div>Login</div>;
+  return <AuthForm type={authType.login} />;
 };
 export default Login;

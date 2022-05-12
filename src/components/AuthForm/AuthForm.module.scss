@@ -1,0 +1,144 @@
+@import "stylesheet/mixin.scss";
+
+.form {
+  min-height: 568px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  width: 280px;
+
+  @include mq(tablet) {
+    width: 533px;
+    min-height: 468px;
+    border-radius: 20px;
+    padding-top: 40px;
+    padding-bottom: 60px;
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+
+.titleWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 60px;
+}
+
+.title {
+  font-family: Poppins;
+  font-weight: 700;
+  font-size: 30px;
+  color: var(--main-text-cl);
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.inputWrapper {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.iconSvg {
+  position: absolute;
+  top: calc(100% / 2 - 76px);
+  left: calc(100% / 2 - 130px);
+
+  @include mq(tablet) {
+    top: calc(100% / 2 - 76px);
+    left: calc(100% / 2 - 195px);
+  }
+}
+
+.input {
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  width: 280px;
+  border: transparent;
+  outline: transparent;
+  border-bottom: 1px solid var(--faded-secondary-cl);
+
+  font-family: Raleway;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--accept-cl);
+
+  &::placeholder {
+    color: var(--faded-cl);
+  }
+
+  &::placeholder::first-letter {
+    text-transform: capitalize;
+  }
+
+  &:focus {
+    border-bottom: 1px solid var(--accept-cl);
+  }
+
+  &:focus+.iconSvg {
+    --color1: var(--accept-cl);
+  }
+
+  @include mq(tablet) {
+    width: 410px;
+  }
+}
+
+.inputError {
+  border-bottom: 1px solid var(--reject-cl);
+  --color1: var(--reject-cl);
+}
+
+.enterBtn {
+  display: block;
+  width: 280px;
+  min-height: 50px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  border: none;
+  background-color: var(--accept-cl);
+  border-radius: 20px;
+
+  font-family: Raleway;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--main-bg-cl);
+
+  @include mq(tablet) {
+    width: 300px;
+  }
+}
+
+.loginBtn {
+  composes: enterBtn;
+  margin-bottom: 0;
+  border: 1px solid var(--accent-cl);
+  background-color: var(--main-bg-cl);
+  color: var(--accent-cl);
+}
+
+.errorWrapper {
+  position: relative;
+}
+
+.error {
+  position: absolute;
+  top: calc(100% / 2 - 35px);
+  left: 0;
+  color: var(--reject-cl);
+
+  font-family: Raleway;
+  font-size: 12px;
+}
