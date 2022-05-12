@@ -31,8 +31,8 @@ export const walletApi = createApi({
       providesTags: ["User"],
     }),
   }),
-  refetchOnFocus: true,
-  refetchOnReconnect: true,
+  // refetchOnFocus: true,
+  // refetchOnReconnect: true,
 });
 
 export const {
