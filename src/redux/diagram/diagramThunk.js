@@ -4,7 +4,7 @@ import axios from "axios";
 axios.defaults.baseURL = " https://wallet.goit.ua";
 
 const tok =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzaWQiOiI5MDUyMjgzOC02Zjc0LTQ2ZTctYTZiOC05OTc4MDc1ZDZkMjIiLCJpYXQiOjE2NTIyMDY3NTcsImV4cCI6MTAwMDAwMDE2NTIyMDY3NTZ9.oYdHERVmSwPficoNnEVsp9B6aFBp7kRD8seA2_kuuu0";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzaWQiOiIzMTQ0ZjQzMy0wYzA4LTQxYTUtYjQ3Zi01NDBhOTNjNzc2NDYiLCJpYXQiOjE2NTIzMzI4ODUsImV4cCI6MTAwMDAwMDE2NTIzMzI4ODR9.WJqzbDD6HstQdODAs50cUDjfRnEM1YI7z6ohvnnG8RU";
 
 const token = {
   set(token) {

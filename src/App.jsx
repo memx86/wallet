@@ -40,9 +40,9 @@ const App = () => {
           <Route
             path="/diagram"
             element={
-              <PrivateRoute>
-                <DiagramTab />
-              </PrivateRoute>
+              // <PrivateRoute>
+              <DiagramTab />
+              // </PrivateRoute>
             }
           />
           <Route

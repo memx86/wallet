@@ -1,9 +1,7 @@
 import s from "./List.module.scss";
-const List = ({ date }) => {
-  //   console.log("date", date);
-  //   console.log("date", date.categoriesSummary);
 
-  const array = date?.categoriesSummary?.slice(1);
+const List = ({ data }) => {
+  const array = data?.categoriesSummary?.slice(1) || [];
   return (
     <div>
       <div className={s.table}>
@@ -13,27 +11,28 @@ const List = ({ date }) => {
         </div>
       </div>
       <ul className={s.list}>
-        {array &&
-          array?.map((el) => (
-            <li key={el.name} className={s.item}>
-              <div className={s.listColor}>
-                <div
-                  className={s.color}
-                  style={{ backgroundColor: "red" }}
-                ></div>
-                <p>{el.name}</p>
-              </div>
+        {array
+          ? array?.map((el) => (
+              <li key={el.name} className={s.item}>
+                <div className={s.listColor}>
+                  <div
+                    className={s.color}
+                    style={{ backgroundColor: "red" }}
+                  ></div>
+                  <p>{el.name}</p>
+                </div>
 
-              <p>{Math.abs(el.total)}</p>
-            </li>
-          ))}
+                <p>{Math.abs(el.total)}</p>
+              </li>
+            ))
+          : null}
         <li className={s.expenses}>
           <b>Expenses:</b>
-          <b>{`${Math.abs(date?.expenseSummary)}`}</b>
+          <b>{!!array.length ? `${Math.abs(data?.expenseSummary)}` : "--"}</b>
         </li>
         <li className={s.incomes}>
           <b>Incomes:</b>
-          <b>{date?.incomeSummary}</b>
+          <b>{!!array.length ? data?.incomeSummary : "--"}</b>
         </li>
       </ul>
     </div>

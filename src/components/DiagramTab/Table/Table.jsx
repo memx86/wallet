@@ -1,10 +1,10 @@
 import { useState } from "react";
 import "./Table.scss";
-import spriteSvg from "components/image/sprite.svg";
-import { month, yearsGenerate } from "./mon-years";
+import spriteSvg from "assets/images/sprite.svg";
+import { month, years } from "../../../assets/constants/MONTHS-YEARS";
 import List from "../List/List";
 
-const Table = ({ date }) => {
+const Table = ({ data }) => {
   const [selectMonth, setSelectMonth] = useState("Month");
   const [selectYear, setSelectYear] = useState("Year");
   const [activeMonth, setIsActiveMonth] = useState(false);
@@ -12,7 +12,6 @@ const Table = ({ date }) => {
 
   return (
     <div>
-      <h3>Table</h3>
       <div className="selectors">
         <div className="select_box">
           {activeMonth && (
@@ -44,7 +43,7 @@ const Table = ({ date }) => {
         <div className="select_box">
           {activeYear && (
             <div className="option_container active">
-              {yearsGenerate(2020 - 10).map((el) => (
+              {years.map((el) => (
                 <div
                   key={el}
                   className="item"
@@ -69,7 +68,7 @@ const Table = ({ date }) => {
           </div>
         </div>
       </div>
-      <List date={date} />
+      <List data={data} />
     </div>
   );
 };

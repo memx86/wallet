@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getTransactionSummary } from "./diagramThunk";
 
 const initialState = {
-  diagDate: {},
+  diagData: {},
   diagLoading: false,
 };
 
@@ -19,7 +19,7 @@ export const diagramReducer = createSlice({
     [getTransactionSummary.fulfilled]: (state, { payload }) => {
       return {
         ...state,
-        diagDate: payload,
+        diagData: payload,
         diagLoading: false,
       };
     },

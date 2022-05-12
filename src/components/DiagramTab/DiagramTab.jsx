@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTransactionSummary } from "./../../redux/diagram/diagramThunk";
+
+import { colorsArray, colorsChange } from "assets/constants/COLORS";
 import Chart from "./Chart/Chart";
 import Table from "./Table/Table";
 
@@ -8,14 +10,20 @@ import s from "./DiagramTab.module.scss";
 
 const DiagramTab = () => {
   const dispatch = useDispatch();
-  const { diagDate } = useSelector((state) => state.diagram);
+  const { diagData } = useSelector((state) => state.diagram);
   const { diagLoader } = useSelector((state) => state);
+
+  function changedData(data, colorsObj) {
+    // const test = Data.categoriesSummary.map((el) => {});
+    const test = data;
+    return test;
+  }
+
+  console.log("diagData", changedData(diagData, colorsChange));
 
   useEffect(() => {
     dispatch(getTransactionSummary());
   }, [dispatch]);
-
-  // console.log("state", diagDate);
 
   return (
     <div>
@@ -24,8 +32,8 @@ const DiagramTab = () => {
         <h3>Loading...</h3>
       ) : (
         <div className={s.diagram}>
-          <Chart date={diagDate} />
-          <Table date={diagDate} />
+          <Chart data={diagData} />
+          <Table data={diagData} />
         </div>
       )}
     </div>

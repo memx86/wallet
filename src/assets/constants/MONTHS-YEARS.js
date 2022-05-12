@@ -13,7 +13,7 @@ export const month = [
   "December",
 ];
 
-export const yearsGenerate = function (startYear) {
+const yearsGenerate = function (startYear) {
   var currentYear = new Date().getFullYear(),
     years = [];
   startYear = startYear || 1980;
@@ -22,3 +22,5 @@ export const yearsGenerate = function (startYear) {
   }
   return years;
 };
+
+export const years = yearsGenerate(2020 - 10);
