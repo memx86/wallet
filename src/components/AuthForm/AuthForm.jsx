@@ -1,52 +1,63 @@
 import s from "./AuthForm.module.scss";
 import { Formik } from "formik";
-import * as yup from "yup";
 import spriteSvg from "assets/images/form-images/sprite.svg";
+import { useRegisterMutation, useLoginMutation } from "redux/wallet/wallet-api";
+import { useDispatch } from "react-redux";
+import { loggedIn, setToken } from "redux/session";
+import { toast } from "react-toastify";
+import {
+  validationLogin,
+  validationsRegister,
+} from "assets/schemas/authFormSchemas";
 
 export const authType = {
   login: "login",
   registration: "registration",
 };
 
-const validationsSchema = yup.object().shape({
-  name: yup
-    .string()
-    .min(1, "Name must be at least 1 characters")
-    .max(12, "Name must not contain more than 12 characters")
-    .required("Name is required"),
-  email: yup.string().email("Email is invalid").required("Email is required"),
-  password: yup
-    .string()
-    .min(6, "Password must be at least 6 characters")
-    .max(12, "Password must not contain more than 12 characters")
-    .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
-      "Password must contain six characters, at least one letter and one number"
-    )
-    .required("Password is required"),
-  confirmPassword: yup
-    .string()
-    .oneOf([yup.ref("password")], "Password must match")
-    .required("Confirm password is required"),
-});
-
 const AuthForm = ({ type }) => {
+  const dispatch = useDispatch();
   const isRegister = type === authType.registration;
 
-  return (
-    <Formik
-      initialValues={{
+  const initialValues = isRegister
+    ? {
         name: "",
         email: "",
         password: "",
         confirmPassword: "",
-      }}
+      }
+    : {
+        email: "",
+        password: "",
+      };
+
+  const [registerAcc] = useRegisterMutation();
+  const [loginAcc] = useLoginMutation();
+
+  return (
+    <Formik
+      initialValues={initialValues}
       validateOnBlur
-      onSubmit={(values) => {
-        alert(JSON.stringify(values, null, 2));
-        console.log(values);
+      onSubmit={async (values) => {
+        try {
+          const { name, email, password } = values;
+          const data = isRegister
+            ? { name, email, password }
+            : { email, password };
+
+          const callFunction = isRegister ? registerAcc : loginAcc;
+          const response = await callFunction(data).unwrap();
+
+          dispatch(setToken(response.token));
+          dispatch(loggedIn());
+        } catch (error) {
+          const message = isRegister
+            ? "User with such email already exists"
+            : "Email or password is not correct";
+          toast.error(message);
+        }
       }}
-      validationSchema={validationsSchema}
+      validationSchema={isRegister ? validationsRegister : validationLogin}
     >
       {({
         values,
