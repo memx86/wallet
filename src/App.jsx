@@ -9,8 +9,8 @@ import { useRefreshQuery } from "redux/wallet";
 
 import Header from "components/Header";
 import Home from "pages/Home";
+import HomeTab from "components/HomeTab";
 import DiagramTab from "components/DiagramTab";
-import Dashboard from "components/Dashboard";
 import Registration from "pages/Registration";
 import Login from "pages/Login";
 import Container from "components/Container";
@@ -38,24 +38,25 @@ const App = () => {
       {isAuth && <Header />}
       <Container>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/home"
-            element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/diagram"
-            element={
-              <PrivateRoute>
-                <DiagramTab />
-              </PrivateRoute>
-            }
-          />
-          <Route path="/currency" element={<Currency />} />
+          <Route path="/" element={<Home />}>
+            <Route
+              path="/home"
+              element={
+                <PrivateRoute>
+                  <HomeTab />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/diagram"
+              element={
+                <PrivateRoute>
+                  <DiagramTab />
+                </PrivateRoute>
+              }
+            />
+            <Route path="/currency" element={<Currency />} />
+          </Route>
           <Route
             path="/register"
             element={
