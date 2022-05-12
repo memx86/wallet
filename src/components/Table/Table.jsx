@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Table.scss";
 import spriteSvg from "assets/images/sprite.svg";
-import { month, years } from "../../../assets/constants/MONTHS-YEARS";
+import { month, years } from "../../assets/constants/MONTHS-YEARS";
 import List from "../List/List";
 
 const Table = ({ data }) => {

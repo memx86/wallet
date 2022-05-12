@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTransactionSummary } from "./../../redux/diagram/diagramThunk";
 
 import { colorsArray, colorsChange } from "assets/constants/COLORS";
-import Chart from "./Chart/Chart";
-import Table from "./Table/Table";
+import Chart from "../Chart/Chart";
+import Table from "../Table/Table";
 
 import s from "./DiagramTab.module.scss";
 
