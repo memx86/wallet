@@ -152,7 +152,7 @@ const AuthForm = ({ type }) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.username}
-                  autoComplete="off"
+                  autoComplete="name"
                 />
                 <svg className={s.iconSvg} style={{ width: "24px" }}>
                   <use href={`${spriteSvg}#account-box`}></use>
