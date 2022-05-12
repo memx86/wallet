@@ -85,6 +85,7 @@ const AuthForm = ({ type }) => {
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.email}
+              autoComplete="email"
             />
             <svg className={s.iconSvg} style={{ width: "24px" }}>
               <use href={`${spriteSvg}#email`}></use>
@@ -104,6 +105,7 @@ const AuthForm = ({ type }) => {
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.password}
+              autoComplete="off"
             />
             <svg className={s.iconSvg} style={{ width: "24px" }}>
               <use href={`${spriteSvg}#lock`}></use>
@@ -125,6 +127,7 @@ const AuthForm = ({ type }) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.confirmPassword}
+                  autoComplete="off"
                 />
                 <svg className={s.iconSvg} style={{ width: "24px" }}>
                   <use href={`${spriteSvg}#lock`}></use>
@@ -148,6 +151,7 @@ const AuthForm = ({ type }) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.name}
+                  autoComplete="name"
                 />
                 <svg className={s.iconSvg} style={{ width: "24px" }}>
                   <use href={`${spriteSvg}#account-box`}></use>
