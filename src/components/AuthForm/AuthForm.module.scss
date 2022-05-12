@@ -73,14 +73,13 @@
 
   &::placeholder::first-letter {
     text-transform: capitalize;
-    color: var(--faded-cl);
   }
 
   &:focus {
     border-bottom: 1px solid var(--accept-cl);
   }
 
-  &:focus + .iconSvg {
+  &:focus+.iconSvg {
     --color1: var(--accept-cl);
   }
 
