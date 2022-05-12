@@ -1,4 +1,5 @@
 @import "stylesheet/mixin.scss";
+
 .section {
   min-height: 100vh;
 
@@ -63,7 +64,7 @@
     margin-bottom: 0px;
     width: 40vw;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
   }
 }
 
@@ -74,33 +75,25 @@
   min-height: 250px;
 
   @include mq(tablet-only) {
-    text-align: end;
+    text-align: right;
   }
 
   @include mq(tablet) {
     background-image: url(../../assets/images/loginPage/frame-tab-1x.png);
-    background-image: -webkit-image-set(
-      url(../../assets/images/loginPage/frame-tab-1x.webp) 1x
-    );
-    background-image: image-set(
-      url(../../assets/images/loginPage/frame-tab-1x.webp) 1x
-    );
+    background-image: -webkit-image-set(url(../../assets/images/loginPage/frame-tab-1x.webp) 1x);
+    background-image: image-set(url(../../assets/images/loginPage/frame-tab-1x.webp) 1x);
     background-repeat: no-repeat;
 
     @include mq(retina) {
       background-image: url(../../assets/images/loginPage/frame-tab-2x.png);
-      background-image: -webkit-image-set(
-        url(../../assets/images/loginPage/frame-tab-2x.webp) 2x
-      );
-      background-image: image-set(
-        url(../../assets/images/loginPage/frame-tab-2x.webp) 2x
-      );
+      background-image: -webkit-image-set(url(../../assets/images/loginPage/frame-tab-2x.webp) 2x);
+      background-image: image-set(url(../../assets/images/loginPage/frame-tab-2x.webp) 2x);
     }
   }
 
   @include mq(desktop) {
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     justify-content: center;
     margin-bottom: 0;
     height: 493px;
@@ -109,12 +102,8 @@
 
     @include mq(retina) {
       background-image: url(../../assets/images/loginPage/frame-desk-2x.png);
-      background-image: -webkit-image-set(
-        url(../../assets/images/loginPage/frame-desk-2x.webp) 2x
-      );
-      background-image: image-set(
-        url(../../assets/images/loginPage/frame-desk-2x.webp) 2x
-      );
+      background-image: -webkit-image-set(url(../../assets/images/loginPage/frame-desk-2x.webp) 2x);
+      background-image: image-set(url(../../assets/images/loginPage/frame-desk-2x.webp) 2x);
     }
   }
 }
