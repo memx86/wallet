@@ -18,6 +18,7 @@ import Loader from "components/Loader";
 import PublicRoute from "components/PublicRoute";
 import PrivateRoute from "components/PrivateRoute";
 import Currency from "components/Currency";
+import HomeTab from "components/HomeTab";
 
 const App = () => {
   const token = useSelector(tokenSelector);
@@ -38,24 +39,25 @@ const App = () => {
       {isAuth && <Header />}
       <Container>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/home"
-            element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/diagram"
-            element={
-              <PrivateRoute>
-                <DiagramTab />
-              </PrivateRoute>
-            }
-          />
-          <Route path="/currency" element={<Currency />} />
+          <Route path="/" element={<Home />}>
+            <Route
+              path="/home"
+              element={
+                <PrivateRoute>
+                  <HomeTab />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/diagram"
+              element={
+                <PrivateRoute>
+                  <DiagramTab />
+                </PrivateRoute>
+              }
+            />
+            <Route path="/currency" element={<Currency />} />
+          </Route>
           <Route
             path="/register"
             element={

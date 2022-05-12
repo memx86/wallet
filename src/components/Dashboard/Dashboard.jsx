@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 
 import Balance from "components/Balance";
@@ -19,7 +20,7 @@ const Dashboard = () => {
         </div>
         {!isMobile && <Currency />}
       </div>
-      <Table />
+      <Outlet />
     </div>
   );
 };
