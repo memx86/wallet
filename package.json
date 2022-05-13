@@ -14,6 +14,7 @@
     "dayjs": "^1.11.2",
     "formik": "^2.2.9",
     "modern-normalize": "^1.1.0",
+    "nanoid": "^3.3.4",
     "react": "^18.1.0",
     "react-chartjs-2": "^4.1.0",
     "react-dom": "^18.1.0",

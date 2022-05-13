@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import s from "./NewTable.module.scss";
+import spriteSvg from "assets/images/sprite.svg";
+import { nanoid } from "@reduxjs/toolkit";
 
 export const TYPE = {
   GENERAL: "general",
@@ -15,17 +17,21 @@ const TYPES = {
   EXPENSE: "EXPENSE",
 };
 
-const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
+const NewTable = ({
+  type = TYPE.GENERAL,
+  data,
+  categories = false,
+  income,
+  expense,
+}) => {
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isGeneral = type === TYPE.GENERAL;
   const prepareDate = (date) => dayjs(date).format("DD.MM.YY");
-  // console.log("data", data);
-  // console.log("prepareDate", prepareDate());
-  // console.log("categories", categories);
-  if (isMobile && isGeneral)
+
+  if (isMobile && isGeneral) {
     return (
       <ul className={s.list}>
-        {data.map(
+        {data?.map(
           ({
             id,
             transactionDate,
@@ -36,7 +42,7 @@ const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
             balanceAfter,
           }) => (
             <li
-              key={id}
+              key={nanoid()}
               className={type === TYPES.INCOME ? s.income : s.expense}
             >
               <ul>
@@ -76,65 +82,112 @@ const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
         )}
       </ul>
     );
+  }
   return (
-    <table className={s.table}>
-      <thead>
-        <tr className={s.head}>
-          {isGeneral && <th className={s.first}>Date</th>}
-          {isGeneral && <th className={s.center}>Type</th>}
-          <th className={isGeneral ? s.category : s.chartCategory}>Category</th>
-          {isGeneral && <th className={s.comment}>Comment</th>}
-          <th className={isGeneral ? s.right : s.chartAmount}>Amount</th>
-          {isGeneral && <th className={s.last}>Balance</th>}
-        </tr>
-      </thead>
-      <tbody>
-        {data.map(
-          ({
-            id,
-            transactionDate,
-            type,
-            categoryId,
-            comment,
-            amount,
-            balanceAfter,
-          }) => (
-            <tr key={id} className={s.row}>
-              {isGeneral && (
-                <td className={s.cell}>{prepareDate(transactionDate)}</td>
-              )}
-              {isGeneral && (
-                <td className={s.center}>
-                  {type === TYPES.INCOME ? "+" : "-"}
-                </td>
-              )}
-              <td className={isGeneral ? s.category : s.chartCategory}>
-                <div className={s.chartWrapper}>
-                  {!isGeneral && (
-                    <span
-                      className={s.marker}
-                      style={{ backgroundColor: "" }}
-                    ></span>
+    <>
+      <table className={isGeneral ? s.table : s.chartTable}>
+        <thead>
+          <tr className={s.head}>
+            {isGeneral && <th className={s.first}>Date</th>}
+            {isGeneral && <th className={s.center}>Type</th>}
+            <th className={isGeneral ? s.category : s.chartCategory}>
+              Category
+            </th>
+            {isGeneral && <th className={s.comment}>Comment</th>}
+            <th className={isGeneral ? s.right : s.chartAmount}>Amount</th>
+            {isGeneral && <th className={s.last}>Balance</th>}
+          </tr>
+        </thead>
+        <tbody>
+          {data?.map(
+            ({
+              id,
+              transactionDate,
+              type,
+              categoryId,
+              comment,
+              amount,
+              balanceAfter,
+              name,
+              total,
+              color,
+            }) => {
+              return (
+                <tr
+                  key={nanoid()}
+                  className={isGeneral ? s.row : s.chartRow}
+                  // style={{
+                  //   boxShadow: "0px 1px 0px rgba(255, 255, 255, 0.6)",
+                  // }}
+                >
+                  {isGeneral && (
+                    <td className={s.cell}>{prepareDate(transactionDate)}</td>
                   )}
-                  {categories[categoryId]}
-                </div>
-              </td>
-              {isGeneral && <td className={s.comment}>{comment}</td>}
-              <td
-                className={`${!isGeneral && s.chartAmount} ${s.right}`}
-                style={{ color: type === TYPES.INCOME ? "#24cca7" : "#ff6596" }}
-              >
-                {Math.abs(amount)}
-              </td>
-              {isGeneral && <td className={s.right}>{balanceAfter}</td>}
-            </tr>
-          )
-        )}
-      </tbody>
-      {!isGeneral && <tfoot></tfoot>}
-    </table>
+                  {isGeneral && (
+                    <td className={s.center}>
+                      {type === TYPES.INCOME ? "+" : "-"}
+                    </td>
+                  )}
+                  <td className={isGeneral ? s.category : s.chartCategory}>
+                    <div className={s.chartWrapper}>
+                      {!isGeneral && (
+                        <span
+                          className={s.marker}
+                          style={{ backgroundColor: color }}
+                        ></span>
+                      )}
+                      {isGeneral ? categories[categoryId] : name}
+                    </div>
+                  </td>
+                  {isGeneral && <td className={s.comment}>{comment}</td>}
+                  <td
+                    className={`${!isGeneral && s.chartAmount} ${s.right}`}
+                    style={
+                      isGeneral
+                        ? {
+                            color:
+                              type === TYPES.INCOME ? "#24cca7" : "#ff6596",
+                          }
+                        : { color: "#000", paddingRight: 20 + "px" }
+                    }
+                  >
+                    {Math.abs(isGeneral ? amount : total)}
+                  </td>
+                  {isGeneral && <td className={s.right}>{balanceAfter}</td>}
+                  {isGeneral && (
+                    <td className={s.change}>
+                      <button>
+                        ...
+                        {/* <svg className={s.icon}>
+                    <use href={`${spriteSvg}#icon_pencil`}></use>
+                  </svg> */}
+                      </button>
+                    </td>
+                  )}
+                  {isGeneral && <td className={s.delete}>X</td>}
+                </tr>
+              );
+            }
+          )}
+        </tbody>
+        {!isGeneral && <tfoot></tfoot>}
+      </table>
+      {!isGeneral && (
+        <ul className={s.totalAmount}>
+          <li className={s.amountItem}>
+            <b>Expenses:</b>
+            <b className={s.expenseAmount}>{Math.abs(expense) || "--"}</b>
+          </li>
+          <li className={s.amountItem}>
+            <b>Incomes:</b>
+            <b className={s.incomeAmount}>{income || "--"}</b>
+          </li>
+        </ul>
+      )}
+    </>
   );
 };
+
 NewTable.propTypes = {
   type: PropTypes.string,
   data: PropTypes.arrayOf(
@@ -142,13 +195,13 @@ NewTable.propTypes = {
       id: PropTypes.string,
       transactionDate: PropTypes.string,
       type: PropTypes.string,
-      categoryId: PropTypes.string.isRequired,
+      categoryId: PropTypes.string,
       comment: PropTypes.string,
-      amount: PropTypes.number.isRequired,
+      amount: PropTypes.number,
       balanceAfter: PropTypes.number,
     })
   ).isRequired,
-  categories: PropTypes.objectOf(PropTypes.string).isRequired,
+  categories: PropTypes.objectOf(PropTypes.string),
 };
 
 export default NewTable;
