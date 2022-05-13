@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const getTransactionSummary = createAsyncThunk(
-  "transSum",
+  "transactionsSummary",
   async (date, thunkApi) => {
     const { month, year } = date;
     try {

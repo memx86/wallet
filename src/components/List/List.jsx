@@ -1,7 +1,8 @@
 import s from "./List.module.scss";
 
 const List = ({ data }) => {
-  const array = data?.categoriesSummary?.slice(1) || [];
+  const array =
+    data?.categoriesSummary?.filter((item) => item.type !== "INCOME") || [];
 
   return (
     <div>
@@ -28,14 +29,12 @@ const List = ({ data }) => {
         <li className={s.expenses}>
           <b>Expenses:</b>
           <b className={s.amountExpenses}>
-            {!!array.length ? `${Math.abs(data?.expenseSummary)}` : "--"}
+            {Math.abs(data?.expenseSummary) || "--"}
           </b>
         </li>
         <li className={s.incomes}>
           <b>Incomes:</b>
-          <b className={s.amountIncomes}>
-            {!!array.length ? data?.incomeSummary : "--"}
-          </b>
+          <b className={s.amountIncomes}>{data?.incomeSummary || "--"}</b>
         </li>
       </ul>
     </div>

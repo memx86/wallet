@@ -4,6 +4,7 @@ import { month, years } from "assets/constants/MONTHS-YEARS";
 import spriteSvg from "assets/images/sprite.svg";
 
 import s from "./Selectors.module.scss";
+import { useClickOutside } from "assets/hooks/HookCloseByWindow";
 
 function filter(param) {
   const filterParam = param?.filter(
@@ -25,11 +26,18 @@ const Selectors = ({ transactions, selectDate }) => {
     (el) => +el.transactionDate.slice(5, 7)
   );
 
+  let domNode = useClickOutside(() => {
+    setIsActiveMonth(false);
+    setIsActiveYear(false);
+  });
+
   useEffect(() => {
     if (selectDate) {
       selectDate(month.indexOf(selectMonth) + 1, selectYear);
     }
-  }, [selectDate, selectYear, selectMonth]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectYear, selectMonth]);
 
   const checkYear = filter(transactionYears);
   const checkMonth = filter(transactionMonths);
@@ -38,7 +46,7 @@ const Selectors = ({ transactions, selectDate }) => {
     <div className={s.selectors}>
       <div className={s.select_box}>
         {activeMonth && (
-          <div className={s.active}>
+          <div ref={domNode} className={s.active}>
             {month.map((el) => {
               return (
                 <option
@@ -49,6 +57,11 @@ const Selectors = ({ transactions, selectDate }) => {
                     setSelectMonth(el);
                     setIsActiveMonth(false);
                   }}
+                  style={
+                    checkMonth.includes(month.indexOf(el) + 1)
+                      ? { color: "black" }
+                      : { color: "#D0D0D0" }
+                  }
                 >
                   {el}
                 </option>
@@ -68,7 +81,7 @@ const Selectors = ({ transactions, selectDate }) => {
       </div>
       <div className={s.select_box}>
         {activeYear && (
-          <div className={s.active}>
+          <div ref={domNode} className={s.active}>
             {years.map((el) => (
               <option
                 disabled={!checkYear.includes(el)}
@@ -78,6 +91,11 @@ const Selectors = ({ transactions, selectDate }) => {
                   setSelectYear(el);
                   setIsActiveYear(false);
                 }}
+                style={
+                  checkYear.includes(el)
+                    ? { color: "black" }
+                    : { color: "#D0D0D0" }
+                }
               >
                 {el}
               </option>
