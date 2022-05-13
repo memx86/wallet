@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import s from "./NewTable.module.scss";
+import ButtonAddTransactions from "components/ButtonAddTransactions";
 
 export const TYPE = {
   GENERAL: "general",
@@ -132,6 +133,7 @@ const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
         )}
       </tbody>
       {!isGeneral && <tfoot></tfoot>}
+      {isGeneral && !isMobile && <ButtonAddTransactions />}
     </table>
   );
 };

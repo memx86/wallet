@@ -1,0 +1,21 @@
+@import "stylesheet/_mixin.scss";
+
+.container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+    @include mq(tablet-only) {
+        right: calc(50% - 350px)
+    }
+
+    @include mq(desktop) {
+        right: calc(50% - 625px)
+    }
+}
+
+.icon {
+    width: 44px;
+    height: 44px;
+    color: var(--accept-cl);
+}
