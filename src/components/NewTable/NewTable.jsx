@@ -77,12 +77,12 @@ const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
     <table className={s.table}>
       <thead>
         <tr className={s.head}>
-          {isGeneral && <th className={s.cell}>Date</th>}
+          {isGeneral && <th className={s.first}>Date</th>}
           {isGeneral && <th className={s.center}>Type</th>}
           <th className={isGeneral ? s.category : s.chartCategory}>Category</th>
           {isGeneral && <th className={s.comment}>Comment</th>}
           <th className={isGeneral ? s.right : s.chartAmount}>Amount</th>
-          {isGeneral && <th className={s.right}>Balance</th>}
+          {isGeneral && <th className={s.last}>Balance</th>}
         </tr>
       </thead>
       <tbody>

@@ -38,8 +38,9 @@
 .table {
     width: 100%;
     table-layout: fixed;
-    background-color: rgba(255, 255, 255, 0.4);
+    border-collapse: collapse;
 }
+
 
 .head {
     height: 58px;
@@ -73,6 +74,25 @@
     text-align: left;
 }
 
+.right {
+    composes: cell;
+    padding-left: 16px;
+    padding-right: 16px;
+    text-align: right;
+}
+
+.first {
+    composes: cell;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.last {
+    composes: right;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
 .center {
     composes: cell;
     width: 10%;
@@ -91,6 +111,8 @@
     width: 70%;
     padding-left: 20px;
     padding-right: 20px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
 }
 
 .chartWrapper {
@@ -98,18 +120,14 @@
     justify-content: left;
     align-items: center;
     gap: 16px;
-}
 
-.right {
-    composes: cell;
-    padding-left: 16px;
-    padding-right: 16px;
-    text-align: right;
 }
 
 .chartAmount {
     composes: right;
     width: 30%;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
 .comment {
