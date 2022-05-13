@@ -29,6 +29,12 @@ const HomeTab = () => {
     skip: !isAuth,
   });
 
+  const filteredData = () => {
+    return data.sort(
+      (a, b) => new Date(b.transactionDate) - new Date(a.transactionDate)
+    );
+  };
+
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
@@ -40,7 +46,7 @@ const HomeTab = () => {
       {!data?.length ? (
         <p>Feel free to add new transactions</p>
       ) : (
-        <NewTable data={data} categories={categories} />
+        <NewTable data={filteredData()} categories={categories} />
       )}
     </>
   );
