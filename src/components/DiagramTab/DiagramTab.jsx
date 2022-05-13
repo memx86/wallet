@@ -8,6 +8,7 @@ import {
 import { colorsChange } from "assets/constants/COLORS";
 import Chart from "components/Chart";
 import Table from "components/Table";
+import Loader from "components/Loader";
 
 import s from "./DiagramTab.module.scss";
 
@@ -54,9 +55,8 @@ const DiagramTab = () => {
 
   return (
     <div>
-      DiagramTab
       {diagLoader ? (
-        <h3>Loading...</h3>
+        <Loader />
       ) : (
         <>
           <h2>Statistic</h2>
