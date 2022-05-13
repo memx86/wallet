@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 const ModalLogout = () => {
   const dispatch = useDispatch();
-  const isLogout = useSelector((state) => isLogoutSelector(state));
+  const isLogout = useSelector(isLogoutSelector);
   const [logout] = useLogoutMutation();
 
   const confirm = async () => {
