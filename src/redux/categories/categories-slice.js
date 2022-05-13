@@ -15,7 +15,7 @@ const categoriesSlice = createSlice({
       state.error = "";
     },
     [getCategories.fulfilled]: (state, { payload }) => {
-      state = payload;
+      state.data = payload;
       state.isLoading = false;
     },
     [getCategories.rejected]: (state, { payload }) => {

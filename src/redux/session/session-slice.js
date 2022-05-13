@@ -20,6 +20,7 @@ const sessionSlice = createSlice({
   },
   reducers: {
     loggedIn(state) {
+      token.set(state.token);
       state.isAuth = true;
     },
     loggedOff(state) {
