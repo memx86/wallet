@@ -1,52 +1,12 @@
 // import s from './HomeTab.module.scss'
 import { useMediaQuery } from "react-responsive";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
+import { useGetTransactionSummaryQuery } from "redux/wallet";
+import Loader from "components/Loader";
 
 import NewTable from "components/NewTable";
 import Balance from "components/Balance";
 
-const arr = [
-  {
-    id: "d907ac87-21cc-452b-bcde-54ce335dbeb9",
-    transactionDate: "2022-05-12",
-    type: "INCOME",
-    comment: "Initial income",
-    amount: 25000,
-    balanceAfter: 25000,
-    categoryId: "063f1132-ba5d-42b4-951d-44011ca46262",
-    userId: "2655e40b-9ffe-49a5-8e23-a8a85fff3e87",
-  },
-  {
-    id: "cab59ce7-faf2-46ce-b2a5-9cc21445ccd5",
-    transactionDate: "2022-05-12",
-    type: "EXPENSE",
-    comment: "Firing JAvelin",
-    amount: -500,
-    balanceAfter: 24500,
-    categoryId: "3acd0ecd-5295-4d54-8e7c-d3908f4d0402",
-    userId: "2655e40b-9ffe-49a5-8e23-a8a85fff3e87",
-  },
-  {
-    id: "8f116979-d893-4e84-9279-322d2cdd25bc",
-    transactionDate: "2022-05-12",
-    type: "EXPENSE",
-    comment: "NLAW training",
-    amount: -1500,
-    balanceAfter: 23000,
-    categoryId: "1272fcc4-d59f-462d-ad33-a85a075e5581",
-    userId: "2655e40b-9ffe-49a5-8e23-a8a85fff3e87",
-  },
-  {
-    id: "fe7983de-19a9-4d8e-9d76-8849acacb696",
-    transactionDate: "2022-05-12",
-    type: "EXPENSE",
-    comment: "New uniform",
-    amount: -1000,
-    balanceAfter: 22000,
-    categoryId: "bbdd58b8-e804-4ab9-bf4f-695da5ef64f4",
-    userId: "2655e40b-9ffe-49a5-8e23-a8a85fff3e87",
-  },
-];
 const category = [
   {
     id: "c9d9e447-1b83-4238-8712-edc77b18b739",
@@ -107,10 +67,13 @@ const category = [
 
 const HomeTab = () => {
   const isMobile = useMediaQuery(MOBILE_ONLY);
+  const { data, isLoading } = useGetTransactionSummaryQuery();
+
+  if (isLoading) return <Loader />;
   return (
     <>
       {isMobile && <Balance />}
-      <NewTable data={arr} categories={category} />
+      <NewTable data={data} categories={category} />
     </>
   );
 };

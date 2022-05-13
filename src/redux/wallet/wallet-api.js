@@ -30,6 +30,10 @@ export const walletApi = createApi({
       query: () => "/users/current",
       providesTags: ["User"],
     }),
+    getTransactionSummary: build.query({
+      query: () => "/transactions",
+      providesTags: ["Transaction"],
+    }),
   }),
   // refetchOnFocus: true,
   // refetchOnReconnect: true,
@@ -40,4 +44,5 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useRefreshQuery,
+  useGetTransactionSummaryQuery,
 } = walletApi;
