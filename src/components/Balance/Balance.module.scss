@@ -1,0 +1,45 @@
+@import "../../stylesheet/vars.scss";
+@import "../../stylesheet/mixin.scss";
+
+.balance {
+    height: 80px;
+    padding: 8px 40px 13px;
+    margin-bottom: 30px;
+    background: var(--main-bg-cl);
+    border-radius: 30px;
+
+    @include mq(tablet){
+        width: 336px;
+        margin-bottom: 0px;
+    }
+
+    @include mq(desktop){
+            width: 395px;
+    }
+}
+
+.balanceTitle {
+    text-align: start;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.5;
+    text-transform: uppercase;
+
+    color: #a6a6a6;
+}
+
+.balanceValue {
+    font-family: Releway;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    color: var(--main-text-cl);
+}
+
+.symbol {
+    font-weight: 300;
+    margin-right: 10px;
+}
