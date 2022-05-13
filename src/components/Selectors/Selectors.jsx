@@ -57,6 +57,11 @@ const Selectors = ({ transactions, selectDate }) => {
                     setSelectMonth(el);
                     setIsActiveMonth(false);
                   }}
+                  style={
+                    checkMonth.includes(month.indexOf(el) + 1)
+                      ? { color: "black" }
+                      : { color: "#D0D0D0" }
+                  }
                 >
                   {el}
                 </option>
@@ -86,6 +91,11 @@ const Selectors = ({ transactions, selectDate }) => {
                   setSelectYear(el);
                   setIsActiveYear(false);
                 }}
+                style={
+                  checkYear.includes(el)
+                    ? { color: "black" }
+                    : { color: "#D0D0D0" }
+                }
               >
                 {el}
               </option>

@@ -38,14 +38,6 @@ const DiagramTab = () => {
 
   const changedData = changeData(diagData, colorsChange);
 
-  // const selectDate = useCallback(function (month, year) {
-  //   const obj = { month: 0, year: 0 };
-  //   if (!isNaN(month) && !isNaN(year)) {
-  //     obj.month = month;
-  //     obj.year = year;
-  //   }
-  //   setObject(obj);
-  // }, []);
   function selectDate(month, year) {
     const obj = { month: 0, year: 0 };
     if (!isNaN(month) && !isNaN(year)) {
