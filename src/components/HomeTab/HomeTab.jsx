@@ -22,7 +22,7 @@ const HomeTab = () => {
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isAuth = useSelector(isAuthSelector);
   const dispatch = useDispatch();
-  const { data, isLoading } = useGetTransactionSummaryQuery(null, {
+  const { data, isFetching } = useGetTransactionSummaryQuery(null, {
     skip: !isAuth,
   });
   const { data: userData } = useRefreshQuery(null, {
@@ -39,7 +39,7 @@ const HomeTab = () => {
     dispatch(getCategories());
   }, [dispatch]);
 
-  if (isLoading || isLoadingCategories) return <Loader />;
+  if (isFetching || isLoadingCategories) return <Loader />;
   return (
     <Fragment>
       {isMobile && <Balance balance={userData.balance} />}
