@@ -1,7 +1,7 @@
 // import s from "./Balance.module.scss"
 
-const Balance = () => {
-  return <div>Balance</div>;
+const Balance = ({ balance }) => {
+  return <div>Balance: {balance}</div>;
 };
 
 export default Balance;

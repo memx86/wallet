@@ -1,11 +1,13 @@
 // import s from './HomeTab.module.scss'
+import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
+import { isAuthSelector } from "redux/session";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
-import { useGetTransactionSummaryQuery } from "redux/wallet";
+import { useGetTransactionSummaryQuery, useRefreshQuery } from "redux/wallet";
 import Loader from "components/Loader";
 
 import NewTable from "components/NewTable";
-import Balance from "components/Balance";
+import Balance from "components/Balance/Balance";
 
 const category = [
   {
@@ -67,13 +69,23 @@ const category = [
 
 const HomeTab = () => {
   const isMobile = useMediaQuery(MOBILE_ONLY);
-  const { data, isLoading } = useGetTransactionSummaryQuery();
+  const isAuth = useSelector(isAuthSelector);
+  const { data, isLoading } = useGetTransactionSummaryQuery(null, {
+    skip: !isAuth,
+  });
+  const { data: userData } = useRefreshQuery(null, {
+    skip: !isAuth,
+  });
 
   if (isLoading) return <Loader />;
   return (
     <>
-      {isMobile && <Balance />}
-      <NewTable data={data} categories={category} />
+      {isMobile && <Balance balance={userData.balance} />}
+      {!data?.length ? (
+        <p>Feel free to add new transactions</p>
+      ) : (
+        <NewTable data={data} categories={category} />
+      )}
     </>
   );
 };
