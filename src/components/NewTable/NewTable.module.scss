@@ -35,8 +35,11 @@
     font-weight: 700;
 }
 
-.table {
+.wrapper {
     position: relative;
+}
+
+.table {
     width: 100%;
     table-layout: fixed;
     border-collapse: collapse;
