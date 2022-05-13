@@ -18,22 +18,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
   line-height: 1.5;
+  background-color: var(--page-bg-cl);
 
   @include mq(tablet) {
-    background-color: var(--page-bg-cl);
     background-image: url(../assets/images/loginPage/ellipse-top-tab-1x.png),
       url(../assets/images/loginPage/ellipse-bottom-tab-1x.png);
 
-    background-image: -webkit-image-set(
-        url(../assets/images/loginPage/ellipse-top-tab-1x.webp) 1x
-      ),
-      -webkit-image-set(url(../assets/images/loginPage/ellipse-bottom-tab-1x.webp)
-            1x);
-    background-image: image-set(
-        url(../assets/images/loginPage/ellipse-top-tab-1x.webp) 1x
-      ),
-      -webkit-image-set(url(../assets/images/loginPage/ellipse-bottom-tab-1x.webp)
-            1x);
+    background-image: -webkit-image-set(url(../assets/images/loginPage/ellipse-top-tab-1x.webp) 1x),
+      -webkit-image-set(url(../assets/images/loginPage/ellipse-bottom-tab-1x.webp) 1x);
+    background-image: image-set(url(../assets/images/loginPage/ellipse-top-tab-1x.webp) 1x),
+      -webkit-image-set(url(../assets/images/loginPage/ellipse-bottom-tab-1x.webp) 1x);
 
     background-position: top right, bottom left;
     background-repeat: no-repeat;
@@ -41,16 +35,10 @@ body {
     @include mq(retina) {
       background-image: url(../assets/images/loginPage/ellipse-top-tab-2x.png),
         url(../assets/images/loginPage/ellipse-bottom-tab-2x.png);
-      background-image: -webkit-image-set(
-          url(../assets/images/loginPage/ellipse-top-tab-2x.webp) 2x
-        ),
-        -webkit-image-set(url(../assets/images/loginPage/ellipse-bottom-tab-2x.webp)
-              2x);
-      background-image: image-set(
-          url(../assets/images/loginPage/ellipse-top-tab-2x.webp) 2x
-        ),
-        -webkit-image-set(url(../assets/images/loginPage/ellipse-bottom-tab-2x.webp)
-              2x);
+      background-image: -webkit-image-set(url(../assets/images/loginPage/ellipse-top-tab-2x.webp) 2x),
+        -webkit-image-set(url(../assets/images/loginPage/ellipse-bottom-tab-2x.webp) 2x);
+      background-image: image-set(url(../assets/images/loginPage/ellipse-top-tab-2x.webp) 2x),
+        -webkit-image-set(url(../assets/images/loginPage/ellipse-bottom-tab-2x.webp) 2x);
     }
   }
 
@@ -58,30 +46,18 @@ body {
     background-image: url(../assets/images/loginPage/ellipse-top-desk-1x.png),
       url(../assets/images/loginPage/ellipse-bottom-desk-1x.png);
 
-    background-image: -webkit-image-set(
-        url(../assets/images/loginPage/ellipse-top-desk-1x.webp) 1x
-      ),
-      -webkit-image-set(url(../assets/images/loginPage/ellipse-bottom-desk-1x.webp)
-            1x);
-    background-image: image-set(
-        url(../assets/images/loginPage/ellipse-top-desk-1x.webp) 1x
-      ),
-      -webkit-image-set(url(../assets/images/loginPage/ellipse-bottom-desk-1x.webp)
-            1x);
+    background-image: -webkit-image-set(url(../assets/images/loginPage/ellipse-top-desk-1x.webp) 1x),
+      -webkit-image-set(url(../assets/images/loginPage/ellipse-bottom-desk-1x.webp) 1x);
+    background-image: image-set(url(../assets/images/loginPage/ellipse-top-desk-1x.webp) 1x),
+      -webkit-image-set(url(../assets/images/loginPage/ellipse-bottom-desk-1x.webp) 1x);
 
     @include mq(retina) {
       background-image: url(../assets/images/loginPage/ellipse-top-desk-2x.png),
         url(../assets/images/loginPage/ellipse-bottom-desk-2x.png);
-      background-image: -webkit-image-set(
-          url(../assets/images/loginPage/ellipse-top-desk-2x.webp) 2x
-        ),
-        -webkit-image-set(url(../assets/images/loginPage/ellipse-bottom-desk-2x.webp)
-              2x);
-      background-image: image-set(
-          url(../assets/images/loginPage/ellipse-top-desk-2x.webp) 2x
-        ),
-        -webkit-image-set(url(../assets/images/loginPage/ellipse-bottom-desk-2x.webp)
-              2x);
+      background-image: -webkit-image-set(url(../assets/images/loginPage/ellipse-top-desk-2x.webp) 2x),
+        -webkit-image-set(url(../assets/images/loginPage/ellipse-bottom-desk-2x.webp) 2x);
+      background-image: image-set(url(../assets/images/loginPage/ellipse-top-desk-2x.webp) 2x),
+        -webkit-image-set(url(../assets/images/loginPage/ellipse-bottom-desk-2x.webp) 2x);
     }
   }
 }
