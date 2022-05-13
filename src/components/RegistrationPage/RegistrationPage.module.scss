@@ -86,22 +86,22 @@
   }
 
   @include mq(tablet) {
-    background-image: url(../../assets/images/loginPage/frame-tab-1x.png);
+    background-image: url(../../assets/images/registrationPage/frame-tab-1x.png);
     background-image: -webkit-image-set(
-      url(../../assets/images/loginPage/frame-tab-1x.webp) 1x
+      url(../../assets/images/registrationPage/frame-tab-1x.webp) 1x
     );
     background-image: image-set(
-      url(../../assets/images/loginPage/frame-tab-1x.webp) 1x
+      url(../../assets/images/registrationPage/frame-tab-1x.webp) 1x
     );
     background-repeat: no-repeat;
 
     @include mq(retina) {
-      background-image: url(../../assets/images/loginPage/frame-tab-2x.png);
+      background-image: url(../../assets/images/registrationPage/frame-tab-2x.png);
       background-image: -webkit-image-set(
-        url(../../assets/images/loginPage/frame-tab-2x.webp) 2x
+        url(../../assets/images/registrationPage/frame-tab-2x.webp) 2x
       );
       background-image: image-set(
-        url(../../assets/images/loginPage/frame-tab-2x.webp) 2x
+        url(../../assets/images/registrationPage/frame-tab-2x.webp) 2x
       );
     }
   }
@@ -113,21 +113,21 @@
     margin-bottom: 0;
     height: 493px;
     width: 436px;
-    background-image: url(../../assets/images/loginPage/frame-desk-1x.png);
+    background-image: url(../../assets/images/registrationPage/frame-desk-1x.png);
     background-image: -webkit-image-set(
-      url(../../assets/images/loginPage/frame-desk-1x.webp) 1x
+      url(../../assets/images/registrationPage/frame-desk-1x.webp) 1x
     );
     background-image: image-set(
-      url(../../assets/images/loginPage/frame-desk-1x.webp) 1x
+      url(../../assets/images/registrationPage/frame-desk-1x.webp) 1x
     );
 
     @include mq(retina) {
-      background-image: url(../../assets/images/loginPage/frame-desk-2x.png);
+      background-image: url(../../assets/images/registrationPage/frame-desk-2x.png);
       background-image: -webkit-image-set(
-        url(../../assets/images/loginPage/frame-desk-2x.webp) 2x
+        url(../../assets/images/registrationPage/frame-desk-2x.webp) 2x
       );
       background-image: image-set(
-        url(../../assets/images/loginPage/frame-desk-2x.webp) 2x
+        url(../../assets/images/registrationPage/frame-desk-2x.webp) 2x
       );
     }
   }
@@ -136,7 +136,7 @@
 .title {
   display: inline-block;
   padding-top: 107px;
-  padding-right: 50px;
+  padding-right: 36px;
   font-family: Poppins;
   font-weight: 400;
   font-size: 30px;
@@ -153,12 +153,8 @@
   display: inline-block;
 
   @include mq(mobile-only) {
-    padding-top: 107px;
-    padding-bottom: 107px;
-  }
-
-  @include mq(tablet-only) {
-    height: 468px;
+    padding-top: 32px;
+    padding-bottom: 36px;
   }
 
   @include mq(desktop) {
