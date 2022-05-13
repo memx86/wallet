@@ -1,8 +1,6 @@
 @import "stylesheet/_mixin.scss";
 
 .container {
-    background-color: rgba(255, 255, 255, 0.4);
-
     @include mq(tablet) {
         display: grid;
         gap: 20px;

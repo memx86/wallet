@@ -6,7 +6,7 @@ import { Navigate } from "react-router-dom";
 
 const PublicRoute = ({ children }) => {
   const isAuth = useSelector(isAuthSelector);
-  return !isAuth ? children : <Navigate to="/" replace={true} />;
+  return !isAuth ? children : <Navigate to="/home" replace={true} />;
 };
 
 PublicRoute.propTypes = {

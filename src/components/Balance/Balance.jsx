@@ -1,13 +1,12 @@
-import s from "./Balance.module.scss"
+import s from "./Balance.module.scss";
 
-export default function Balance() {
+export default function Balance({ balance }) {
   return (
     <div className={s.balance}>
-      <p className={s.balanceTitle}>Ваш баланс</p>
+      <p className={s.balanceTitle}>Your balance</p>
       <p className={s.balanceValue}>
-        <span className={s.symbol}>₴</span>
+        <span className={s.symbol}>₴ {balance}</span>
       </p>
     </div>
   );
 }
-

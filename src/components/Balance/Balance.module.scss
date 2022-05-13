@@ -1,5 +1,4 @@
-@import "../../stylesheet/vars.scss";
-@import "../../stylesheet/mixin.scss";
+@import "stylesheet/mixin.scss";
 
 .balance {
     height: 80px;
@@ -8,13 +7,13 @@
     background: var(--main-bg-cl);
     border-radius: 30px;
 
-    @include mq(tablet){
+    @include mq(tablet) {
         width: 336px;
         margin-bottom: 0px;
     }
 
-    @include mq(desktop){
-            width: 395px;
+    @include mq(desktop) {
+        width: 395px;
     }
 }
 
@@ -25,13 +24,21 @@
     line-height: 1.5;
     text-transform: uppercase;
 
-    color: #a6a6a6;
+    color: var(--faded-cl);
 }
 
 .balanceValue {
-    font-family: Releway;
-    font-style: normal;
-    font-weight: 600;
+    font-family: Poppins,
+        system-ui,
+        -apple-system,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif,
+        "Apple Color Emoji",
+        "Segoe UI Emoji";
+    font-weight: 700;
     font-size: 30px;
     line-height: 1.5;
     display: flex;
