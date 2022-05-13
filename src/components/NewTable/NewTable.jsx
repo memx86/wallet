@@ -2,7 +2,6 @@ import { useMediaQuery } from "react-responsive";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 
-import prepareCategories from "services/categories";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import s from "./NewTable.module.scss";
 
@@ -19,7 +18,6 @@ const TYPES = {
 const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isGeneral = type === TYPE.GENERAL;
-  const category = prepareCategories(categories);
   const prepareDate = (date) => dayjs(date).format("DD.MM.YY");
   if (isMobile && isGeneral)
     return (
@@ -49,7 +47,7 @@ const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
                 </li>
                 <li className={s.element}>
                   <span className={s.title}>Category</span>
-                  <span>{category[categoryId]}</span>
+                  <span>{categories[categoryId]}</span>
                 </li>
                 <li className={s.element}>
                   <span className={s.title}>Comment</span>
@@ -115,7 +113,7 @@ const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
                       style={{ backgroundColor: "" }}
                     ></span>
                   )}
-                  {category[categoryId]}
+                  {categories[categoryId]}
                 </div>
               </td>
               {isGeneral && <td className={s.comment}>{comment}</td>}
@@ -147,13 +145,7 @@ NewTable.propTypes = {
       balanceAfter: PropTypes.number,
     })
   ).isRequired,
-  categories: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  categories: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default NewTable;

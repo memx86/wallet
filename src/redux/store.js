@@ -12,6 +12,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import diagramReducer from "./diagram/diagramSlice";
+import { categoriesReducer } from "./categories";
 
 import { sessionReducer } from "./session";
 import { walletApi } from "./wallet";
@@ -22,10 +23,17 @@ const persistSession = {
   whitelist: ["token"],
 };
 
+const persistCategories = {
+  key: "wallet/categories",
+  storage,
+  whitelist: ["data"],
+};
+
 const store = configureStore({
   reducer: {
-    diagram: diagramReducer,
     session: persistReducer(persistSession, sessionReducer),
+    categories: persistReducer(persistCategories, categoriesReducer),
+    diagram: diagramReducer,
     [walletApi.reducerPath]: walletApi.reducer,
   },
   middleware: (getDefaultMiddleware) => [
