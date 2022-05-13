@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { month, years } from "assets/constants/MONTHS-YEARS";
 import spriteSvg from "assets/images/sprite.svg";
 
 import s from "./Selectors.module.scss";
+import { useClickOutside } from "assets/hooks/HookCloseByWindow";
 
 function filter(param) {
   const filterParam = param?.filter(
@@ -12,25 +13,6 @@ function filter(param) {
 
   return filterParam;
 }
-
-const useClickOutside = (handler) => {
-  let domNode = useRef();
-  useEffect(() => {
-    let mayBEHandler = (e) => {
-      if (!domNode.current?.contains(e.target)) {
-        // setIsActiveMonth(false);
-        // setIsActiveYear(false);
-        handler();
-      }
-    };
-    document.addEventListener("mousedown", mayBEHandler);
-    return () => {
-      document.removeEventListener("mousedown", mayBEHandler);
-    };
-  }, []);
-
-  return domNode;
-};
 
 const Selectors = ({ transactions, selectDate }) => {
   const [selectMonth, setSelectMonth] = useState("Month");
@@ -46,6 +28,7 @@ const Selectors = ({ transactions, selectDate }) => {
 
   let domNode = useClickOutside(() => {
     setIsActiveMonth(false);
+    setIsActiveYear(false);
   });
 
   useEffect(() => {
@@ -93,7 +76,7 @@ const Selectors = ({ transactions, selectDate }) => {
       </div>
       <div className={s.select_box}>
         {activeYear && (
-          <div className={s.active}>
+          <div ref={domNode} className={s.active}>
             {years.map((el) => (
               <option
                 disabled={!checkYear.includes(el)}

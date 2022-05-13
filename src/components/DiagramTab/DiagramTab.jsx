@@ -18,7 +18,7 @@ const DiagramTab = () => {
   const { transactions } = useSelector((state) => state.diagram);
   const [object, setObject] = useState({ month: 0, year: 0 });
 
-  console.log("diagData", diagData);
+  // console.log("diagData", diagData);
 
   function changeData(data, colorsObj) {
     if (!Object.keys(data).length) {

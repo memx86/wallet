@@ -10,17 +10,16 @@ const Chart = ({ data: { categoriesSummary, periodTotal } }) => {
   const filterCategoriesSum = categoriesSummary?.filter(
     (item) => item.type !== "INCOME"
   );
-  const amountCat = filterCategoriesSum?.map((item) => item.total);
-  const nameCat = filterCategoriesSum?.map((item) => item.name);
-  const colorCat = filterCategoriesSum?.map((item) => item.color);
+  const amountCat = filterCategoriesSum?.map((item) => item.total) || [];
+  const colorCat = filterCategoriesSum?.map((item) => item.color) || [];
 
   const data = {
     datasets: [
       {
         // label: nameCat?.slice(1),
-        id: nameCat,
-        data: amountCat || [1],
-        backgroundColor: colorCat || ["#4a56e2"],
+        // id: nameCat,
+        data: !!amountCat.length ? amountCat : [1],
+        backgroundColor: !!colorCat.length ? colorCat : ["#4a56e2"],
         borderWidth: 0,
       },
     ],
