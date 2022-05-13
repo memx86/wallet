@@ -36,7 +36,7 @@ const App = () => {
   return (
     <Fragment>
       {isAuth && <Header />}
-      {/* <Container> */}
+
       <Routes>
         <Route path="/" element={<Home />}>
           <Route
@@ -75,7 +75,7 @@ const App = () => {
         />
         <Route path="*" element={<Home />} />
       </Routes>
-      {/* </Container> */}
+
       <ToastContainer hideProgressBar />
     </Fragment>
   );

@@ -1,6 +1,9 @@
+import { Navigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+
 import Currency from "components/Currency";
 import Container from "components/Container";
+
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import s from "./CurrencyTab.module.scss";
 
@@ -12,6 +15,8 @@ const CurrencyTab = () => {
         <Currency />
       </div>
     </Container>
-  ) : null;
+  ) : (
+    <Navigate to="/home" replace={true} />
+  );
 };
 export default CurrencyTab;
