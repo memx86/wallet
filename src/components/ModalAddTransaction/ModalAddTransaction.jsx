@@ -7,6 +7,7 @@ import { GrClose } from "react-icons/gr";
 
 import { categoriesSelector } from "redux/categories";
 import { isTransactionModalSelector, transactionModal } from "redux/session";
+import { useAddTransactionMutation } from "redux/wallet";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 
@@ -26,22 +27,47 @@ const ModalAddTransaction = () => {
   const isTransactionModal = useSelector(isTransactionModalSelector);
   const categories = useSelector(categoriesSelector);
   const dispatch = useDispatch();
+  const [addTransaction] = useAddTransactionMutation();
 
-  const selectFields = Object.entries(categories).filter(
-    ([, category]) => category !== "Income"
-  );
+  const selectFields = [];
+  let incomeCategoryId;
+  Object.entries(categories).forEach(([id, category]) => {
+    if (category === "Income") {
+      incomeCategoryId = id;
+      return;
+    }
+    selectFields.push([id, category]);
+  });
 
   const closeModal = () => {
     dispatch(transactionModal(false));
   };
 
-  const onSubmit = (values) => {
+  // const prepareDate = (date) => {
+  //   const currentDate = new Date();
+  //   const timeZone = currentDate.getTimezoneOffset();
+  //   const currentTime = (currentDate.getTime() - 60000 * timeZone) % 86400000;
+  //   const initialDate = new Date(date).getTime();
+  //   return new Date(initialDate + currentTime);
+  // };
+
+  const onSubmit = async (values) => {
     const data = {
       ...values,
+      // transactionDate: prepareDate(values.transactionDate),
+      categoryId: values.type ? values.categoryId : incomeCategoryId,
       amount: values.type ? values.amount * -1 : values.amount,
       type: values.type ? TYPES.EXPENSE : TYPES.INCOME,
     };
-    console.log("data", data);
+    try {
+      const res = await addTransaction(data).unwrap();
+      if (res) {
+        toast.success("Transaction added");
+        closeModal();
+      }
+    } catch (error) {
+      toast.error("Can't add transaction");
+    }
   };
   return isTransactionModal ? (
     <Modal modalClassName={s.modal} closeModal={closeModal}>
