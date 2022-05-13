@@ -1,7 +1,12 @@
-// import s from "./Balance.module.scss"
+import s from "./Balance.module.scss";
 
-const Balance = () => {
-  return <div>Balance</div>;
-};
-
-export default Balance;
+export default function Balance({ balance }) {
+  return (
+    <div className={s.balance}>
+      <p className={s.balanceTitle}>Your balance</p>
+      <p className={s.balanceValue}>
+        <span className={s.symbol}>₴ {balance}</span>
+      </p>
+    </div>
+  );
+}

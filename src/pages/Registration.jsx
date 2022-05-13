@@ -1,6 +1,6 @@
-import AuthForm, { authType } from "components/AuthForm/AuthForm";
+import RegistrationPage from "components/RegistrationPage";
 
 const Registration = () => {
-  return <AuthForm type={authType.registration} />;
+  return <RegistrationPage />;
 };
 export default Registration;

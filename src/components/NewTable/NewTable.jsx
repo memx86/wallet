@@ -2,7 +2,6 @@ import { useMediaQuery } from "react-responsive";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 
-import prepareCategories from "services/categories";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import s from "./NewTable.module.scss";
 
@@ -19,7 +18,6 @@ const TYPES = {
 const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isGeneral = type === TYPE.GENERAL;
-  const category = prepareCategories(categories);
   const prepareDate = (date) => dayjs(date).format("DD.MM.YY");
   // console.log("data", data);
   // console.log("prepareDate", prepareDate());
@@ -52,7 +50,7 @@ const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
                 </li>
                 <li className={s.element}>
                   <span className={s.title}>Category</span>
-                  <span>{category[categoryId]}</span>
+                  <span>{categories[categoryId]}</span>
                 </li>
                 <li className={s.element}>
                   <span className={s.title}>Comment</span>
@@ -82,12 +80,12 @@ const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
     <table className={s.table}>
       <thead>
         <tr className={s.head}>
-          {isGeneral && <th className={s.cell}>Date</th>}
+          {isGeneral && <th className={s.first}>Date</th>}
           {isGeneral && <th className={s.center}>Type</th>}
           <th className={isGeneral ? s.category : s.chartCategory}>Category</th>
           {isGeneral && <th className={s.comment}>Comment</th>}
           <th className={isGeneral ? s.right : s.chartAmount}>Amount</th>
-          {isGeneral && <th className={s.right}>Balance</th>}
+          {isGeneral && <th className={s.last}>Balance</th>}
         </tr>
       </thead>
       <tbody>
@@ -118,7 +116,7 @@ const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
                       style={{ backgroundColor: "" }}
                     ></span>
                   )}
-                  {category[categoryId]}
+                  {categories[categoryId]}
                 </div>
               </td>
               {isGeneral && <td className={s.comment}>{comment}</td>}
@@ -150,13 +148,7 @@ NewTable.propTypes = {
       balanceAfter: PropTypes.number,
     })
   ).isRequired,
-  categories: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  categories: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default NewTable;

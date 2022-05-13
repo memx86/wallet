@@ -77,7 +77,7 @@ const Currency = () => {
     return (
       <div className={s.wrapper}>
         <p className={s.text}>
-          Что-то пошло не так... <br /> Попробуйте позже.
+          Can't get data from server. Please try again later.
         </p>
       </div>
     );
@@ -88,9 +88,9 @@ const Currency = () => {
       <table className={s.table}>
         <thead className={s.thead}>
           <tr>
-            <th className={s.thLeft}>Валюта</th>
-            <th className={s.thCenter}>Покупка</th>
-            <th className={s.thRight}>Продажа</th>
+            <th className={s.thLeft}>Currency</th>
+            <th className={s.thCenter}>Buying rate</th>
+            <th className={s.thRight}>Selling Rate</th>
           </tr>
         </thead>
         <tbody className={s.tbody}>

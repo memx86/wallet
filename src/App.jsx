@@ -17,7 +17,8 @@ import Login from "pages/Login";
 import Loader from "components/Loader";
 import PublicRoute from "components/PublicRoute";
 import PrivateRoute from "components/PrivateRoute";
-import Currency from "components/Currency";
+import CurrencyTab from "components/CurrencyTab";
+import ModalLogout from "components/ModalLogout";
 
 const App = () => {
   const token = useSelector(tokenSelector);
@@ -36,7 +37,7 @@ const App = () => {
   return (
     <Fragment>
       {isAuth && <Header />}
-      {/* <Container> */}
+
       <Routes>
         <Route path="/" element={<Home />}>
           <Route
@@ -55,7 +56,7 @@ const App = () => {
               </PrivateRoute>
             }
           />
-          <Route path="currency" element={<Currency />} />
+          <Route path="currency" element={<CurrencyTab />} />
         </Route>
         <Route
           path="/register"
@@ -75,7 +76,7 @@ const App = () => {
         />
         <Route path="*" element={<Home />} />
       </Routes>
-      {/* </Container> */}
+      <ModalLogout />
       <ToastContainer hideProgressBar />
     </Fragment>
   );
