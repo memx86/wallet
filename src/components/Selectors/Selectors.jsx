@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { month, years } from "assets/constants/MONTHS-YEARS";
 import spriteSvg from "assets/images/sprite.svg";
@@ -13,6 +13,25 @@ function filter(param) {
   return filterParam;
 }
 
+const useClickOutside = (handler) => {
+  let domNode = useRef();
+  useEffect(() => {
+    let mayBEHandler = (e) => {
+      if (!domNode.current?.contains(e.target)) {
+        // setIsActiveMonth(false);
+        // setIsActiveYear(false);
+        handler();
+      }
+    };
+    document.addEventListener("mousedown", mayBEHandler);
+    return () => {
+      document.removeEventListener("mousedown", mayBEHandler);
+    };
+  }, []);
+
+  return domNode;
+};
+
 const Selectors = ({ transactions, selectDate }) => {
   const [selectMonth, setSelectMonth] = useState("Month");
   const [selectYear, setSelectYear] = useState("Year");
@@ -25,11 +44,17 @@ const Selectors = ({ transactions, selectDate }) => {
     (el) => +el.transactionDate.slice(5, 7)
   );
 
+  let domNode = useClickOutside(() => {
+    setIsActiveMonth(false);
+  });
+
   useEffect(() => {
     if (selectDate) {
       selectDate(month.indexOf(selectMonth) + 1, selectYear);
     }
-  }, [selectDate, selectYear, selectMonth]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectYear, selectMonth]);
 
   const checkYear = filter(transactionYears);
   const checkMonth = filter(transactionMonths);
@@ -38,7 +63,7 @@ const Selectors = ({ transactions, selectDate }) => {
     <div className={s.selectors}>
       <div className={s.select_box}>
         {activeMonth && (
-          <div className={s.active}>
+          <div ref={domNode} className={s.active}>
             {month.map((el) => {
               return (
                 <option

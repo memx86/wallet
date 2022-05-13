@@ -7,17 +7,20 @@ import s from "./Chart.module.scss";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Chart = ({ data: { categoriesSummary, periodTotal } }) => {
-  const amountCat = categoriesSummary?.map((item) => item.total);
-  const nameCat = categoriesSummary?.map((item) => item.name);
-  const colorCat = categoriesSummary?.map((item) => item.color);
+  const filterCategoriesSum = categoriesSummary?.filter(
+    (item) => item.type !== "INCOME"
+  );
+  const amountCat = filterCategoriesSum?.map((item) => item.total);
+  const nameCat = filterCategoriesSum?.map((item) => item.name);
+  const colorCat = filterCategoriesSum?.map((item) => item.color);
 
   const data = {
     datasets: [
       {
         // label: nameCat?.slice(1),
-        id: nameCat?.slice(1),
-        data: amountCat ? amountCat?.slice(1) : [1],
-        backgroundColor: colorCat?.slice(1),
+        id: nameCat,
+        data: amountCat || [1],
+        backgroundColor: colorCat || ["#4a56e2"],
         borderWidth: 0,
       },
     ],
@@ -26,9 +29,7 @@ const Chart = ({ data: { categoriesSummary, periodTotal } }) => {
     <>
       <div className={s.chart}>
         <Doughnut data={data} />
-        <b className={s.amount}>
-          &#163;{periodTotal ? Math.abs(periodTotal) : "--"}
-        </b>
+        <b className={s.amount}>&#8372;{periodTotal || "--"}</b>
       </div>
     </>
   );

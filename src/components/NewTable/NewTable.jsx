@@ -21,6 +21,9 @@ const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
   const isGeneral = type === TYPE.GENERAL;
   const category = prepareCategories(categories);
   const prepareDate = (date) => dayjs(date).format("DD.MM.YY");
+  // console.log("data", data);
+  // console.log("prepareDate", prepareDate());
+  // console.log("categories", categories);
   if (isMobile && isGeneral)
     return (
       <ul className={s.list}>

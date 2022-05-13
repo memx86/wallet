@@ -1,6 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTransactionSummary } from "redux/diagram/diagramThunk";
+import {
+  getTransactions,
+  getTransactionSummary,
+} from "redux/diagram/diagramThunk";
 
 import { colorsChange } from "assets/constants/COLORS";
 import Chart from "components/Chart";
@@ -12,6 +15,10 @@ const DiagramTab = () => {
   const dispatch = useDispatch();
   const { diagData } = useSelector((state) => state.diagram);
   const { diagLoader } = useSelector((state) => state);
+  const { transactions } = useSelector((state) => state.diagram);
+  const [object, setObject] = useState({ month: 0, year: 0 });
+
+  console.log("diagData", diagData);
 
   function changeData(data, colorsObj) {
     if (!Object.keys(data).length) {
@@ -31,19 +38,27 @@ const DiagramTab = () => {
 
   const changedData = changeData(diagData, colorsChange);
 
+  // const selectDate = useCallback(function (month, year) {
+  //   const obj = { month: 0, year: 0 };
+  //   if (!isNaN(month) && !isNaN(year)) {
+  //     obj.month = month;
+  //     obj.year = year;
+  //   }
+  //   setObject(obj);
+  // }, []);
   function selectDate(month, year) {
     const obj = { month: 0, year: 0 };
     if (!isNaN(month) && !isNaN(year)) {
       obj.month = month;
       obj.year = year;
     }
-
-    return obj;
+    setObject(obj);
   }
 
   useEffect(() => {
-    dispatch(getTransactionSummary(selectDate()));
-  }, [dispatch]);
+    dispatch(getTransactionSummary(object));
+    dispatch(getTransactions());
+  }, [dispatch, object]);
 
   return (
     <div>
@@ -55,7 +70,11 @@ const DiagramTab = () => {
           <h2>Statistic</h2>
           <div className={s.diagram}>
             <Chart data={changedData} />
-            <Table data={changedData} selectDate={selectDate} />
+            <Table
+              data={changedData}
+              selectDate={selectDate}
+              transactions={transactions}
+            />
           </div>
         </>
       )}
