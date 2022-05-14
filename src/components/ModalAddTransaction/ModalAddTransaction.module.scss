@@ -115,7 +115,7 @@
     display: grid;
     gap: 40px;
 
-    @include mq(desktop) {
+    @include mq(tablet) {
         display: flex;
         gap: 20px;
     }
