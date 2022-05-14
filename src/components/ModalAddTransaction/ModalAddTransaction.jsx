@@ -44,18 +44,19 @@ const ModalAddTransaction = () => {
     dispatch(transactionModal(false));
   };
 
-  // const prepareDate = (date) => {
-  //   const currentDate = new Date();
-  //   const timeZone = currentDate.getTimezoneOffset();
-  //   const currentTime = (currentDate.getTime() - 60000 * timeZone) % 86400000;
-  //   const initialDate = new Date(date).getTime();
-  //   return new Date(initialDate + currentTime);
-  // };
+  const prepareDate = (date) => {
+    const currentDate = new Date();
+    const timeZone = currentDate.getTimezoneOffset();
+    const currentTime = (currentDate.getTime() - 60000 * timeZone) % 86400000;
+    const initialDate = new Date(date).getTime();
+    const result = new Date(initialDate + currentTime);
+    return result.toISOString();
+  };
 
   const onSubmit = async (values) => {
     const data = {
       ...values,
-      // transactionDate: prepareDate(values.transactionDate),
+      transactionDate: prepareDate(values.transactionDate),
       categoryId: values.type ? values.categoryId : incomeCategoryId,
       amount: values.type ? values.amount * -1 : values.amount,
       type: values.type ? TYPES.EXPENSE : TYPES.INCOME,
