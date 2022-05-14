@@ -44,7 +44,7 @@ export const walletApi = createApi({
     }),
     deleteTransaction: build.mutation({
       query: (id) => ({ url: `/transactions/${id}`, method: "DELETE" }),
-      invalidatesTags: ["Transaction"],
+      invalidatesTags: ["Transactions"],
     }),
   }),
   // refetchOnFocus: true,

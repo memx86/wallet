@@ -23,12 +23,13 @@ const RemoveTransaction = ({ id }) => {
 
   const removeItem = async () => {
     try {
-      await removal(elementId);
-      toast.success("Transaction successfully removed");
+      const response = await removal(elementId).unwrap();
+      if (response) {
+        toast.success("Transaction successfully removed");
+        dispatch(removalModal(false));
+      }
     } catch (error) {
       toast.error(error.message);
-    } finally {
-      dispatch(removalModal(false));
     }
   };
 
