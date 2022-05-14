@@ -12,7 +12,7 @@ export const walletApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["User"],
+  tagTypes: ["User", "Transactions"],
   endpoints: (build) => ({
     register: build.mutation({
       query: (data) => ({ url: "/auth/sign-up", method: "POST", body: data }),
@@ -24,7 +24,7 @@ export const walletApi = createApi({
     }),
     logout: build.mutation({
       query: () => ({ url: "/auth/sign-out", method: "DELETE" }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["User", "Transactions"],
     }),
     refresh: build.query({
       query: () => "/users/current",
@@ -32,7 +32,15 @@ export const walletApi = createApi({
     }),
     getTransactionSummary: build.query({
       query: () => "/transactions",
-      providesTags: ["Transaction"],
+      providesTags: ["Transactions"],
+    }),
+    addTransaction: build.mutation({
+      query: (data) => ({
+        url: "/transactions",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Transactions"],
     }),
     deleteTransaction: build.mutation({
       query: (id) => ({ url: `/transactions/${id}`, method: "DELETE" }),
@@ -50,4 +58,5 @@ export const {
   useRefreshQuery,
   useGetTransactionSummaryQuery,
   useDeleteTransactionMutation,
+  useAddTransactionMutation,
 } = walletApi;
