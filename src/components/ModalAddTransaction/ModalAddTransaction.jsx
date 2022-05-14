@@ -81,7 +81,7 @@ const ModalAddTransaction = () => {
       <Formik
         initialValues={{
           type: true,
-          categoryId: "",
+          categoryId: selectFields?.at(0)?.at(0),
           amount: "",
           transactionDate: "",
           comment: "",
@@ -113,13 +113,19 @@ const ModalAddTransaction = () => {
                 type="number"
                 name="amount"
                 min="0"
+                max="9999999"
                 placeholder="0.00"
+                required
                 autoComplete="off"
               />
               <div className={s.wrapper}>
                 <DatePickerField
                   name="transactionDate"
                   className={s.half}
+                  maxDate={new Date()}
+                  placeholderText="Select a date"
+                  dateFormat="dd.MM.yyyy"
+                  required
                   autoComplete="off"
                 />
                 <MdDateRange className={s.dateIcon} />
