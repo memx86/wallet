@@ -3,9 +3,12 @@ import dayjs from "dayjs";
 import PropTypes from "prop-types";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
-import s from "./NewTable.module.scss";
+
 import RemoveTransaction from "components/RemoveTransaction/RemoveTransaction";
+import EditTransaction from "components/EditTransaction/EditTransaction";
 import ButtonAddTransactions from "components/ButtonAddTransactions";
+
+import s from "./NewTable.module.scss";
 
 export const TYPE = {
   GENERAL: "general",
@@ -17,18 +20,21 @@ const TYPES = {
   EXPENSE: "EXPENSE",
 };
 
-const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
+const NewTable = ({
+  type = TYPE.GENERAL,
+  data,
+  categories = false,
+  income,
+  expense,
+}) => {
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isGeneral = type === TYPE.GENERAL;
   const prepareDate = (date) => dayjs(date).format("DD.MM.YY");
 
-  // console.log("data", data);
-  // console.log("prepareDate", prepareDate());
-  // console.log("categories", categories);
   if (isMobile && isGeneral && data?.length)
     return (
       <ul className={s.list}>
-        {data.map(
+        {data?.map(
           ({
             id,
             transactionDate,
@@ -37,12 +43,15 @@ const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
             comment,
             amount,
             balanceAfter,
+            color,
+            name,
+            total,
           }) => (
             <li
               key={id}
               className={type === TYPES.INCOME ? s.income : s.expense}
             >
-              <ul>
+              <ul className={s.listInside}>
                 <li className={s.element}>
                   <span className={s.title}>Date</span>
                   <span>{prepareDate(transactionDate)}</span>
@@ -72,6 +81,15 @@ const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
                 <li className={s.element}>
                   <span className={s.title}>Balance</span>
                   <span>{balanceAfter}</span>
+                  <EditTransaction
+                    id={id}
+                    transactionDate={transactionDate}
+                    type={type}
+                    categoryId={categoryId}
+                    comment={comment}
+                    amount={amount}
+                    balanceAfter={balanceAfter}
+                  />
                   <RemoveTransaction id={id} />
                 </li>
               </ul>
@@ -80,6 +98,7 @@ const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
         )}
       </ul>
     );
+
   return (
     <div className={s.wrapper}>
       {!data.length ? (
@@ -95,7 +114,8 @@ const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
               </th>
               {isGeneral && <th className={s.comment}>Comment</th>}
               <th className={isGeneral ? s.right : s.chartAmount}>Amount</th>
-              {isGeneral && <th className={s.last}>Balance</th>}
+              {isGeneral && <th className={s.balance}>Balance</th>}
+              {isGeneral && <th className={s.last}>Options</th>}
             </tr>
           </thead>
           <tbody>
@@ -108,13 +128,13 @@ const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
                 comment,
                 amount,
                 balanceAfter,
+                color,
+                name,
+                total,
               }) => (
-                <tr key={id} className={s.row}>
+                <tr key={id || name} className={s.row}>
                   {isGeneral && (
-                    <td className={s.cell}>
-                      <RemoveTransaction id={id} />
-                      {prepareDate(transactionDate)}
-                    </td>
+                    <td className={s.cell}>{prepareDate(transactionDate)}</td>
                   )}
                   {isGeneral && (
                     <td className={s.center}>
@@ -126,33 +146,66 @@ const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
                       {!isGeneral && (
                         <span
                           className={s.marker}
-                          style={{ backgroundColor: "" }}
+                          style={{ backgroundColor: color }}
                         ></span>
                       )}
-                      {categories[categoryId]}
+                      {isGeneral ? categories[categoryId] : name}
                     </div>
                   </td>
                   {isGeneral && <td className={s.comment}>{comment}</td>}
                   <td
                     className={`${!isGeneral && s.chartAmount} ${s.right}`}
-                    style={{
-                      color: type === TYPES.INCOME ? "#24cca7" : "#ff6596",
-                    }}
+                    style={
+                      isGeneral
+                        ? {
+                            color:
+                              type === TYPES.INCOME ? "#24cca7" : "#ff6596",
+                          }
+                        : { color: "#000", paddingRight: 20 + "px" }
+                    }
                   >
-                    {Math.abs(amount)}
+                    {Math.abs(isGeneral ? amount : total)}
                   </td>
-                  {isGeneral && <td className={s.right}>{balanceAfter}</td>}
+                  {isGeneral && <td className={s.balance}>{balanceAfter}</td>}
+                  {isGeneral && (
+                    <td className={s.last}>
+                      <div className={s.optionButtons}>
+                        <EditTransaction
+                          id={id}
+                          transactionDate={transactionDate}
+                          type={type}
+                          categoryId={categoryId}
+                          comment={comment}
+                          amount={amount}
+                          balanceAfter={balanceAfter}
+                        />
+                        <RemoveTransaction id={id} />
+                      </div>
+                    </td>
+                  )}
                 </tr>
               )
             )}
           </tbody>
-          {!isGeneral && <tfoot></tfoot>}
         </table>
       )}
       {isGeneral && !isMobile && <ButtonAddTransactions />}
+      {!isGeneral && (
+        <ul className={s.totalAmount}>
+          <li className={s.amountItem}>
+            <b>Expenses:</b>
+            <b className={s.expenseAmount}>{Math.abs(expense) || "--"}</b>
+          </li>
+          <li className={s.amountItem}>
+            <b>Incomes:</b>
+            <b className={s.incomeAmount}>{income || "--"}</b>
+          </li>
+        </ul>
+      )}
     </div>
   );
 };
+
 NewTable.propTypes = {
   type: PropTypes.string,
   data: PropTypes.arrayOf(
@@ -160,13 +213,13 @@ NewTable.propTypes = {
       id: PropTypes.string,
       transactionDate: PropTypes.string,
       type: PropTypes.string,
-      categoryId: PropTypes.string.isRequired,
+      categoryId: PropTypes.string,
       comment: PropTypes.string,
-      amount: PropTypes.number.isRequired,
+      amount: PropTypes.number,
       balanceAfter: PropTypes.number,
     })
   ).isRequired,
-  categories: PropTypes.objectOf(PropTypes.string).isRequired,
+  categories: PropTypes.objectOf(PropTypes.string),
 };
 
 export default NewTable;

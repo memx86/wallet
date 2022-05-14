@@ -41,21 +41,13 @@ const RemoveTransaction = ({ id }) => {
   return (
     <>
       {isMobile ? (
-        <svg
-          width="30px"
-          height="30px"
-          className={s.removeIcon}
-          onClick={openModal}
-        >
-          <use href={`${spriteSvg}#remove`}></use>
-        </svg>
+        <div className={s.remove}>
+          <svg className={s.removeIcon} onClick={openModal}>
+            <use href={`${spriteSvg}#bin`}></use>
+          </svg>
+        </div>
       ) : (
-        <svg
-          width="20px"
-          height="20px"
-          className={s.removeIcon}
-          onClick={openModal}
-        >
+        <svg width="20px" height="20px" className={s.icon} onClick={openModal}>
           <use href={`${spriteSvg}#bin`}></use>
         </svg>
       )}

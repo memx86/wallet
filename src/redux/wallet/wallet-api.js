@@ -46,6 +46,14 @@ export const walletApi = createApi({
       query: (id) => ({ url: `/transactions/${id}`, method: "DELETE" }),
       invalidatesTags: ["Transactions", "User"],
     }),
+    editTransaction: build.mutation({
+      query: ({ id, ...patch }) => ({
+        url: `/transactions/${id}`,
+        method: "PATCH",
+        body: patch,
+      }),
+      invalidatesTags: ["Transactions", "User"],
+    }),
   }),
   // refetchOnFocus: true,
   // refetchOnReconnect: true,
@@ -59,4 +67,5 @@ export const {
   useGetTransactionSummaryQuery,
   useDeleteTransactionMutation,
   useAddTransactionMutation,
+  useEditTransactionMutation,
 } = walletApi;

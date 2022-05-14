@@ -7,10 +7,11 @@ import {
 
 import { colorsChange } from "assets/constants/COLORS";
 import Chart from "components/Chart";
-import Table from "components/Table";
 import Loader from "components/Loader";
 
 import s from "./DiagramTab.module.scss";
+import NewTable from "components/NewTable";
+import Selectors from "components/Selectors";
 
 const DiagramTab = () => {
   const dispatch = useDispatch();
@@ -18,8 +19,6 @@ const DiagramTab = () => {
   const { diagLoader } = useSelector((state) => state);
   const { transactions } = useSelector((state) => state.diagram);
   const [object, setObject] = useState({ month: 0, year: 0 });
-
-  // console.log("diagData", diagData);
 
   function changeData(data, colorsObj) {
     if (!Object.keys(data).length) {
@@ -53,6 +52,10 @@ const DiagramTab = () => {
     dispatch(getTransactions());
   }, [dispatch, object]);
 
+  const dataWithoutIncome =
+    changedData?.categoriesSummary?.filter((item) => item.type !== "INCOME") ||
+    [];
+
   return (
     <div>
       {diagLoader ? (
@@ -62,11 +65,17 @@ const DiagramTab = () => {
           <h2>Statistic</h2>
           <div className={s.diagram}>
             <Chart data={changedData} />
-            <Table
-              data={changedData}
-              selectDate={selectDate}
-              transactions={transactions}
-            />
+            <div className={s.table}>
+              <Selectors transactions={transactions} selectDate={selectDate} />
+              <NewTable
+                type="chart"
+                data={dataWithoutIncome}
+                selectDate={selectDate}
+                transactions={transactions}
+                income={changedData?.incomeSummary}
+                expense={changedData?.expenseSummary}
+              />
+            </div>
           </div>
         </>
       )}

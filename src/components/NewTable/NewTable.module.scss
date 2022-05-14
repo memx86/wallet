@@ -1,8 +1,9 @@
+
 @import "stylesheet/_mixin.scss";
 
 .list {
   display: grid;
-  gap: 8px;
+  gap: 12px;
   background-color: var(--secondary-bg-cl);
 }
 
@@ -21,8 +22,11 @@
   border-left: 5px solid var(--reject-cl);
 }
 
-.element {
+.listInside{
   position: relative;
+}
+
+.element {
   padding: 10px 20px 10px 15px;
   display: flex;
   justify-content: space-between;
@@ -59,6 +63,20 @@
 }
 
 .row {
+    position: relative;
+    height: 52px;
+    font-weight: 400;
+    &:not(:last-child)::after {
+        content: "";
+        height: 1px;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: 10;
+        background-color: var(--faded-cl);
+        box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
+    }
   position: relative;
   height: 52px;
   font-weight: 400;
@@ -124,6 +142,20 @@
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
 }
+.chartTable{
+    margin: 0 auto;
+    width: 280px;
+    @include mq(tablet) {
+    width: 340px;
+    }
+    @include mq(desktop) {
+       width: 390px;
+    }
+}
+.chartRow{
+    composes:row;
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
+}
 
 .chartWrapper {
   display: flex;
@@ -144,8 +176,35 @@
   width: 25%;
 }
 
-.marker {
-  display: block;
-  width: 24px;
-  height: 24px;
+.balance{
+    composes: cell;
 }
+
+.marker {
+    display: block;
+    width: 24px;
+    height: 24px;
+}
+
+.optionButtons{
+  display: flex;
+}
+
+.totalAmount{
+    padding: 0 20px;
+}
+.amountItem{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.expenseAmount{
+    color: var(--reject-cl);
+}
+
+.incomeAmount{
+    color: var(--accept-cl);
+}
+
+
