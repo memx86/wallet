@@ -44,6 +44,10 @@ const ModalAddTransaction = () => {
     dispatch(transactionModal(false));
   };
 
+  let date = new Date();
+  const output = String(date.getDate()).padStart(2, '0') + '.' + String(date.getMonth() + 1).padStart(2, '0') + '.' + date.getFullYear();
+
+
   // const prepareDate = (date) => {
   //   const currentDate = new Date();
   //   const timeZone = currentDate.getTimezoneOffset();
@@ -123,7 +127,7 @@ const ModalAddTransaction = () => {
                   name="transactionDate"
                   className={s.half}
                   maxDate={new Date()}
-                  placeholderText="Select a date"
+                  placeholderText={output}
                   dateFormat="dd.MM.yyyy"
                   required
                   autoComplete="off"
