@@ -3,7 +3,7 @@
 
 .list {
   display: grid;
-  gap: 8px;
+  gap: 12px;
   background-color: var(--secondary-bg-cl);
 }
 
@@ -22,8 +22,11 @@
   border-left: 5px solid var(--reject-cl);
 }
 
-.element {
+.listInside{
   position: relative;
+}
+
+.element {
   padding: 10px 20px 10px 15px;
   display: flex;
   justify-content: space-between;
@@ -183,19 +186,8 @@
     height: 24px;
 }
 
-.edit{
-    // position: absolute;
-    // top: 50%;
-    // right: 10px;
-    // transform: translateY(-50%);
-    background-color: none;
-    border: none;
-    margin-right: 15px;
-}
-
-.delete{
-    background-color: none;
-    border: none;
+.optionButtons{
+  display: flex;
 }
 
 .totalAmount{
@@ -214,9 +206,5 @@
 .incomeAmount{
     color: var(--accept-cl);
 }
-.icon{
-    width: 15px;
-    height: 15px;
-    cursor: pointer;
-}
+
 

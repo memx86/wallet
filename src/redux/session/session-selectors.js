@@ -4,3 +4,4 @@ export const isLogoutSelector = (state) => state.session.isLogout;
 export const isRemovalSelector = (state) => state.session.isRemoval;
 export const isTransactionModalSelector = (state) =>
   state.session.isTransactionModal;
+export const isEditModalSelector = (state) => state.session.isEditModal;
