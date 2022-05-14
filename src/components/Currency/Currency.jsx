@@ -107,5 +107,6 @@ const Currency = () => {
       </table>
     );
   }
+  return null;
 };
 export default Currency;
