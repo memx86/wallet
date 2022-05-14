@@ -4,6 +4,7 @@ import { Formik, Form, Field } from "formik";
 import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "react-toastify";
 import { GrClose } from "react-icons/gr";
+import { MdDateRange } from "react-icons/md";
 
 import { categoriesSelector } from "redux/categories";
 import { isTransactionModalSelector, transactionModal } from "redux/session";
@@ -106,19 +107,24 @@ const ModalAddTransaction = () => {
                 ))}
               </Field>
             )}
-            <Field
-              className={s.input}
-              type="number"
-              name="amount"
-              min="0"
-              placeholder="0.00"
-              autoComplete="off"
-            />
-            <DatePickerField
-              name="transactionDate"
-              className={s.input}
-              autoComplete="off"
-            />
+            <div className={s.double}>
+              <Field
+                className={s.half}
+                type="number"
+                name="amount"
+                min="0"
+                placeholder="0.00"
+                autoComplete="off"
+              />
+              <div className={s.wrapper}>
+                <DatePickerField
+                  name="transactionDate"
+                  className={s.half}
+                  autoComplete="off"
+                />
+                <MdDateRange className={s.dateIcon} />
+              </div>
+            </div>
             <Field
               className={s.textarea}
               as="textarea"

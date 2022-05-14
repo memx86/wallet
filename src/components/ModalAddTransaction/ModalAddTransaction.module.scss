@@ -8,7 +8,9 @@
     background-color: var(--main-bg-cl);
 
     @include mq(tablet) {
-        // padding: 40px 80px;
+        padding: 40px 70px 60px 70px;
+        max-width: unset;
+        width: 540px;
     }
 }
 
@@ -103,6 +105,38 @@
     font-size: 18px;
     border: none;
     border-bottom: 1px solid var(--faded-secondary-cl);
+
+    @include mq (tablet) {
+        width: 394px;
+    }
+}
+
+.double {
+    display: grid;
+    gap: 40px;
+
+    @include mq(desktop) {
+        display: flex;
+        gap: 20px;
+    }
+}
+
+.half {
+    composes: input;
+
+    @include mq(tablet) {
+        width: 180px;
+    }
+}
+
+.dateIcon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 6px;
+    right: 8px;
+    color: var(--accent-cl);
+    pointer-events: none;
 }
 
 .textarea {
