@@ -18,6 +18,7 @@ import Loader from "components/Loader";
 import PublicRoute from "components/PublicRoute";
 import PrivateRoute from "components/PrivateRoute";
 import CurrencyTab from "components/CurrencyTab";
+import ModalAddTransaction from "components/ModalAddTransaction";
 import ModalLogout from "components/ModalLogout";
 
 const App = () => {
@@ -76,6 +77,7 @@ const App = () => {
         />
         <Route path="*" element={<Home />} />
       </Routes>
+      <ModalAddTransaction />
       <ModalLogout />
       <ToastContainer hideProgressBar />
     </Fragment>
