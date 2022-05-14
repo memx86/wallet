@@ -29,6 +29,7 @@ const HomeTab = () => {
   const { data: userData } = useRefreshQuery(null, {
     skip: !isAuth,
   });
+  console.log("data", data);
 
   const filteredData = (data) => {
     return [...data].sort(

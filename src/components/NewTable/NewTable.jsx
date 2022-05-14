@@ -5,7 +5,10 @@ import PropTypes from "prop-types";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import s from "./NewTable.module.scss";
 import spriteSvg from "assets/images/sprite.svg";
-import ButtonAddTransactions from "components/ButtonAddTransactions";
+// import ButtonAddTransactions from "components/ButtonAddTransactions";
+import ModalAddTransaction from "components/ModalAddTransaction";
+import { useDispatch } from "react-redux";
+import { transactionModal } from "redux/session";
 
 export const TYPE = {
   GENERAL: "general",
@@ -27,6 +30,13 @@ const NewTable = ({
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isGeneral = type === TYPE.GENERAL;
   const prepareDate = (date) => dayjs(date).format("DD.MM.YY");
+
+  const dispatch = useDispatch();
+  const handleClickEdit = (e) => {
+    // console.log("e", e.target.parentElement);
+    dispatch(transactionModal(true));
+  };
+
   if (isMobile && isGeneral && data?.length)
     return (
       <ul className={s.list}>
@@ -39,9 +49,12 @@ const NewTable = ({
             comment,
             amount,
             balanceAfter,
+            color,
+            name,
+            total,
           }) => (
             <li
-              key={nanoid()}
+              key={id}
               className={type === TYPES.INCOME ? s.income : s.expense}
             >
               <ul>
@@ -97,7 +110,8 @@ const NewTable = ({
               </th>
               {isGeneral && <th className={s.comment}>Comment</th>}
               <th className={isGeneral ? s.right : s.chartAmount}>Amount</th>
-              {isGeneral && <th className={s.last}>Balance</th>}
+              {isGeneral && <th className={s.balance}>Balance</th>}
+              {isGeneral && <th className={s.last}>Options</th>}
             </tr>
           </thead>
           <tbody>
@@ -110,8 +124,11 @@ const NewTable = ({
                 comment,
                 amount,
                 balanceAfter,
+                color,
+                name,
+                total,
               }) => (
-                <tr key={id} className={s.row}>
+                <tr key={id || name} className={s.row}>
                   {isGeneral && (
                     <td className={s.cell}>{prepareDate(transactionDate)}</td>
                   )}
@@ -145,18 +162,21 @@ const NewTable = ({
                   >
                     {Math.abs(isGeneral ? amount : total)}
                   </td>
-                  {isGeneral && <td className={s.right}>{balanceAfter}</td>}
+                  {isGeneral && <td className={s.balance}>{balanceAfter}</td>}
                   {isGeneral && (
-                    <td className={s.change}>
-                      <button>
-                        ...
-                        {/* <svg className={s.icon}>
-                    <use href={`${spriteSvg}#icon_pencil`}></use>
-                  </svg> */}
+                    <td className={s.last}>
+                      <button className={s.edit} onClick={handleClickEdit}>
+                        <svg className={s.icon}>
+                          <use href={`${spriteSvg}#icon_pencil`}></use>
+                        </svg>
+                      </button>
+                      <button className={s.delete}>
+                        <svg className={s.icon}>
+                          <use href={`${spriteSvg}#icon_cancel`}></use>
+                        </svg>
                       </button>
                     </td>
                   )}
-                  {isGeneral && <td className={s.delete}>X</td>}
                 </tr>
               )
             )}
@@ -176,6 +196,7 @@ const NewTable = ({
           </li>
         </ul>
       )}
+      <ModalAddTransaction />
     </div>
   );
 };

@@ -87,7 +87,7 @@
 .right {
     composes: cell;
     padding-left: 16px;
-    padding-right: 60px;
+    padding-right: 20px;
     text-align: right;
 }
 
@@ -160,21 +160,29 @@
     width: 25%;
 }
 
+.balance{
+    composes: cell;
+}
+
 .marker {
     display: block;
     width: 24px;
     height: 24px;
 }
 
-.change{
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
+.edit{
+    // position: absolute;
+    // top: 50%;
+    // right: 10px;
+    // transform: translateY(-50%);
+    background-color: none;
+    border: none;
+    margin-right: 15px;
 }
 
 .delete{
-
+    background-color: none;
+    border: none;
 }
 
 .totalAmount{
@@ -192,5 +200,10 @@
 
 .incomeAmount{
     color: var(--accept-cl);
+}
+.icon{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
 }
 
