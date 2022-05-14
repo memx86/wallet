@@ -92,12 +92,22 @@ const ModalAddTransaction = () => {
         {({ values }) => (
           <Form className={s.form}>
             <label className={s.label}>
-              <span className={s.income}>Income</span>
+              <span
+                className={s.income}
+                style={values.type ? { color: "#e0e0e0" } : null}
+              >
+                Income
+              </span>
               <span className={s.wrapper}>
                 <Field type="checkbox" name="type" className={s.type} />
                 <span className={s.check}></span>
               </span>
-              <span className={s.expense}>Expense</span>
+              <span
+                className={s.expense}
+                style={!values.type ? { color: "#e0e0e0" } : null}
+              >
+                Expense
+              </span>
             </label>
             {values.type && (
               <Field name="categoryId" as="select" className={s.input}>
