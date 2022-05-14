@@ -5,10 +5,11 @@ import PropTypes from "prop-types";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import s from "./NewTable.module.scss";
 import spriteSvg from "assets/images/sprite.svg";
-// import ButtonAddTransactions from "components/ButtonAddTransactions";
 import ModalAddTransaction from "components/ModalAddTransaction";
 import { useDispatch } from "react-redux";
 import { transactionModal } from "redux/session";
+import RemoveTransaction from "components/RemoveTransaction/RemoveTransaction";
+import ButtonAddTransactions from "components/ButtonAddTransactions";
 
 export const TYPE = {
   GENERAL: "general",
@@ -87,6 +88,7 @@ const NewTable = ({
                 <li className={s.element}>
                   <span className={s.title}>Balance</span>
                   <span>{balanceAfter}</span>
+                  <RemoveTransaction id={id} />
                 </li>
               </ul>
             </li>
@@ -130,7 +132,10 @@ const NewTable = ({
               }) => (
                 <tr key={id || name} className={s.row}>
                   {isGeneral && (
-                    <td className={s.cell}>{prepareDate(transactionDate)}</td>
+                    <td className={s.cell}>
+                      <RemoveTransaction id={id} />
+                      {prepareDate(transactionDate)}
+                    </td>
                   )}
                   {isGeneral && (
                     <td className={s.center}>

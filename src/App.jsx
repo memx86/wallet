@@ -1,5 +1,5 @@
 import { Fragment, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,12 +26,15 @@ const App = () => {
   const isAuth = useSelector(isAuthSelector);
   const { isSuccess, isFetching } = useRefreshQuery(null, { skip: !token });
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isSuccess) {
       dispatch(loggedIn());
+      navigate("/home");
     }
-  }, [dispatch, isSuccess]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess]);
 
   if (isFetching) return <Loader />;
 
