@@ -40,11 +40,11 @@ export const walletApi = createApi({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["Transactions"],
+      invalidatesTags: ["Transactions", "User"],
     }),
     deleteTransaction: build.mutation({
       query: (id) => ({ url: `/transactions/${id}`, method: "DELETE" }),
-      invalidatesTags: ["Transactions"],
+      invalidatesTags: ["Transactions", "User"],
     }),
   }),
   // refetchOnFocus: true,
