@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "react-toastify";
 import { GrClose } from "react-icons/gr";
@@ -11,6 +11,7 @@ import { isTransactionModalSelector, transactionModal } from "redux/session";
 import { useAddTransactionMutation } from "redux/wallet";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
+import transactionSchema from "assets/schemas/transactionSchema";
 
 import Modal from "components/Modal/Modal";
 import IconButton from "components/IconButton";
@@ -44,18 +45,19 @@ const ModalAddTransaction = () => {
     dispatch(transactionModal(false));
   };
 
-  // const prepareDate = (date) => {
-  //   const currentDate = new Date();
-  //   const timeZone = currentDate.getTimezoneOffset();
-  //   const currentTime = (currentDate.getTime() - 60000 * timeZone) % 86400000;
-  //   const initialDate = new Date(date).getTime();
-  //   return new Date(initialDate + currentTime);
-  // };
+  const prepareDate = (date) => {
+    const currentDate = new Date();
+    const timeZone = currentDate.getTimezoneOffset();
+    const currentTime = (currentDate.getTime() - 60000 * timeZone) % 86400000;
+    const initialDate = new Date(date).getTime();
+    const result = new Date(initialDate + currentTime);
+    return result.toISOString();
+  };
 
   const onSubmit = async (values) => {
     const data = {
       ...values,
-      // transactionDate: prepareDate(values.transactionDate),
+      transactionDate: prepareDate(values.transactionDate),
       categoryId: values.type ? values.categoryId : incomeCategoryId,
       amount: values.type ? values.amount * -1 : values.amount,
       type: values.type ? TYPES.EXPENSE : TYPES.INCOME,
@@ -70,6 +72,25 @@ const ModalAddTransaction = () => {
       toast.error("Can't add transaction");
     }
   };
+
+  const handleAmount = (value) => {
+    if (!value || Number.isNaN(Number(value))) return value;
+    const length = value.length;
+    const dotIndex = value.indexOf(".");
+
+    if (dotIndex < 0) {
+      return value.concat(".00");
+    }
+
+    if (dotIndex < length - 3) {
+      return value.slice(0, dotIndex + 3);
+    }
+
+    if (dotIndex > length - 3) {
+      return value.padEnd(length + 1, "0");
+    }
+  };
+
   return isTransactionModal ? (
     <Modal modalClassName={s.modal} closeModal={closeModal}>
       {!isMobile && (
@@ -87,16 +108,28 @@ const ModalAddTransaction = () => {
           comment: "",
         }}
         onSubmit={onSubmit}
+        validateOnBlur
+        validationSchema={transactionSchema}
       >
-        {({ values }) => (
+        {({ values, isValid, handleBlur, setFieldValue }) => (
           <Form className={s.form}>
             <label className={s.label}>
-              <span className={s.income}>Income</span>
+              <span
+                className={s.income}
+                style={values.type ? { color: "#e0e0e0" } : null}
+              >
+                Income
+              </span>
               <span className={s.wrapper}>
                 <Field type="checkbox" name="type" className={s.type} />
                 <span className={s.check}></span>
               </span>
-              <span className={s.expense}>Expense</span>
+              <span
+                className={s.expense}
+                style={!values.type ? { color: "#e0e0e0" } : null}
+              >
+                Expense
+              </span>
             </label>
             {values.type && (
               <Field name="categoryId" as="select" className={s.input}>
@@ -108,16 +141,23 @@ const ModalAddTransaction = () => {
               </Field>
             )}
             <div className={s.double}>
-              <Field
-                className={s.half}
-                type="number"
-                name="amount"
-                min="0"
-                max="9999999"
-                placeholder="0.00"
-                required
-                autoComplete="off"
-              />
+              <label className={s.wrapper}>
+                <Field
+                  className={s.half}
+                  type="text"
+                  name="amount"
+                  onBlur={(e) => {
+                    const { value } = e.target;
+                    setFieldValue("amount", handleAmount(value));
+                    handleBlur(e);
+                  }}
+                  placeholder="0.00"
+                  autoComplete="off"
+                />
+                <span className={s.errorAmount}>
+                  <ErrorMessage name="amount" />
+                </span>
+              </label>
               <div className={s.wrapper}>
                 <DatePickerField
                   name="transactionDate"
@@ -125,21 +165,25 @@ const ModalAddTransaction = () => {
                   maxDate={new Date()}
                   placeholderText="Select a date"
                   dateFormat="dd.MM.yyyy"
-                  required
                   autoComplete="off"
                 />
                 <MdDateRange className={s.dateIcon} />
               </div>
             </div>
-            <Field
-              className={s.textarea}
-              as="textarea"
-              name="comment"
-              rows="3"
-              placeholder="Comment"
-              autoComplete="off"
-            />
-            <button className={s.btnConfirm} type="submit">
+            <label className={s.wrapper}>
+              <Field
+                className={s.textarea}
+                as="textarea"
+                name="comment"
+                rows="3"
+                placeholder="Comment"
+                autoComplete="off"
+              />
+              <span className={s.error}>
+                <ErrorMessage name="comment" />
+              </span>
+            </label>
+            <button className={s.btnConfirm} type="submit" disabled={!isValid}>
               Add transaction
             </button>
           </Form>

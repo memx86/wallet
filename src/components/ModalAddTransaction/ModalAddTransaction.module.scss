@@ -42,6 +42,7 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
+    cursor: pointer;
 }
 
 .income {
@@ -71,8 +72,13 @@
     display: block;
     width: 80px;
     height: 40px;
-    border: 1px solid var(--faded-cl);
+    border: 1px solid var(--accept-cl);
     border-radius: 30px;
+    transition: border-color 250ms linear;
+
+    .type:checked+& {
+        border-color: var(--reject-cl);
+    }
 
     &::after {
         content: "+";
@@ -109,6 +115,11 @@
     @include mq (tablet) {
         width: 394px;
     }
+
+    &:focus {
+        outline: none;
+        border-color: var(--accept-cl);
+    }
 }
 
 .double {
@@ -142,6 +153,24 @@
 .textarea {
     composes: input;
     resize: none;
+}
+
+.error {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    transform: translateY(100%);
+    color: var(--reject-cl);
+}
+
+.errorAmount {
+    composes: error;
+    transform: translateY(110%);
+
+    @include mq(tablet) {
+        width: 250%;
+    }
 }
 
 .btnConfirm {
