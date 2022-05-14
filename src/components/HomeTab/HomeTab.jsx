@@ -44,11 +44,7 @@ const HomeTab = () => {
   return (
     <Fragment>
       {isMobile && <Balance balance={userData.balance} />}
-      {!data?.length ? (
-        <p>Feel free to add new transactions</p>
-      ) : (
-        <NewTable data={filteredData(data)} categories={categories} />
-      )}
+      <NewTable data={filteredData(data)} categories={categories} />
       {isMobile && <ButtonAddTransactions />}
     </Fragment>
   );
