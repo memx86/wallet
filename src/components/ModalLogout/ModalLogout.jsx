@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { isLogoutSelector, loggedOff, logoutModal } from "redux/session";
 import { useLogoutMutation } from "redux/wallet";
 import { toast } from "react-toastify";
+import Modal from "components/Modal";
 
 const ModalLogout = () => {
   const dispatch = useDispatch();
@@ -26,19 +27,17 @@ const ModalLogout = () => {
 
   return (
     isLogout && (
-      <div className={s.backdrop}>
-        <div className={s.modal}>
-          <span className={s.text}>Are you sure you want to logout?</span>
-          <div className={s.btnWrapper}>
-            <button className={s.btnCancel} onClick={cancel}>
-              cancel
-            </button>
-            <button className={s.btnConfirm} onClick={confirm}>
-              confirm
-            </button>
-          </div>
+      <Modal closeModal={cancel} modalClassName={s.modal}>
+        <span className={s.text}>Are you sure you want to logout?</span>
+        <div className={s.btnWrapper}>
+          <button className={s.btnCancel} onClick={cancel}>
+            cancel
+          </button>
+          <button className={s.btnConfirm} onClick={confirm}>
+            confirm
+          </button>
         </div>
-      </div>
+      </Modal>
     )
   );
 };

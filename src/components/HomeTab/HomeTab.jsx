@@ -14,6 +14,7 @@ import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import Loader from "components/Loader";
 import NewTable from "components/NewTable";
 import Balance from "components/Balance";
+import ButtonAddTransactions from "components/ButtonAddTransactions";
 // import s from './HomeTab.module.scss'
 
 const HomeTab = () => {
@@ -43,11 +44,8 @@ const HomeTab = () => {
   return (
     <Fragment>
       {isMobile && <Balance balance={userData.balance} />}
-      {!data?.length ? (
-        <p>Feel free to add new transactions</p>
-      ) : (
-        <NewTable data={filteredData(data)} categories={categories} />
-      )}
+      <NewTable data={filteredData(data)} categories={categories} />
+      {isMobile && <ButtonAddTransactions />}
     </Fragment>
   );
 };

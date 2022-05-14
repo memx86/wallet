@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import s from "./NewTable.module.scss";
 import spriteSvg from "assets/images/sprite.svg";
-import { nanoid } from "@reduxjs/toolkit";
+import ButtonAddTransactions from "components/ButtonAddTransactions";
 
 export const TYPE = {
   GENERAL: "general",
@@ -27,8 +27,7 @@ const NewTable = ({
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isGeneral = type === TYPE.GENERAL;
   const prepareDate = (date) => dayjs(date).format("DD.MM.YY");
-
-  if (isMobile && isGeneral) {
+  if (isMobile && isGeneral && data?.length)
     return (
       <ul className={s.list}>
         {data?.map(
@@ -82,44 +81,37 @@ const NewTable = ({
         )}
       </ul>
     );
-  }
+
   return (
-    <>
-      <table className={isGeneral ? s.table : s.chartTable}>
-        <thead>
-          <tr className={s.head}>
-            {isGeneral && <th className={s.first}>Date</th>}
-            {isGeneral && <th className={s.center}>Type</th>}
-            <th className={isGeneral ? s.category : s.chartCategory}>
-              Category
-            </th>
-            {isGeneral && <th className={s.comment}>Comment</th>}
-            <th className={isGeneral ? s.right : s.chartAmount}>Amount</th>
-            {isGeneral && <th className={s.last}>Balance</th>}
-          </tr>
-        </thead>
-        <tbody>
-          {data?.map(
-            ({
-              id,
-              transactionDate,
-              type,
-              categoryId,
-              comment,
-              amount,
-              balanceAfter,
-              name,
-              total,
-              color,
-            }) => {
-              return (
-                <tr
-                  key={nanoid()}
-                  className={isGeneral ? s.row : s.chartRow}
-                  // style={{
-                  //   boxShadow: "0px 1px 0px rgba(255, 255, 255, 0.6)",
-                  // }}
-                >
+    <div className={s.wrapper}>
+      {!data.length ? (
+        <p> Feel free to add some transactions!</p>
+      ) : (
+        <table className={s.table}>
+          <thead>
+            <tr className={s.head}>
+              {isGeneral && <th className={s.first}>Date</th>}
+              {isGeneral && <th className={s.center}>Type</th>}
+              <th className={isGeneral ? s.category : s.chartCategory}>
+                Category
+              </th>
+              {isGeneral && <th className={s.comment}>Comment</th>}
+              <th className={isGeneral ? s.right : s.chartAmount}>Amount</th>
+              {isGeneral && <th className={s.last}>Balance</th>}
+            </tr>
+          </thead>
+          <tbody>
+            {data.map(
+              ({
+                id,
+                transactionDate,
+                type,
+                categoryId,
+                comment,
+                amount,
+                balanceAfter,
+              }) => (
+                <tr key={id} className={s.row}>
                   {isGeneral && (
                     <td className={s.cell}>{prepareDate(transactionDate)}</td>
                   )}
@@ -166,12 +158,12 @@ const NewTable = ({
                   )}
                   {isGeneral && <td className={s.delete}>X</td>}
                 </tr>
-              );
-            }
-          )}
-        </tbody>
-        {!isGeneral && <tfoot></tfoot>}
-      </table>
+              )
+            )}
+          </tbody>
+          {!isGeneral && <tfoot></tfoot>}
+        </table>
+      )}
       {!isGeneral && (
         <ul className={s.totalAmount}>
           <li className={s.amountItem}>
@@ -184,7 +176,7 @@ const NewTable = ({
           </li>
         </ul>
       )}
-    </>
+    </div>
   );
 };
 

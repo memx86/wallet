@@ -18,6 +18,7 @@ const sessionSlice = createSlice({
     isAuth: false,
     token: null,
     isLogout: false,
+    isTransactionModal: false,
   },
   reducers: {
     loggedIn(state) {
@@ -36,9 +37,12 @@ const sessionSlice = createSlice({
     logoutModal(state, { payload }) {
       state.isLogout = payload;
     },
+    transactionModal(state, { payload }) {
+      state.isTransactionModal = payload;
+    },
   },
 });
 
-export const { loggedIn, loggedOff, setToken, logoutModal } =
+export const { loggedIn, loggedOff, setToken, logoutModal, transactionModal } =
   sessionSlice.actions;
 export const sessionReducer = sessionSlice.reducer;
