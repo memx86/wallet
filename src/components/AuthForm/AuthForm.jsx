@@ -10,6 +10,8 @@ import {
   validationsRegister,
 } from "assets/schemas/authFormSchemas";
 import { Link } from "react-router-dom";
+import PasswordStrength from "components/PasswordStrength/PasswordStrength";
+import PropTypes from "prop-types";
 
 export const authType = {
   login: "login",
@@ -112,6 +114,7 @@ const AuthForm = ({ type }) => {
               <use href={`${spriteSvg}#lock`}></use>
             </svg>
           </div>
+          {isRegister && <PasswordStrength password={values.password} />}
           {touched.password && errors.password && (
             <div className={s.errorWrapper}>
               <p className={s.error}>{errors.password}</p>
@@ -186,4 +189,9 @@ const AuthForm = ({ type }) => {
     </Formik>
   );
 };
+
+AuthForm.propTypes = {
+  type: PropTypes.string,
+};
+
 export default AuthForm;
