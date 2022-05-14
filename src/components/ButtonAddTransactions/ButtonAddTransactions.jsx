@@ -12,11 +12,15 @@ const ButtonAddTransactions = () => {
     dispatch(transactionModal(true));
   };
   return (
-    <div className={s.container}>
-      <IconButton onClick={openModal} label="Add transaction">
+    <IconButton
+      onClick={openModal}
+      label="Add transaction"
+      className={s.container}
+    >
+      <span className={s.wrapper}>
         <AiFillPlusCircle className={s.icon} />
-      </IconButton>
-    </div>
+      </span>
+    </IconButton>
   );
 };
 export default ButtonAddTransactions;
