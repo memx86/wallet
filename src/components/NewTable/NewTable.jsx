@@ -23,7 +23,7 @@ const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
   // console.log("data", data);
   // console.log("prepareDate", prepareDate());
   // console.log("categories", categories);
-  if (isMobile && isGeneral)
+  if (isMobile && isGeneral && data?.length)
     return (
       <ul className={s.list}>
         {data.map(
@@ -79,66 +79,70 @@ const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
     );
   return (
     <div className={s.wrapper}>
-      <table className={s.table}>
-        <thead>
-          <tr className={s.head}>
-            {isGeneral && <th className={s.first}>Date</th>}
-            {isGeneral && <th className={s.center}>Type</th>}
-            <th className={isGeneral ? s.category : s.chartCategory}>
-              Category
-            </th>
-            {isGeneral && <th className={s.comment}>Comment</th>}
-            <th className={isGeneral ? s.right : s.chartAmount}>Amount</th>
-            {isGeneral && <th className={s.last}>Balance</th>}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map(
-            ({
-              id,
-              transactionDate,
-              type,
-              categoryId,
-              comment,
-              amount,
-              balanceAfter,
-            }) => (
-              <tr key={id} className={s.row}>
-                {isGeneral && (
-                  <td className={s.cell}>{prepareDate(transactionDate)}</td>
-                )}
-                {isGeneral && (
-                  <td className={s.center}>
-                    {type === TYPES.INCOME ? "+" : "-"}
+      {!data.length ? (
+        <p> Feel free to add some transactions!</p>
+      ) : (
+        <table className={s.table}>
+          <thead>
+            <tr className={s.head}>
+              {isGeneral && <th className={s.first}>Date</th>}
+              {isGeneral && <th className={s.center}>Type</th>}
+              <th className={isGeneral ? s.category : s.chartCategory}>
+                Category
+              </th>
+              {isGeneral && <th className={s.comment}>Comment</th>}
+              <th className={isGeneral ? s.right : s.chartAmount}>Amount</th>
+              {isGeneral && <th className={s.last}>Balance</th>}
+            </tr>
+          </thead>
+          <tbody>
+            {data.map(
+              ({
+                id,
+                transactionDate,
+                type,
+                categoryId,
+                comment,
+                amount,
+                balanceAfter,
+              }) => (
+                <tr key={id} className={s.row}>
+                  {isGeneral && (
+                    <td className={s.cell}>{prepareDate(transactionDate)}</td>
+                  )}
+                  {isGeneral && (
+                    <td className={s.center}>
+                      {type === TYPES.INCOME ? "+" : "-"}
+                    </td>
+                  )}
+                  <td className={isGeneral ? s.category : s.chartCategory}>
+                    <div className={s.chartWrapper}>
+                      {!isGeneral && (
+                        <span
+                          className={s.marker}
+                          style={{ backgroundColor: "" }}
+                        ></span>
+                      )}
+                      {categories[categoryId]}
+                    </div>
                   </td>
-                )}
-                <td className={isGeneral ? s.category : s.chartCategory}>
-                  <div className={s.chartWrapper}>
-                    {!isGeneral && (
-                      <span
-                        className={s.marker}
-                        style={{ backgroundColor: "" }}
-                      ></span>
-                    )}
-                    {categories[categoryId]}
-                  </div>
-                </td>
-                {isGeneral && <td className={s.comment}>{comment}</td>}
-                <td
-                  className={`${!isGeneral && s.chartAmount} ${s.right}`}
-                  style={{
-                    color: type === TYPES.INCOME ? "#24cca7" : "#ff6596",
-                  }}
-                >
-                  {Math.abs(amount)}
-                </td>
-                {isGeneral && <td className={s.right}>{balanceAfter}</td>}
-              </tr>
-            )
-          )}
-        </tbody>
-        {!isGeneral && <tfoot></tfoot>}
-      </table>
+                  {isGeneral && <td className={s.comment}>{comment}</td>}
+                  <td
+                    className={`${!isGeneral && s.chartAmount} ${s.right}`}
+                    style={{
+                      color: type === TYPES.INCOME ? "#24cca7" : "#ff6596",
+                    }}
+                  >
+                    {Math.abs(amount)}
+                  </td>
+                  {isGeneral && <td className={s.right}>{balanceAfter}</td>}
+                </tr>
+              )
+            )}
+          </tbody>
+          {!isGeneral && <tfoot></tfoot>}
+        </table>
+      )}
       {isGeneral && !isMobile && <ButtonAddTransactions />}
     </div>
   );
