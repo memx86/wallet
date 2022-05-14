@@ -1,40 +1,41 @@
 @import "stylesheet/_mixin.scss";
 
 .list {
-    display: grid;
-    gap: 8px;
-    background-color: var(--secondary-bg-cl);
+  display: grid;
+  gap: 8px;
+  background-color: var(--secondary-bg-cl);
 }
 
 .item {
-    border-radius: 10px;
-    background-color: var(--main-bg-cl);
+  border-radius: 10px;
+  background-color: var(--main-bg-cl);
 }
 
 .income {
-    composes: item;
-    border-left: 5px solid var(--accept-cl);
+  composes: item;
+  border-left: 5px solid var(--accept-cl);
 }
 
 .expense {
-    composes: item;
-    border-left: 5px solid var(--reject-cl)
+  composes: item;
+  border-left: 5px solid var(--reject-cl);
 }
 
 .element {
-    padding: 10px 20px 10px 15px;
-    display: flex;
-    justify-content: space-between;
+  position: relative;
+  padding: 10px 20px 10px 15px;
+  display: flex;
+  justify-content: space-between;
 
-    &:not(:last-child) {
-        border-bottom: 1px solid var(--faded-cl);
-        box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
-    }
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--faded-cl);
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
+  }
 }
 
 .title {
-    font-size: 18px;
-    font-weight: 700;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .wrapper {
@@ -46,107 +47,105 @@
 }
 
 .table {
-    width: 100%;
-    table-layout: fixed;
-    border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
 }
 
-
 .head {
-    height: 58px;
-    border-radius: 30px;
-    background-color: var(--main-bg-cl);
+  height: 58px;
+  border-radius: 30px;
+  background-color: var(--main-bg-cl);
 }
 
 .row {
-    position: relative;
-    height: 52px;
-    font-weight: 400;
+  position: relative;
+  height: 52px;
+  font-weight: 400;
 
-    &:not(:last-child)::after {
-        content: "";
-        height: 1px;
-        width: 100%;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        z-index: 10;
-        background-color: var(--faded-cl);
-        box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
-    }
-
+  &:not(:last-child)::after {
+    content: "";
+    height: 1px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+    background-color: var(--faded-cl);
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
+  }
 }
 
 .cell {
-    padding-left: 32px;
-    padding-right: 32px;
-    width: 15%;
-    text-align: left;
+  position: relative;
+  padding-left: 32px;
+  padding-right: 32px;
+  width: 15%;
+  text-align: left;
 }
 
 .right {
-    composes: cell;
-    padding-left: 16px;
-    padding-right: 16px;
-    text-align: right;
+  composes: cell;
+  padding-left: 16px;
+  padding-right: 16px;
+  text-align: right;
 }
 
 .first {
-    composes: cell;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
+  composes: cell;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
 }
 
 .last {
-    composes: right;
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
+  composes: right;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
 }
 
 .center {
-    composes: cell;
-    width: 10%;
-    padding-left: 16px;
-    padding-right: 16px;
-    text-align: center;
+  composes: cell;
+  width: 10%;
+  padding-left: 16px;
+  padding-right: 16px;
+  text-align: center;
 }
 
 .category {
-    composes: cell;
-    width: 20%;
+  composes: cell;
+  width: 20%;
 }
 
 .chartCategory {
-    composes: category;
-    width: 70%;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
+  composes: category;
+  width: 70%;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
 }
 
 .chartWrapper {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    gap: 16px;
-
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 16px;
 }
 
 .chartAmount {
-    composes: right;
-    width: 30%;
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
+  composes: right;
+  width: 30%;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
 }
 
 .comment {
-    composes: cell;
-    width: 25%;
+  composes: cell;
+  width: 25%;
 }
 
 .marker {
-    display: block;
-    width: 24px;
-    height: 24px;
+  display: block;
+  width: 24px;
+  height: 24px;
 }

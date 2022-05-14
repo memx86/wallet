@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import s from "./NewTable.module.scss";
+import RemoveTransaction from "components/RemoveTransaction/RemoveTransaction";
 import ButtonAddTransactions from "components/ButtonAddTransactions";
 
 export const TYPE = {
@@ -20,6 +21,7 @@ const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isGeneral = type === TYPE.GENERAL;
   const prepareDate = (date) => dayjs(date).format("DD.MM.YY");
+
   // console.log("data", data);
   // console.log("prepareDate", prepareDate());
   // console.log("categories", categories);
@@ -70,6 +72,7 @@ const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
                 <li className={s.element}>
                   <span className={s.title}>Balance</span>
                   <span>{balanceAfter}</span>
+                  <RemoveTransaction id={id} />
                 </li>
               </ul>
             </li>
@@ -108,7 +111,10 @@ const NewTable = ({ type = TYPE.GENERAL, data, categories }) => {
               }) => (
                 <tr key={id} className={s.row}>
                   {isGeneral && (
-                    <td className={s.cell}>{prepareDate(transactionDate)}</td>
+                    <td className={s.cell}>
+                      <RemoveTransaction id={id} />
+                      {prepareDate(transactionDate)}
+                    </td>
                   )}
                   {isGeneral && (
                     <td className={s.center}>

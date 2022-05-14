@@ -1,3 +1,32 @@
+@import "stylesheet/mixin.scss";
+
+.removeIcon {
+  position: absolute;
+  @include mq(mobile-only) {
+    top: 22px;
+    left: -15px;
+    background-color: var(--main-bg-cl);
+    border-radius: 50%;
+    fill: #990000;
+  }
+
+  @include mq(tablet) {
+    fill: #707070;
+    top: 18px;
+    left: 5px;
+  }
+  @include mq(desktop) {
+    top: 50%;
+    left: 0;
+    transition: fill 250ms linear;
+    transform: translateY(-50%);
+
+    &:hover {
+      fill: #4b4b4b;
+    }
+  }
+}
+
 .backdrop {
   position: fixed;
   top: 0;
