@@ -115,6 +115,11 @@
     @include mq (tablet) {
         width: 394px;
     }
+
+    &:focus {
+        outline: none;
+        border-color: var(--accept-cl);
+    }
 }
 
 .double {
