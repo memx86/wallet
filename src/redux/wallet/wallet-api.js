@@ -52,7 +52,7 @@ export const walletApi = createApi({
         method: "PATCH",
         body: patch,
       }),
-      invalidatesTags: ["Transactions"],
+      invalidatesTags: ["Transactions", "User"],
     }),
   }),
   // refetchOnFocus: true,

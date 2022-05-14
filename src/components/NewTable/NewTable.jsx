@@ -3,9 +3,12 @@ import dayjs from "dayjs";
 import PropTypes from "prop-types";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
-import s from "./NewTable.module.scss";
+
 import RemoveTransaction from "components/RemoveTransaction/RemoveTransaction";
 import EditTransaction from "components/EditTransaction/EditTransaction";
+import ButtonAddTransactions from "components/ButtonAddTransactions";
+
+import s from "./NewTable.module.scss";
 
 export const TYPE = {
   GENERAL: "general",
@@ -184,9 +187,9 @@ const NewTable = ({
               )
             )}
           </tbody>
-          {!isGeneral && <tfoot></tfoot>}
         </table>
       )}
+      {isGeneral && !isMobile && <ButtonAddTransactions />}
       {!isGeneral && (
         <ul className={s.totalAmount}>
           <li className={s.amountItem}>
