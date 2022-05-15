@@ -25,21 +25,8 @@
 }
 
 .titleWrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 16px;
   margin-bottom: 60px;
-}
-
-.title {
-  font-family: Poppins;
-  font-weight: 700;
-  font-size: 30px;
-  color: var(--main-text-cl);
-  text-transform: capitalize;
-  text-align: center;
 }
 
 .inputWrapper {
@@ -86,7 +73,7 @@
     border-bottom: 1px solid var(--accept-cl);
   }
 
-  &:focus + .iconSvg {
+  &:focus+.iconSvg {
     --color1: var(--accept-cl);
   }
 

@@ -1,7 +1,20 @@
+@import "stylesheet/_mixin.scss";
+
 .logo {
     display: flex;
     align-items: center;
     gap: 16px;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+
+    @include mq(tablet) {
+        width: 40px;
+        height: 40px;
+    }
+
 }
 
 .title {
