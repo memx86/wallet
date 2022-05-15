@@ -150,8 +150,8 @@ const ModalAddTransaction = () => {
                   name="amount"
                   onBlur={(e) => {
                     const { value } = e.target;
-                    handleBlur(e);
                     setFieldValue("amount", handleAmount(value));
+                    handleBlur(e);
                   }}
                   placeholder="0.00"
                   autoComplete="off"

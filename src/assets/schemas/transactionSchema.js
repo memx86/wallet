@@ -6,7 +6,7 @@ const transactionSchema = yup.object().shape({
   amount: yup
     .string()
     .min(1)
-    .max(10)
+    .max(8)
     .matches(
       /^(?:\d*\.)?\d+$/,
       "Only numbers and . allowed, max 2 symbols after dot"

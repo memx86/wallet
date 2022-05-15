@@ -75,12 +75,12 @@ const NewTable = ({
                       color: type === TYPES.INCOME ? "#24cca7" : "#ff6596",
                     }}
                   >
-                    {Math.abs(amount)}
+                    {Math.abs(amount)?.toFixed(2)}
                   </span>
                 </li>
                 <li className={s.element}>
                   <span className={s.title}>Balance</span>
-                  <span>{balanceAfter}</span>
+                  <span>{balanceAfter?.toFixed(2)}</span>
                   <EditTransaction
                     id={id}
                     transactionDate={transactionDate}
@@ -164,9 +164,11 @@ const NewTable = ({
                         : { color: "#000", paddingRight: 20 + "px" }
                     }
                   >
-                    {Math.abs(isGeneral ? amount : total)}
+                    {Math.abs(isGeneral ? amount : total)?.toFixed(2)}
                   </td>
-                  {isGeneral && <td className={s.balance}>{balanceAfter}</td>}
+                  {isGeneral && (
+                    <td className={s.balance}>{balanceAfter?.toFixed(2)}</td>
+                  )}
                   {isGeneral && (
                     <td className={s.last}>
                       <div className={s.optionButtons}>
@@ -194,11 +196,13 @@ const NewTable = ({
         <ul className={s.totalAmount}>
           <li className={s.amountItem}>
             <b>Expenses:</b>
-            <b className={s.expenseAmount}>{Math.abs(expense) || "--"}</b>
+            <b className={s.expenseAmount}>
+              {Math.abs(expense)?.toFixed(2) || "--"}
+            </b>
           </li>
           <li className={s.amountItem}>
             <b>Incomes:</b>
-            <b className={s.incomeAmount}>{income || "--"}</b>
+            <b className={s.incomeAmount}>{income?.toFixed(2) || "--"}</b>
           </li>
         </ul>
       )}

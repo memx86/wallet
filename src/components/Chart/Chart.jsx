@@ -28,7 +28,7 @@ const Chart = ({ data: { categoriesSummary, periodTotal } }) => {
     <>
       <div className={s.chart}>
         <Doughnut data={data} />
-        <b className={s.amount}>&#8372;{periodTotal || "--"}</b>
+        <b className={s.amount}>&#8372;{periodTotal?.toFixed(2) || "--"}</b>
       </div>
     </>
   );
