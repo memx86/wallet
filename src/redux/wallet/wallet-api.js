@@ -16,11 +16,11 @@ export const walletApi = createApi({
   endpoints: (build) => ({
     register: build.mutation({
       query: (data) => ({ url: "/auth/sign-up", method: "POST", body: data }),
-      providesTags: ["User"],
+      invalidatesTags: ["User", "Transactions"],
     }),
     login: build.mutation({
       query: (data) => ({ url: "/auth/sign-in", method: "POST", body: data }),
-      providesTags: ["User"],
+      invalidatesTags: ["User", "Transactions"],
     }),
     logout: build.mutation({
       query: () => ({ url: "/auth/sign-out", method: "DELETE" }),
