@@ -87,8 +87,10 @@ const ModalAddTransaction = () => {
     }
 
     if (dotIndex > length - 3) {
-      return value.padEnd(length + 1, "0");
+      return value.padEnd(dotIndex + 3, "0");
     }
+
+    return value;
   };
 
   return isTransactionModal ? (
