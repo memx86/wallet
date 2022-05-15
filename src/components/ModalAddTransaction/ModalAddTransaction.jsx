@@ -87,8 +87,10 @@ const ModalAddTransaction = () => {
     }
 
     if (dotIndex > length - 3) {
-      return value.padEnd(length + 1, "0");
+      return value.padEnd(dotIndex + 3, "0");
     }
+
+    return value;
   };
 
   return isTransactionModal ? (
@@ -148,8 +150,8 @@ const ModalAddTransaction = () => {
                   name="amount"
                   onBlur={(e) => {
                     const { value } = e.target;
-                    setFieldValue("amount", handleAmount(value));
                     handleBlur(e);
+                    setFieldValue("amount", handleAmount(value));
                   }}
                   placeholder="0.00"
                   autoComplete="off"
