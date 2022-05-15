@@ -1,12 +1,20 @@
-import { ReactComponent as LogoSVG } from "assets/images/logo.svg";
+import PropTypes from "prop-types";
+
+import sprite from "assets/images/sprite.svg";
 import s from "./Logo.module.scss";
 
-const Logo = () => {
+const Logo = ({ wrapperClassName = "" }) => {
   return (
-    <div className={s.logo}>
-      <LogoSVG />
+    <div className={`${s.logo} ${wrapperClassName}`}>
+      <svg className={s.icon}>
+        <use href={`${sprite}#wallet`}></use>
+      </svg>
       <span className={s.title}>Wallet</span>
     </div>
   );
 };
+Logo.propTypes = {
+  wrapperClassName: PropTypes.string,
+};
+
 export default Logo;

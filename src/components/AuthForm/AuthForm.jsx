@@ -12,6 +12,7 @@ import {
 import { Link } from "react-router-dom";
 import PasswordStrength from "components/PasswordStrength/PasswordStrength";
 import PropTypes from "prop-types";
+import Logo from "components/Logo";
 
 export const authType = {
   login: "login",
@@ -73,12 +74,7 @@ const AuthForm = ({ type }) => {
         dirty,
       }) => (
         <form onSubmit={handleSubmit} className={s.form}>
-          <div className={s.titleWrapper}>
-            <svg style={{ width: "30px", height: "30px" }}>
-              <use href={`${spriteSvg}#wallet`}></use>
-            </svg>
-            <h1 className={s.title}>Wallet</h1>
-          </div>
+          <Logo wrapperClassName={s.titleWrapper} />
           <div className={s.inputWrapper}>
             <input
               className={s.input}

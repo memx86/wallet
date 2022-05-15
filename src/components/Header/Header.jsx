@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import Container from "components/Container";
 import Logo from "components/Logo";
 import UserName from "components/UserName";
@@ -8,7 +10,9 @@ const Header = () => {
   return (
     <header className={s.header}>
       <Container className={s.container}>
-        <Logo />
+        <Link to="/home">
+          <Logo />
+        </Link>
         <UserName />
       </Container>
     </header>
