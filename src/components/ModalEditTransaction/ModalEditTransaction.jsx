@@ -26,8 +26,7 @@ const TYPES = {
 const ModalEditTransaction = ({ el, onClose }) => {
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const categories = useSelector(categoriesSelector);
-  const [editTransaction, data] = useEditTransactionMutation();
-  console.log("data", data);
+  const [editTransaction] = useEditTransactionMutation();
   const {
     amount,
 

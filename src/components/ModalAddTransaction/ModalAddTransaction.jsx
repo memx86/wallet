@@ -16,8 +16,10 @@ import TransactionSchema from "assets/schemas/transactionSchema";
 import Modal from "components/Modal/Modal";
 import IconButton from "components/IconButton";
 import DatePickerField from "components/DatePickerField";
+import dayjs from "dayjs";
 
 import s from "./ModalAddTransaction.module.scss";
+import Select from "components/Select";
 
 const TYPES = {
   INCOME: "INCOME",
@@ -45,6 +47,8 @@ const ModalAddTransaction = () => {
   const closeModal = () => {
     dispatch(transactionModal(false));
   };
+
+  const now = dayjs().format("DD.MM.YYYY");
 
   const prepareDate = (date) => {
     const currentDate = new Date();
@@ -107,7 +111,7 @@ const ModalAddTransaction = () => {
           type: true,
           categoryId: selectFields?.at(0)?.at(0),
           amount: "",
-          transactionDate: "",
+          transactionDate: new Date(),
           comment: "",
         }}
         onSubmit={onSubmit}
@@ -135,13 +139,11 @@ const ModalAddTransaction = () => {
               </span>
             </label>
             {values.type && (
-              <Field name="categoryId" as="select" className={s.input}>
-                {selectFields.map(([categoryId, category]) => (
-                  <option value={categoryId} key={categoryId}>
-                    {category}
-                  </option>
-                ))}
-              </Field>
+              <Select
+                options={selectFields}
+                name="categoryId"
+                containerClassName={s.input}
+              />
             )}
             <div className={s.double}>
               <label className={s.wrapper}>
@@ -166,7 +168,7 @@ const ModalAddTransaction = () => {
                   name="transactionDate"
                   className={s.half}
                   maxDate={new Date()}
-                  placeholderText={t("modalAddTransaction.selectDate")}
+                  placeholderText={now}
                   dateFormat="dd.MM.yyyy"
                   autoComplete="off"
                 />
@@ -175,10 +177,9 @@ const ModalAddTransaction = () => {
             </div>
             <label className={s.wrapper}>
               <Field
-                className={s.textarea}
-                as="textarea"
+                className={s.input}
+                type="text"
                 name="comment"
-                rows="3"
                 placeholder={t("modalAddTransaction.comment")}
                 autoComplete="off"
               />

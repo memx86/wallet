@@ -150,23 +150,17 @@
     pointer-events: none;
 }
 
-.textarea {
-    composes: input;
-    resize: none;
-}
-
 .error {
     position: absolute;
     bottom: 0;
     left: 0;
     z-index: 10;
-    transform: translateY(100%);
+    transform: translateY(110%);
     color: var(--reject-cl);
 }
 
 .errorAmount {
     composes: error;
-    transform: translateY(110%);
 
     @include mq(tablet) {
         width: 250%;
@@ -186,7 +180,7 @@
     background-color: var(--accept-cl);
     border-radius: 20px;
 
-    font-family: Raleway;
+    font-family: Circe;
     font-weight: 400;
     font-size: 14px;
     line-height: 1.5;
@@ -194,6 +188,10 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--main-bg-cl);
+
+    &:disabled {
+        opacity: 0.5;
+    }
 }
 
 .btnCancel {
