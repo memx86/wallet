@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import PropTypes from "prop-types";
 import s from "./Modal.module.scss";
+import { Spring, animated, useSpring } from "react-spring";
 
-function Modal({ children, closeModal, modalClassName = "" }) {
+function Modal({ trigger, children, closeModal, modalClassName = "" }) {
   useEffect(() => {
     document.addEventListener("keydown", onEsc);
     return () => {
@@ -18,10 +19,18 @@ function Modal({ children, closeModal, modalClassName = "" }) {
     if (e.target === e.currentTarget) closeModal();
   };
 
+  const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 } });
+
   return (
-    <div className={s.backdrop} onClick={onBackdropClick}>
-      <div className={modalClassName}>{children}</div>
-    </div>
+    trigger && (
+      <animated.div
+        style={props}
+        className={s.backdrop}
+        onClick={onBackdropClick}
+      >
+        <div className={modalClassName}>{children}</div>
+      </animated.div>
+    )
   );
 }
 Modal.propTypes = {

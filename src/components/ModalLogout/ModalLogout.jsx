@@ -26,19 +26,17 @@ const ModalLogout = () => {
   };
 
   return (
-    isLogout && (
-      <Modal closeModal={cancel} modalClassName={s.modal}>
-        <span className={s.text}>Are you sure you want to logout?</span>
-        <div className={s.btnWrapper}>
-          <button className={s.btnCancel} onClick={cancel}>
-            cancel
-          </button>
-          <button className={s.btnConfirm} onClick={confirm}>
-            confirm
-          </button>
-        </div>
-      </Modal>
-    )
+    <Modal trigger={isLogout} closeModal={cancel} modalClassName={s.modal}>
+      <span className={s.text}>Are you sure you want to logout?</span>
+      <div className={s.btnWrapper}>
+        <button className={s.btnCancel} onClick={cancel}>
+          cancel
+        </button>
+        <button className={s.btnConfirm} onClick={confirm}>
+          confirm
+        </button>
+      </div>
+    </Modal>
   );
 };
 export default ModalLogout;
