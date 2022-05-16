@@ -18,7 +18,7 @@ const validationsRegister = yup.object().shape({
         allow_utf8_local_part: false,
       })
     )
-    .matches(/(^(?!-)(?=[^@]{2,}@))/, "Email is invalid"),
+    .matches(/(^(?!-)([a-zA-Z0-9_-])(?=[^@]{2,}@)([a-z]))/, "Email is invalid"),
   password: yup
     .string()
     .min(6, "Password must be at least 6 characters")
@@ -45,7 +45,7 @@ const validationLogin = yup.object().shape({
         allow_utf8_local_part: false,
       })
     )
-    .matches(/(^(?!-)(?=[^@]{2,}@))/, "Email is invalid"),
+    .matches(/(^(?!-)([a-zA-Z0-9_-])(?=[^@]{2,}@)([a-z]))/, "Email is invalid"),
   password: yup
     .string()
     .min(6, "Password must be at least 6 characters")
