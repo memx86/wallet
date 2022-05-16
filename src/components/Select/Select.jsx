@@ -25,7 +25,8 @@ const Select = ({ options, containerClassName = "", name }) => {
     };
   }, [isOpen]);
 
-  const openList = () => {
+  const openList = (e) => {
+    if (e.target !== e.currentTarget) return;
     setIsOpen(true);
   };
 
@@ -44,10 +45,9 @@ const Select = ({ options, containerClassName = "", name }) => {
     <div
       className={`${containerClassName} ${s.container}`}
       style={{ borderBottomColor: isOpen ? "#24cca7" : null }}
+      onClick={openList}
     >
-      <div className={s.header} onClick={openList}>
-        {options?.find(([value]) => value === field.value)?.at(1)}
-      </div>
+      {options?.find(([value]) => value === field.value)?.at(1)}
       {isOpen && (
         <div className={s.wrapper}>
           <ul className={s.list} ref={listRef}>

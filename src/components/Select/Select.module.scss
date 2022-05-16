@@ -1,6 +1,19 @@
 .container {
     position: relative;
     cursor: pointer;
+
+    &::after {
+        content: "";
+        position: absolute;
+        width: 13px;
+        height: 13px;
+        right: 8px;
+        top: 9px;
+        transform: rotate(-45deg);
+        border-left: 1px solid var(--main-text-cl);
+        border-bottom: 1px solid var(--main-text-cl);
+        pointer-events: none;
+    }
 }
 
 .wrapper {
