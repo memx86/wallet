@@ -1,21 +1,25 @@
 import * as yup from "yup";
 
-const transactionSchema = yup.object().shape({
-  type: yup.boolean().required("Type is required"),
-  categoryId: yup.string().required("Category is required"),
-  amount: yup
-    .string()
-    .min(1)
-    .max(8)
-    .matches(
-      /^(?:\d*\.)?\d+$/,
-      "Only numbers and . allowed, max 2 symbols after dot"
-    )
-    .required("Amount is required"),
-  transactionDate: yup.date().required("Date is required"),
-  comment: yup
-    .string()
-    .matches(/^[a-zA-Z\s]+$/, "Only alphabet symbols allowed"),
-});
+const TransactionSchema = (t) => {
+  const transactionSchema = yup.object().shape({
+    type: yup.boolean().required(t("transactionSchema.typeRequired")),
+    categoryId: yup
+      .string()
+      .required(t("transactionSchema.categoryIdRequired")),
+    amount: yup
+      .string()
+      .min(1)
+      .max(8)
+      .matches(/^(?:\d*\.)?\d+$/, t("transactionSchema.amountMatches"))
+      .required(t("transactionSchema.amountRequired")),
+    transactionDate: yup
+      .date()
+      .required(t("transactionSchema.transactionDateRequired")),
+    comment: yup
+      .string()
+      .matches(/^[a-zA-Z\s]+$/, t("transactionSchema.commentMatches")),
+  });
+  return transactionSchema;
+};
 
-export default transactionSchema;
+export default TransactionSchema;
