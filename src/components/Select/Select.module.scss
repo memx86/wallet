@@ -8,10 +8,11 @@
         width: 13px;
         height: 13px;
         right: 8px;
-        top: 50%;
-        transform: rotate(-45deg) translateY(-50%);
+        top: 9px;
+        transform: rotate(-45deg);
         border-left: 1px solid var(--main-text-cl);
         border-bottom: 1px solid var(--main-text-cl);
+        pointer-events: none;
     }
 }
 
