@@ -16,7 +16,6 @@ const validationsRegister = yup.object().shape({
     .test("is-valid", "Email is invalid", (value) =>
       isEmailValidator(value, {
         allow_utf8_local_part: false,
-        domain_specific_validation: false,
       })
     )
     .matches(/(^(?!-)(?=[^@]{2,}@))/, "Email is invalid"),
@@ -44,7 +43,6 @@ const validationLogin = yup.object().shape({
     .test("is-valid", "Email is invalid", (value) =>
       isEmailValidator(value, {
         allow_utf8_local_part: false,
-        domain_specific_validation: true,
       })
     )
     .matches(/(^(?!-)(?=[^@]{2,}@))/, "Email is invalid"),
