@@ -16,6 +16,7 @@ import transactionSchema from "assets/schemas/transactionSchema";
 import Modal from "components/Modal/Modal";
 import IconButton from "components/IconButton";
 import DatePickerField from "components/DatePickerField";
+import dayjs from 'dayjs'
 
 import s from "./ModalAddTransaction.module.scss";
 import Select from "components/Select";
@@ -45,6 +46,9 @@ const ModalAddTransaction = () => {
   const closeModal = () => {
     dispatch(transactionModal(false));
   };
+  
+  const now = dayjs().format('DD.MM.YYYY');
+  
 
   const prepareDate = (date) => {
     const currentDate = new Date();
@@ -107,7 +111,7 @@ const ModalAddTransaction = () => {
           type: true,
           categoryId: selectFields?.at(0)?.at(0),
           amount: "",
-          transactionDate: "",
+          transactionDate: new Date(),
           comment: "",
         }}
         onSubmit={onSubmit}
@@ -164,7 +168,7 @@ const ModalAddTransaction = () => {
                   name="transactionDate"
                   className={s.half}
                   maxDate={new Date()}
-                  placeholderText="Select a date"
+                  placeholderText={now}
                   dateFormat="dd.MM.yyyy"
                   autoComplete="off"
                 />
