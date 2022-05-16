@@ -1,6 +1,5 @@
 @import "stylesheet/mixin.scss";
 
-
 .form {
   margin-left: auto;
   margin-right: auto;
@@ -19,6 +18,12 @@
     padding-right: 60px;
   }
 
+  @media only screen and (max-height: 500px) and (orientation: landscape) {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    min-height: auto;
+  }
+
   @include mq(desktop) {
     margin-left: 107px;
   }
@@ -27,6 +32,10 @@
 .titleWrapper {
   justify-content: center;
   margin-bottom: 60px;
+
+  @media only screen and (max-height: 500px) and (orientation: landscape) {
+    margin-bottom: 30px;
+  }
 }
 
 .inputWrapper {
@@ -73,7 +82,7 @@
     border-bottom: 1px solid var(--accept-cl);
   }
 
-  &:focus+.iconSvg {
+  &:focus + .iconSvg {
     --color1: var(--accept-cl);
   }
 
