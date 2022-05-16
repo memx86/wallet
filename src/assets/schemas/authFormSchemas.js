@@ -45,7 +45,7 @@ const ValidationLogin = (t) =>
   yup.object().shape({
     email: yup
       .string()
-      .email()
+      .required(t("authFormSchemas.valLoginEmailRequired"))
       .min(10, t("authFormSchemas.valRegEmailMin"))
       .max(63, t("authFormSchemas.valRegEmailMax"))
       .test("is-valid", t("authFormSchemas.valLoginEmailEmail"), (value) =>
@@ -56,8 +56,7 @@ const ValidationLogin = (t) =>
       .matches(
         /(^(?!-)([a-zA-Z0-9_-])(?=[^@]{2,}@)([a-z]))/,
         t("authFormSchemas.valLoginEmailEmail")
-      )
-      .required(t("authFormSchemas.valLoginEmailRequired")),
+      ),
     password: yup
       .string()
       .min(6, t("authFormSchemas.valLoginPassMin"))
