@@ -8,7 +8,10 @@ import { MdDateRange } from "react-icons/md";
 
 import { categoriesSelector } from "redux/categories";
 import { isTransactionModalSelector, transactionModal } from "redux/session";
-import { useAddTransactionMutation } from "redux/wallet";
+import {
+  useAddTransactionMutation,
+  useEditTransactionMutation,
+} from "redux/wallet";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import transactionSchema from "assets/schemas/transactionSchema";
@@ -24,12 +27,13 @@ const TYPES = {
   EXPENSE: "EXPENSE",
 };
 
-const ModalAddTransaction = () => {
+const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isTransactionModal = useSelector(isTransactionModalSelector);
   const categories = useSelector(categoriesSelector);
   const dispatch = useDispatch();
   const [addTransaction] = useAddTransactionMutation();
+  const [editTransaction] = useEditTransactionMutation();
 
   const selectFields = [];
   let incomeCategoryId;
@@ -63,10 +67,12 @@ const ModalAddTransaction = () => {
       type: values.type ? TYPES.EXPENSE : TYPES.INCOME,
     };
     try {
-      const res = await addTransaction(data).unwrap();
+      const res = editModal
+        ? await editTransaction({ ...data, id: transaction.id }).unwrap()
+        : await addTransaction(data).unwrap();
       if (res) {
         toast.success("Transaction added");
-        closeModal();
+        editModal ? closeEditModal() : closeModal();
       }
     } catch (error) {
       toast.error("Can't add transaction");
@@ -93,21 +99,31 @@ const ModalAddTransaction = () => {
     return value;
   };
 
-  return isTransactionModal ? (
-    <Modal modalClassName={s.modal} closeModal={closeModal}>
+  return isTransactionModal || editModal ? (
+    <Modal
+      modalClassName={s.modal}
+      closeModal={editModal ? closeEditModal : closeModal}
+    >
       {!isMobile && (
-        <IconButton onClick={closeModal} label="Close window">
+        <IconButton
+          onClick={editModal ? closeEditModal : closeModal}
+          label="Close window"
+        >
           <GrClose className={s.close} />
         </IconButton>
       )}
-      <h2 className={s.title}>Add transaction</h2>
+      <h2 className={s.title}>
+        {editModal ? "Edit transaction" : "Add transaction"}
+      </h2>
       <Formik
         initialValues={{
-          type: true,
-          categoryId: selectFields?.at(0)?.at(0),
-          amount: "",
-          transactionDate: "",
-          comment: "",
+          type: transaction?.type === "INCOME" ? false : true,
+          categoryId: editModal
+            ? transaction.categoryId
+            : selectFields?.at(0)?.at(0),
+          amount: editModal ? Math.abs(transaction?.amount) : "",
+          transactionDate: editModal ? transaction?.transactionDate : "",
+          comment: editModal ? transaction?.comment : "",
         }}
         onSubmit={onSubmit}
         validateOnBlur
@@ -186,12 +202,16 @@ const ModalAddTransaction = () => {
               </span>
             </label>
             <button className={s.btnConfirm} type="submit" disabled={!isValid}>
-              Add transaction
+              {editModal ? "Change transaction" : "Add transaction"}
             </button>
           </Form>
         )}
       </Formik>
-      <button type="button" onClick={closeModal} className={s.btnCancel}>
+      <button
+        type="button"
+        onClick={editModal ? closeEditModal : closeModal}
+        className={s.btnCancel}
+      >
         Cancel
       </button>
     </Modal>
