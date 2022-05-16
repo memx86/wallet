@@ -45,7 +45,6 @@
   &:hover {
     fill: var(--main-text-cl);
   }
-
 }
 
 .remove {
@@ -70,17 +69,6 @@
   padding: 5px;
   margin: 0 auto;
   fill: var(--remove-cl);
-
-}
-
-.backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.25);
 }
 
 .modal {

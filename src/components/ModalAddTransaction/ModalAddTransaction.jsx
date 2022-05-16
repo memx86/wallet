@@ -18,6 +18,7 @@ import IconButton from "components/IconButton";
 import DatePickerField from "components/DatePickerField";
 
 import s from "./ModalAddTransaction.module.scss";
+import Select from "components/Select";
 
 const TYPES = {
   INCOME: "INCOME",
@@ -134,13 +135,11 @@ const ModalAddTransaction = () => {
               </span>
             </label>
             {values.type && (
-              <Field name="categoryId" as="select" className={s.input}>
-                {selectFields.map(([categoryId, category]) => (
-                  <option value={categoryId} key={categoryId}>
-                    {category}
-                  </option>
-                ))}
-              </Field>
+              <Select
+                options={selectFields}
+                name="categoryId"
+                containerClassName={s.input}
+              />
             )}
             <div className={s.double}>
               <label className={s.wrapper}>
