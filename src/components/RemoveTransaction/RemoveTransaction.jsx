@@ -1,24 +1,21 @@
 import s from "./RemoveTransaction.module.scss";
-import { useDispatch, useSelector } from "react-redux";
 import { useDeleteTransactionMutation } from "redux/wallet/wallet-api";
-import { isRemovalSelector } from "redux/session/session-selectors";
-import { removalModal } from "redux/session";
 import { useMediaQuery } from "react-responsive";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import { toast } from "react-toastify";
 import spriteSvg from "assets/images/sprite.svg";
+import { useState } from "react";
 
 let elementId = null;
 
 const RemoveTransaction = ({ id }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const isMobile = useMediaQuery(MOBILE_ONLY);
-  const dispatch = useDispatch();
-  const isRemoval = useSelector((state) => isRemovalSelector(state));
   const [removal] = useDeleteTransactionMutation();
 
   const openModal = () => {
     elementId = id;
-    dispatch(removalModal(true));
+    setIsOpen(!isOpen);
   };
 
   const removeItem = async () => {
@@ -30,12 +27,12 @@ const RemoveTransaction = ({ id }) => {
     } catch (error) {
       toast.error(error.message);
     } finally {
-      dispatch(removalModal(false));
+      setIsOpen(false);
     }
   };
 
   const cancel = () => {
-    dispatch(removalModal(false));
+    setIsOpen(false);
   };
 
   return (
@@ -52,7 +49,7 @@ const RemoveTransaction = ({ id }) => {
         </svg>
       )}
 
-      {isRemoval && (
+      {isOpen && (
         <div className={s.backdrop}>
           <div className={s.modal}>
             <span className={s.text}>Please confirm removal</span>
