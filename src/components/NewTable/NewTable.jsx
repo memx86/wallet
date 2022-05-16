@@ -1,6 +1,7 @@
 import { useMediaQuery } from "react-responsive";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 
@@ -30,7 +31,7 @@ const NewTable = ({
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isGeneral = type === TYPE.GENERAL;
   const prepareDate = (date) => dayjs(date).format("DD.MM.YY");
-
+  const { t } = useTranslation();
   if (isMobile && isGeneral && data?.length)
     return (
       <ul className={s.list}>
@@ -53,23 +54,23 @@ const NewTable = ({
             >
               <ul className={s.listInside}>
                 <li className={s.element}>
-                  <span className={s.title}>Date</span>
+                  <span className={s.title}>{t("newTable.date")}</span>
                   <span>{prepareDate(transactionDate)}</span>
                 </li>
                 <li className={s.element}>
-                  <span className={s.title}>Type</span>
+                  <span className={s.title}>{t("newTable.type")}</span>
                   <span>{type === TYPES.INCOME ? "+" : "-"}</span>
                 </li>
                 <li className={s.element}>
-                  <span className={s.title}>Category</span>
+                  <span className={s.title}>{t("newTable.category")}</span>
                   <span>{categories[categoryId]}</span>
                 </li>
                 <li className={s.element}>
-                  <span className={s.title}>Comment</span>
+                  <span className={s.title}>{t("newTable.comment")}</span>
                   <span>{comment}</span>
                 </li>
                 <li className={s.element}>
-                  <span className={s.title}>Amount</span>
+                  <span className={s.title}>{t("newTable.amount")}</span>
                   <span
                     style={{
                       color: type === TYPES.INCOME ? "#24cca7" : "#ff6596",
@@ -79,7 +80,7 @@ const NewTable = ({
                   </span>
                 </li>
                 <li className={s.element}>
-                  <span className={s.title}>Balance</span>
+                  <span className={s.title}>{t("newTable.balance")}</span>
                   <span>{balanceAfter?.toFixed(2)}</span>
                   <EditTransaction
                     id={id}
@@ -102,20 +103,26 @@ const NewTable = ({
   return (
     <div className={s.wrapper}>
       {!data.length ? (
-        <p> Feel free to add some transactions!</p>
+        <p> {t("newTable.feelfree")}</p>
       ) : (
         <table className={s.table}>
           <thead>
             <tr className={s.head}>
-              {isGeneral && <th className={s.first}>Date</th>}
-              {isGeneral && <th className={s.center}>Type</th>}
+              {isGeneral && <th className={s.first}>{t("newTable.date")}</th>}
+              {isGeneral && <th className={s.center}>{t("newTable.type")}</th>}
               <th className={isGeneral ? s.category : s.chartCategory}>
-                Category
+                {t("newTable.category")}
               </th>
-              {isGeneral && <th className={s.comment}>Comment</th>}
-              <th className={isGeneral ? s.right : s.chartAmount}>Amount</th>
-              {isGeneral && <th className={s.balance}>Balance</th>}
-              {isGeneral && <th className={s.last}>Options</th>}
+              {isGeneral && (
+                <th className={s.comment}>{t("newTable.comment")}</th>
+              )}
+              <th className={isGeneral ? s.right : s.chartAmount}>
+                {t("newTable.amount")}
+              </th>
+              {isGeneral && (
+                <th className={s.balance}>{t("newTable.balance")}</th>
+              )}
+              {isGeneral && <th className={s.last}>{t("newTable.options")}</th>}
             </tr>
           </thead>
           <tbody>
@@ -195,13 +202,13 @@ const NewTable = ({
       {!isGeneral && (
         <ul className={s.totalAmount}>
           <li className={s.amountItem}>
-            <b>Expenses:</b>
+            <b>{t("newTable.expenses")}</b>
             <b className={s.expenseAmount}>
               {Math.abs(expense)?.toFixed(2) || "--"}
             </b>
           </li>
           <li className={s.amountItem}>
-            <b>Incomes:</b>
+            <b>{t("newTable.incomes")}</b>
             <b className={s.incomeAmount}>{income?.toFixed(2) || "--"}</b>
           </li>
         </ul>

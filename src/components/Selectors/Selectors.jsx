@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { month, years } from "assets/constants/MONTHS-YEARS";
 import spriteSvg from "assets/images/sprite.svg";
+import { useTranslation } from "react-i18next";
 
 import s from "./Selectors.module.scss";
 import { useClickOutside } from "assets/hooks/HookCloseByWindow";
@@ -15,8 +16,9 @@ function filter(param) {
 }
 
 const Selectors = ({ transactions, selectDate }) => {
-  const [selectMonth, setSelectMonth] = useState("Month");
-  const [selectYear, setSelectYear] = useState("Year");
+  const { t } = useTranslation();
+  const [selectMonth, setSelectMonth] = useState(`${t("selectors.month")}`);
+  const [selectYear, setSelectYear] = useState(`${t("selectors.year")}`);
   const [activeMonth, setIsActiveMonth] = useState(false);
   const [activeYear, setIsActiveYear] = useState(false);
   const transactionYears = transactions?.map(

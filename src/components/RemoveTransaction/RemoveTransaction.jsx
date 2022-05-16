@@ -5,6 +5,7 @@ import { isRemovalSelector } from "redux/session/session-selectors";
 import { removalModal } from "redux/session";
 import { useMediaQuery } from "react-responsive";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
+import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import spriteSvg from "assets/images/sprite.svg";
 
@@ -16,6 +17,7 @@ const RemoveTransaction = ({ id }) => {
   const isRemoval = useSelector((state) => isRemovalSelector(state));
   const [removal] = useDeleteTransactionMutation();
 
+  const { t } = useTranslation();
   const openModal = () => {
     elementId = id;
     dispatch(removalModal(true));
@@ -55,13 +57,15 @@ const RemoveTransaction = ({ id }) => {
       {isRemoval && (
         <div className={s.backdrop}>
           <div className={s.modal}>
-            <span className={s.text}>Please confirm removal</span>
+            <span className={s.text}>
+              {t("removeTransaction.pleaseConfirm")}
+            </span>
             <div className={s.btnWrapper}>
               <button className={s.btnCancel} onClick={cancel}>
-                cancel
+                {t("removeTransaction.cancel")}
               </button>
               <button className={s.btnConfirm} onClick={removeItem}>
-                confirm
+                {t("removeTransaction.confirm")}
               </button>
             </div>
           </div>

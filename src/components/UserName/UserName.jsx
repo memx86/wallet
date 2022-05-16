@@ -3,6 +3,7 @@ import { IoLogOutOutline } from "react-icons/io5";
 import { useMediaQuery } from "react-responsive";
 import { isAuthSelector, logoutModal } from "redux/session";
 import { useRefreshQuery } from "redux/wallet";
+import { useTranslation } from "react-i18next";
 
 import Loader from "components/Loader";
 import { TABLET } from "assets/constants/MEDIA";
@@ -15,7 +16,7 @@ const UserName = () => {
 
   const dispatch = useDispatch();
   const isTablet = useMediaQuery(TABLET);
-
+  const { t } = useTranslation();
   const { username } = data;
 
   const onClick = () => {
@@ -28,7 +29,7 @@ const UserName = () => {
       <span className={s.name}>{username}</span>
       <button type="button" className={s.button} onClick={onClick}>
         <IoLogOutOutline style={{ width: "18px", height: "18px" }} />
-        {isTablet && <span>Logout</span>}
+        {isTablet && <span>{t("userName.logout")}</span>}
       </button>
     </div>
   );

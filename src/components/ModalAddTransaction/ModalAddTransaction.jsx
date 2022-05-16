@@ -9,9 +9,9 @@ import { MdDateRange } from "react-icons/md";
 import { categoriesSelector } from "redux/categories";
 import { isTransactionModalSelector, transactionModal } from "redux/session";
 import { useAddTransactionMutation } from "redux/wallet";
-
+import { useTranslation } from "react-i18next";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
-import transactionSchema from "assets/schemas/transactionSchema";
+import TransactionSchema from "assets/schemas/transactionSchema";
 
 import Modal from "components/Modal/Modal";
 import IconButton from "components/IconButton";
@@ -25,6 +25,7 @@ const TYPES = {
 };
 
 const ModalAddTransaction = () => {
+  const { t } = useTranslation();
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isTransactionModal = useSelector(isTransactionModalSelector);
   const categories = useSelector(categoriesSelector);
@@ -100,7 +101,7 @@ const ModalAddTransaction = () => {
           <GrClose className={s.close} />
         </IconButton>
       )}
-      <h2 className={s.title}>Add transaction</h2>
+      <h2 className={s.title}>{t("modalAddTransaction.addTransaction")}</h2>
       <Formik
         initialValues={{
           type: true,
@@ -111,7 +112,7 @@ const ModalAddTransaction = () => {
         }}
         onSubmit={onSubmit}
         validateOnBlur
-        validationSchema={transactionSchema}
+        validationSchema={TransactionSchema(t)}
       >
         {({ values, isValid, handleBlur, setFieldValue }) => (
           <Form className={s.form}>
@@ -120,7 +121,7 @@ const ModalAddTransaction = () => {
                 className={s.income}
                 style={values.type ? { color: "#e0e0e0" } : null}
               >
-                Income
+                {t("modalAddTransaction.income")}
               </span>
               <span className={s.wrapper}>
                 <Field type="checkbox" name="type" className={s.type} />
@@ -130,7 +131,7 @@ const ModalAddTransaction = () => {
                 className={s.expense}
                 style={!values.type ? { color: "#e0e0e0" } : null}
               >
-                Expense
+                {t("modalAddTransaction.expense")}
               </span>
             </label>
             {values.type && (
@@ -165,7 +166,7 @@ const ModalAddTransaction = () => {
                   name="transactionDate"
                   className={s.half}
                   maxDate={new Date()}
-                  placeholderText="Select a date"
+                  placeholderText={t("modalAddTransaction.selectDate")}
                   dateFormat="dd.MM.yyyy"
                   autoComplete="off"
                 />
@@ -178,7 +179,7 @@ const ModalAddTransaction = () => {
                 as="textarea"
                 name="comment"
                 rows="3"
-                placeholder="Comment"
+                placeholder={t("modalAddTransaction.comment")}
                 autoComplete="off"
               />
               <span className={s.error}>
@@ -186,13 +187,13 @@ const ModalAddTransaction = () => {
               </span>
             </label>
             <button className={s.btnConfirm} type="submit" disabled={!isValid}>
-              Add transaction
+              {t("modalAddTransaction.transaction")}
             </button>
           </Form>
         )}
       </Formik>
       <button type="button" onClick={closeModal} className={s.btnCancel}>
-        Cancel
+        {t("modalAddTransaction.cancel")}
       </button>
     </Modal>
   ) : null;

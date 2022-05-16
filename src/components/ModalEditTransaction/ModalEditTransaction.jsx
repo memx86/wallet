@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "react-toastify";
 import { GrClose } from "react-icons/gr";
 import { MdDateRange } from "react-icons/md";
+import { useTranslation } from "react-i18next";
 
 import { categoriesSelector } from "redux/categories";
 import { useEditTransactionMutation } from "redux/wallet";
@@ -36,7 +37,7 @@ const ModalEditTransaction = ({ el, onClose }) => {
     transactionDate,
     type,
   } = el;
-
+  const { t } = useTranslation();
   const selectFields = [];
   let incomeCategoryId;
   Object.entries(categories).forEach(([id, category]) => {
@@ -77,7 +78,7 @@ const ModalEditTransaction = ({ el, onClose }) => {
           <GrClose className={s.close} />
         </IconButton>
       )}
-      <h2 className={s.title}>Edit transaction</h2>
+      <h2 className={s.title}>{t("modalEditTransaction.addTransaction")}</h2>
       <Formik
         initialValues={{
           type: type === "INCOME" ? false : true,
@@ -91,12 +92,16 @@ const ModalEditTransaction = ({ el, onClose }) => {
         {({ values }) => (
           <Form className={s.form}>
             <label className={s.label}>
-              <span className={s.income}>Income</span>
+              <span className={s.income}>
+                {t("modalEditTransaction.income")}
+              </span>
               <span className={s.wrapper}>
                 <Field type="checkbox" name="type" className={s.type} />
                 <span className={s.check}></span>
               </span>
-              <span className={s.expense}>Expense</span>
+              <span className={s.expense}>
+                {t("modalEditTransaction.expense")}
+              </span>
             </label>
             {values.type && (
               <Field name="categoryId" as="select" className={s.input}>
@@ -123,7 +128,7 @@ const ModalEditTransaction = ({ el, onClose }) => {
                   name="transactionDate"
                   className={s.half}
                   maxDate={new Date()}
-                  placeholderText="Select a date"
+                  placeholderText={t("modalEditTransaction.selectDate")}
                   dateFormat="dd.MM.yyyy"
                   required
                   autoComplete="off"
@@ -136,17 +141,17 @@ const ModalEditTransaction = ({ el, onClose }) => {
               as="textarea"
               name="comment"
               rows="3"
-              placeholder="Comment"
+              placeholder={t("modalEditTransaction.comment")}
               autoComplete="off"
             />
             <button className={s.btnConfirm} type="submit">
-              Change transaction
+              {t("modalEditTransaction.transaction")}
             </button>
           </Form>
         )}
       </Formik>
       <button type="button" onClick={onClose} className={s.btnCancel}>
-        Cancel
+        {t("modalEditTransaction.cancel")}
       </button>
     </Modal>
   );

@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import { useTranslation } from "react-i18next";
 
 import sprite from "assets/images/sprite.svg";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
@@ -7,6 +8,7 @@ import s from "./Navigation.module.scss";
 
 const Navigation = () => {
   const isMobile = useMediaQuery(MOBILE_ONLY);
+  const { t } = useTranslation();
   return (
     <ul className={s.list}>
       <li>
@@ -18,7 +20,7 @@ const Navigation = () => {
           <svg width="38" height="38" className={s.icon}>
             <use href={`${sprite}#home`}></use>
           </svg>
-          {!isMobile && "Home"}
+          {!isMobile && `${t("navigation.homes")}`}
         </NavLink>
       </li>
       <li>
@@ -30,7 +32,7 @@ const Navigation = () => {
           <svg width="38" height="38" className={s.icon}>
             <use href={`${sprite}#diagram`}></use>
           </svg>
-          {!isMobile && "Diagram"}
+          {!isMobile && `${t("navigation.diagram")}`}
         </NavLink>
       </li>
       <li>
