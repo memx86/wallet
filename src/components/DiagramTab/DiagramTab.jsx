@@ -13,12 +13,18 @@ import s from "./DiagramTab.module.scss";
 import NewTable from "components/NewTable";
 import Selectors from "components/Selectors";
 
+import { isButtonShown } from "redux/isAddTransactionButtonShow/isAddTransactionButtonShownSlice";
+
 const DiagramTab = () => {
   const dispatch = useDispatch();
   const { diagData } = useSelector((state) => state.diagram);
   const { diagLoader } = useSelector((state) => state);
   const { transactions } = useSelector((state) => state.diagram);
   const [object, setObject] = useState({ month: 0, year: 0 });
+
+  useEffect(() => {
+    dispatch(isButtonShown(false));
+  }, [dispatch]);
 
   function changeData(data, colorsObj) {
     if (!Object.keys(data).length) {

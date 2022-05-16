@@ -17,6 +17,8 @@ import { categoriesReducer } from "./categories";
 import { sessionReducer } from "./session";
 import { walletApi } from "./wallet";
 
+import { isAddTransactionButtonReducer } from "./isAddTransactionButtonShow/isAddTransactionButtonShownSlice";
+
 const persistSession = {
   key: "wallet/session",
   storage,
@@ -34,6 +36,7 @@ const store = configureStore({
     session: persistReducer(persistSession, sessionReducer),
     categories: persistReducer(persistCategories, categoriesReducer),
     diagram: diagramReducer,
+    isAddTransactionButtonShown: isAddTransactionButtonReducer,
     [walletApi.reducerPath]: walletApi.reducer,
   },
   middleware: (getDefaultMiddleware) => [

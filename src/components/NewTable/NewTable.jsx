@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
@@ -6,7 +8,8 @@ import { MOBILE_ONLY } from "assets/constants/MEDIA";
 
 import RemoveTransaction from "components/RemoveTransaction/RemoveTransaction";
 import EditTransaction from "components/EditTransaction/EditTransaction";
-import ButtonAddTransactions from "components/ButtonAddTransactions";
+
+import { isButtonShown } from "redux/isAddTransactionButtonShow/isAddTransactionButtonShownSlice";
 
 import s from "./NewTable.module.scss";
 
@@ -30,6 +33,12 @@ const NewTable = ({
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isGeneral = type === TYPE.GENERAL;
   const prepareDate = (date) => dayjs(date).format("DD.MM.YY");
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(isButtonShown(true));
+  }, [dispatch]);
 
   if (isMobile && isGeneral && data?.length)
     return (
@@ -191,7 +200,6 @@ const NewTable = ({
           </tbody>
         </table>
       )}
-      {isGeneral && !isMobile && <ButtonAddTransactions />}
       {!isGeneral && (
         <ul className={s.totalAmount}>
           <li className={s.amountItem}>
