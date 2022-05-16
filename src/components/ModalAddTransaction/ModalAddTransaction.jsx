@@ -15,6 +15,7 @@ import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import Modal from "components/Modal/Modal";
 import IconButton from "components/IconButton";
 import DatePickerField from "components/DatePickerField";
+import dayjs from 'dayjs'
 
 import s from "./ModalAddTransaction.module.scss";
 
@@ -43,10 +44,9 @@ const ModalAddTransaction = () => {
   const closeModal = () => {
     dispatch(transactionModal(false));
   };
-
-  let date = new Date();
-  const output = String(date.getDate()).padStart(2, '0') + '.' + String(date.getMonth() + 1).padStart(2, '0') + '.' + date.getFullYear();
-
+  
+  const now = dayjs().format('DD.MM.YYYY');
+  
 
   // const prepareDate = (date) => {
   //   const currentDate = new Date();
@@ -127,7 +127,7 @@ const ModalAddTransaction = () => {
                   name="transactionDate"
                   className={s.half}
                   maxDate={new Date()}
-                  placeholderText={output}
+                  placeholderText={now}
                   dateFormat="dd.MM.yyyy"
                   required
                   autoComplete="off"
