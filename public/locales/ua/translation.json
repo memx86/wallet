@@ -47,7 +47,7 @@
     "modalLogout":{
         "logout":"Ви впевнені, що хочете вийти?",
         "cancel":"відміна",
-        "confirm":"згодин"
+        "confirm":"згоден"
     },
 
     "newTable":{
@@ -73,7 +73,7 @@
     "removeTransaction":{
         "pleaseConfirm":"Підтвердьте видалення",
         "cancel":"відміна",
-        "confirm":"згодин"
+        "confirm":"згоден"
     },
     "userName":{
         "logout":"Вийти"
@@ -84,7 +84,7 @@
     },
     
     "modalEditTransaction":{
-        "addTransaction":"Додати транзакцію",
+        "addTransaction":"Редагувати транзакцію",
         "income":"Дохід",
         "expense":"Витрати",
         "selectDate":"Виберіть дату",
@@ -122,7 +122,7 @@
     "categoryIdRequired":"Обов’язкова категорія",
 
     "amountMatches":"Тільки числа , . дозволено, максимум 2 символи після крапки",
-    "amountRequired":"Amount is required",
+    "amountRequired":"Необхідна сума",
 
     "transactionDateRequired":"Дата обов’язкова",
 

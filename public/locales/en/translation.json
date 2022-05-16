@@ -83,7 +83,7 @@
     },
    
     "modalEditTransaction":{
-        "addTransaction":"Add transaction", 
+        "addTransaction":"Edit transaction", 
         "income":"Income",
         "expense":"Expense",
         "comment":"Comment",
