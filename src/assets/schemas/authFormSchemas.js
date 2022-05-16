@@ -16,10 +16,10 @@ const validationsRegister = yup.object().shape({
     .test("is-valid", "Email is invalid", (value) =>
       isEmailValidator(value, {
         allow_utf8_local_part: false,
-        domain_specific_validation: true,
+        domain_specific_validation: false,
       })
     )
-    .matches(/(^(?!-)(?=[^@]{2,}@))/, "Must be at least 2 characters before @"),
+    .matches(/(^(?!-)(?=[^@]{2,}@))/, "Email is invalid"),
   password: yup
     .string()
     .min(6, "Password must be at least 6 characters")
@@ -47,7 +47,7 @@ const validationLogin = yup.object().shape({
         domain_specific_validation: true,
       })
     )
-    .matches(/(^(?!-)(?=[^@]{2,}@))/, "Must be at least 2 characters before @"),
+    .matches(/(^(?!-)(?=[^@]{2,}@))/, "Email is invalid"),
   password: yup
     .string()
     .min(6, "Password must be at least 6 characters")
