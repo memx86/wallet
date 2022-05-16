@@ -128,6 +128,7 @@ const ModalAddTransaction = () => {
                   className={s.half}
                   maxDate={new Date()}
                   placeholderText={now}
+                  initialValue={new Date()}
                   dateFormat="dd.MM.yyyy"
                   required
                   autoComplete="off"
