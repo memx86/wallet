@@ -173,10 +173,9 @@ const ModalAddTransaction = () => {
             </div>
             <label className={s.wrapper}>
               <Field
-                className={s.textarea}
-                as="textarea"
+                className={s.input}
+                type="text"
                 name="comment"
-                rows="3"
                 placeholder="Comment"
                 autoComplete="off"
               />
