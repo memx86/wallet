@@ -34,15 +34,18 @@ const ModalAddTransaction = () => {
   const dispatch = useDispatch();
   const [addTransaction] = useAddTransactionMutation();
 
-  const selectFields = [];
-  let incomeCategoryId;
-  Object.entries(categories).forEach(([id, category]) => {
-    if (category === "Income") {
-      incomeCategoryId = id;
-      return;
-    }
-    selectFields.push([id, category]);
-  });
+  const selectFields = categories
+    ? []
+    : [["c9d9e447-1b83-4238-8712-edc77b18b739", "No categories found"]];
+  let incomeCategoryId = "063f1132-ba5d-42b4-951d-44011ca46262";
+  categories &&
+    Object.entries(categories).forEach(([id, category]) => {
+      if (category === "Income") {
+        incomeCategoryId = id;
+        return;
+      }
+      selectFields.push([id, category]);
+    });
 
   const closeModal = () => {
     dispatch(transactionModal(false));
