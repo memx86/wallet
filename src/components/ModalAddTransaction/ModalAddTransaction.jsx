@@ -87,7 +87,7 @@ const ModalAddTransaction = () => {
           type: true,
           categoryId: selectFields?.at(0)?.at(0),
           amount: "",
-          transactionDate: "",
+          transactionDate: new Date(),
           comment: "",
         }}
         onSubmit={onSubmit}
@@ -128,7 +128,6 @@ const ModalAddTransaction = () => {
                   className={s.half}
                   maxDate={new Date()}
                   placeholderText={now}
-                  initialValue={new Date()}
                   dateFormat="dd.MM.yyyy"
                   required
                   autoComplete="off"
