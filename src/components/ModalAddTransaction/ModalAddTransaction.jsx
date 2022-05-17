@@ -146,7 +146,9 @@ const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
             ? transaction.categoryId
             : selectFields?.at(0)?.at(0),
           amount: editModal ? Math.abs(transaction?.amount) : "",
-          transactionDate: editModal ? transaction?.transactionDate : "",
+          transactionDate: editModal
+            ? transaction?.transactionDate
+            : new Date(),
           comment: editModal ? transaction?.comment : "",
         }}
         onSubmit={onSubmit}
