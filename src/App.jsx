@@ -13,14 +13,12 @@ import HomeTab from "components/HomeTab";
 import DiagramTab from "components/DiagramTab";
 import Registration from "pages/Registration";
 import Login from "pages/Login";
-// import Container from "components/Container";
 import Loader from "components/Loader";
 import PublicRoute from "components/PublicRoute";
 import PrivateRoute from "components/PrivateRoute";
 import CurrencyTab from "components/CurrencyTab";
 import ModalAddTransaction from "components/ModalAddTransaction";
 import ModalLogout from "components/ModalLogout";
-import LanguageSwitcher from "./components/LanguageSwitcher/LanguageSwitcher";
 
 const App = () => {
   const token = useSelector(tokenSelector);
@@ -43,7 +41,6 @@ const App = () => {
     <Suspense fallback={<Loader />}>
       <Fragment>
         {isAuth && <Header />}
-        <LanguageSwitcher />
         <Routes>
           <Route path="/" element={<Home />}>
             <Route

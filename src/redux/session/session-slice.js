@@ -19,6 +19,7 @@ const sessionSlice = createSlice({
     token: null,
     isLogout: false,
     isTransactionModal: false,
+    isShown: true,
   },
   reducers: {
     loggedIn(state) {
@@ -43,6 +44,9 @@ const sessionSlice = createSlice({
     editModal(state, { payload }) {
       state.isEditModal = payload;
     },
+    isButtonShown(state, { payload }) {
+      state.isShown = payload;
+    },
   },
 });
 
@@ -53,5 +57,6 @@ export const {
   logoutModal,
   transactionModal,
   editModal,
+  isButtonShown,
 } = sessionSlice.actions;
 export const sessionReducer = sessionSlice.reducer;
