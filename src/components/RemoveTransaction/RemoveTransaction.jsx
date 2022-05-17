@@ -44,14 +44,14 @@ const RemoveTransaction = ({ id }) => {
     <>
       {isMobile ? (
         <div className={s.remove}>
-          <IconButton onClick={openModal} label="Remove transaction">
+          <IconButton onClick={openModal} label={t("removeTransaction.remove")}>
             <svg className={s.removeIcon}>
               <use href={`${spriteSvg}#bin`}></use>
             </svg>
           </IconButton>
         </div>
       ) : (
-        <IconButton onClick={openModal} label="Remove transaction">
+        <IconButton onClick={openModal} label={t("removeTransaction.remove")}>
           <svg width="20px" height="20px" className={s.icon}>
             <use href={`${spriteSvg}#bin`}></use>
           </svg>
@@ -64,7 +64,6 @@ const RemoveTransaction = ({ id }) => {
           children={
             <div className={s.modal}>
               <span className={s.text}>
-                {" "}
                 {t("removeTransaction.pleaseConfirm")}
               </span>
               <div className={s.btnWrapper}>

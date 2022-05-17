@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
+import { useClickOutside } from "assets/hooks/HookCloseByWindow";
 import { month, years } from "assets/constants/MONTHS-YEARS";
 import spriteSvg from "assets/images/sprite.svg";
-import { useTranslation } from "react-i18next";
 
 import s from "./Selectors.module.scss";
-import { useClickOutside } from "assets/hooks/HookCloseByWindow";
 
 function filter(param) {
   const filterParam = param?.filter(
@@ -28,8 +28,6 @@ const Selectors = ({ transactions, selectDate }) => {
   const transactionMonths = transactions?.map(
     (el) => +el.transactionDate.slice(5, 7)
   );
-
-  console.log("transactions", transactions);
 
   let domNode = useClickOutside(() => {
     setIsActiveMonth(false);

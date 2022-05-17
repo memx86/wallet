@@ -34,7 +34,6 @@ const TYPES = {
 const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
   const { t } = useTranslation();
   const isMobile = useMediaQuery(MOBILE_ONLY);
-  // const isMobile = true;
   const isTransactionModal = useSelector(isTransactionModalSelector);
   const categories = useSelector(categoriesSelector);
   const dispatch = useDispatch();
@@ -247,11 +246,13 @@ export default ModalAddTransaction;
 ModalAddTransaction.propTypes = {
   editModal: PropTypes.bool,
   closeEditModal: PropTypes.func,
-  transaction: PropTypes.objectOf({
+  transaction: PropTypes.shape({
     id: PropTypes.string,
     transactionDate: PropTypes.string,
     type: PropTypes.string,
     categoryId: PropTypes.string,
     comment: PropTypes.string,
+    amount: PropTypes.number,
+    balanceAfter: PropTypes.number,
   }),
 };

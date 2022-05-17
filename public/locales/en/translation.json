@@ -83,6 +83,7 @@
     "regPage": "Finance App"
   },
   "removeTransaction": {
+    "remove": "Remove transaction",
     "pleaseConfirm": "Please confirm removal",
     "cancel": "cancel",
     "confirm": "confirm"

@@ -5,8 +5,8 @@ import { useTranslation } from "react-i18next";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 
-import RemoveTransaction from "components/RemoveTransaction/RemoveTransaction";
-import EditTransaction from "components/EditTransaction/EditTransaction";
+import RemoveTransaction from "components/RemoveTransaction";
+import EditTransaction from "components/EditTransaction";
 import ButtonAddTransactions from "components/ButtonAddTransactions";
 
 import s from "./NewTable.module.scss";
