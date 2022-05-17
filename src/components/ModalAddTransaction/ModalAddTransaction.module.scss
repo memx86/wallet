@@ -109,6 +109,7 @@
     padding: 8px 20px;
     width: 280px;
     font-size: 18px;
+    text-align: left;
     border: none;
     border-bottom: 1px solid var(--faded-secondary-cl);
 
@@ -150,23 +151,17 @@
     pointer-events: none;
 }
 
-.textarea {
-    composes: input;
-    resize: none;
-}
-
 .error {
     position: absolute;
     bottom: 0;
     left: 0;
     z-index: 10;
-    transform: translateY(100%);
+    transform: translateY(110%);
     color: var(--reject-cl);
 }
 
 .errorAmount {
     composes: error;
-    transform: translateY(110%);
 
     @include mq(tablet) {
         width: 250%;
@@ -194,6 +189,10 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--main-bg-cl);
+
+    &:disabled {
+        opacity: 0.5;
+    }
 }
 
 .btnCancel {

@@ -2,7 +2,6 @@
 
 .selectors {
     width: 100%;
-    margin-bottom: 20px;
     justify-content: space-between;
     @include mq(tablet) {
         display: flex;
@@ -69,6 +68,7 @@
     max-height: 150px;
     opacity: 1;
     overflow-y: scroll;
+    
 }
 
 
@@ -117,4 +117,19 @@
     height: 100%;
     fill: var(--main-text-cl);
     transition: all 0.4s;
+}
+.reset{
+    padding-top: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.button {
+    width: 280px;
+    background: none;
+    height: 50px;
+    border-radius: 25px;
+    @include mq(tablet) {
+            width: 180px;
+        }
 }

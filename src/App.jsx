@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, Suspense } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,7 +13,6 @@ import HomeTab from "components/HomeTab";
 import DiagramTab from "components/DiagramTab";
 import Registration from "pages/Registration";
 import Login from "pages/Login";
-// import Container from "components/Container";
 import Loader from "components/Loader";
 import PublicRoute from "components/PublicRoute";
 import PrivateRoute from "components/PrivateRoute";
@@ -39,51 +38,52 @@ const App = () => {
   if (isFetching) return <Loader />;
 
   return (
-    <Fragment>
-      {isAuth && <Header />}
-
-      <Routes>
-        <Route path="/" element={<Home />}>
+    <Suspense fallback={<Loader />}>
+      <Fragment>
+        {isAuth && <Header />}
+        <Routes>
+          <Route path="/" element={<Home />}>
+            <Route
+              path="home"
+              element={
+                <PrivateRoute>
+                  <HomeTab />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="diagram"
+              element={
+                <PrivateRoute>
+                  <DiagramTab />
+                </PrivateRoute>
+              }
+            />
+            <Route path="currency" element={<CurrencyTab />} />
+          </Route>
           <Route
-            path="home"
+            path="/register"
             element={
-              <PrivateRoute>
-                <HomeTab />
-              </PrivateRoute>
+              <PublicRoute>
+                <Registration />
+              </PublicRoute>
             }
           />
           <Route
-            path="diagram"
+            path="/login"
             element={
-              <PrivateRoute>
-                <DiagramTab />
-              </PrivateRoute>
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
             }
           />
-          <Route path="currency" element={<CurrencyTab />} />
-        </Route>
-        <Route
-          path="/register"
-          element={
-            <PublicRoute>
-              <Registration />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <PublicRoute>
-              <Login />
-            </PublicRoute>
-          }
-        />
-        <Route path="*" element={<Home />} />
-      </Routes>
-      <ModalAddTransaction />
-      <ModalLogout />
-      <ToastContainer hideProgressBar />
-    </Fragment>
+          <Route path="*" element={<Home />} />
+        </Routes>
+        <ModalAddTransaction />
+        <ModalLogout />
+        <ToastContainer hideProgressBar />
+      </Fragment>
+    </Suspense>
   );
 };
 export default App;

@@ -21,6 +21,7 @@ body {
   background-color: var(--page-bg-cl);
 
   @include mq(tablet) {
+    min-height: 100vh;
     background-image: url(../assets/images/loginPage/ellipse-top-tab-1x.png),
       url(../assets/images/loginPage/ellipse-bottom-tab-1x.png);
 

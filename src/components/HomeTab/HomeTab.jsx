@@ -3,13 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 
 import { isAuthSelector } from "redux/session";
-import { useGetTransactionSummaryQuery, useRefreshQuery } from "redux/wallet";
-import {
-  categoriesIsLoadingSelector,
-  categoriesSelector,
-  getCategories,
-} from "redux/categories";
+import { useGetTransactionsQuery, useRefreshQuery } from "redux/wallet";
+import { categoriesIsLoadingSelector, getCategories } from "redux/categories";
+
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
+import useCategoriesLocale from "assets/hooks/useCategoriesLocale";
 
 import Loader from "components/Loader";
 import NewTable from "components/NewTable";
@@ -18,12 +16,12 @@ import ButtonAddTransactions from "components/ButtonAddTransactions";
 // import s from './HomeTab.module.scss'
 
 const HomeTab = () => {
-  const categories = useSelector(categoriesSelector);
+  const categories = useCategoriesLocale();
   const isLoadingCategories = useSelector(categoriesIsLoadingSelector);
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isAuth = useSelector(isAuthSelector);
   const dispatch = useDispatch();
-  const { data, isFetching } = useGetTransactionSummaryQuery(null, {
+  const { data, isFetching } = useGetTransactionsQuery(null, {
     skip: !isAuth,
   });
   const { data: userData } = useRefreshQuery(null, {

@@ -1,20 +1,27 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "react-toastify";
 import { GrClose } from "react-icons/gr";
 import { MdDateRange } from "react-icons/md";
+import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
 
-import { categoriesSelector } from "redux/categories";
 import { isTransactionModalSelector, transactionModal } from "redux/session";
-import { useAddTransactionMutation } from "redux/wallet";
+import {
+  useAddTransactionMutation,
+  useEditTransactionMutation,
+} from "redux/wallet";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
-import transactionSchema from "assets/schemas/transactionSchema";
+import TransactionSchema from "assets/schemas/transactionSchema";
+import useCategoriesLocale from "assets/hooks/useCategoriesLocale";
+import useDatePickerLocale from "assets/hooks/useDatePickerLocale";
 
 import Modal from "components/Modal/Modal";
 import IconButton from "components/IconButton";
+import Select from "components/Select";
 import DatePickerField from "components/DatePickerField";
 
 import s from "./ModalAddTransaction.module.scss";
@@ -24,34 +31,47 @@ const TYPES = {
   EXPENSE: "EXPENSE",
 };
 
-const ModalAddTransaction = () => {
+const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
+  const { t } = useTranslation();
+  const categories = useCategoriesLocale();
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isTransactionModal = useSelector(isTransactionModalSelector);
-  const categories = useSelector(categoriesSelector);
   const dispatch = useDispatch();
   const [addTransaction] = useAddTransactionMutation();
+  const [editTransaction] = useEditTransactionMutation();
+  const datePickerLocale = useDatePickerLocale();
 
-  const selectFields = [];
-  let incomeCategoryId;
-  Object.entries(categories).forEach(([id, category]) => {
-    if (category === "Income") {
-      incomeCategoryId = id;
-      return;
-    }
-    selectFields.push([id, category]);
-  });
+  const selectFields = categories
+    ? []
+    : [
+        [
+          "c9d9e447-1b83-4238-8712-edc77b18b739",
+          t("modalAddTransaction.nocategories"),
+        ],
+      ];
+  let incomeCategoryId = "063f1132-ba5d-42b4-951d-44011ca46262";
+  categories &&
+    Object.entries(categories).forEach(([id, category]) => {
+      if (category === "Income") {
+        incomeCategoryId = id;
+        return;
+      }
+      selectFields.push([id, category]);
+    });
 
   const closeModal = () => {
     dispatch(transactionModal(false));
   };
 
+  const now = dayjs().format("DD.MM.YYYY");
+
   const prepareDate = (date) => {
-    const currentDate = new Date();
-    const timeZone = currentDate.getTimezoneOffset();
-    const currentTime = (currentDate.getTime() - 60000 * timeZone) % 86400000;
-    const initialDate = new Date(date).getTime();
-    const result = new Date(initialDate + currentTime);
-    return result.toISOString();
+    // const currentDate = new Date();
+    // const timeZone = currentDate.getTimezoneOffset();
+    // const currentTime = (currentDate.getTime() - 60000 * timeZone) % 86400000;
+    // const initialDate = new Date(date).getTime();
+    // const result = new Date(initialDate + currentTime);
+    return date.toISOString();
   };
 
   const onSubmit = async (values) => {
@@ -63,13 +83,22 @@ const ModalAddTransaction = () => {
       type: values.type ? TYPES.EXPENSE : TYPES.INCOME,
     };
     try {
-      const res = await addTransaction(data).unwrap();
-      if (res) {
-        toast.success("Transaction added");
-        closeModal();
-      }
+      const res = editModal
+        ? await editTransaction({ ...data, id: transaction.id }).unwrap()
+        : await addTransaction(data).unwrap();
+      if (res)
+        toast.success(
+          editModal
+            ? t("modalEditTransaction.success")
+            : t("modalAddTransaction.success")
+        );
+      editModal ? closeEditModal() : closeModal();
     } catch (error) {
-      toast.error("Can't add transaction");
+      toast.error(
+        editModal
+          ? t("modalEditTransaction.error")
+          : t("modalAddTransaction.error")
+      );
     }
   };
 
@@ -93,25 +122,39 @@ const ModalAddTransaction = () => {
     return value;
   };
 
-  return isTransactionModal ? (
-    <Modal modalClassName={s.modal} closeModal={closeModal}>
+  return isTransactionModal || editModal ? (
+    <Modal
+      modalClassName={s.modal}
+      closeModal={editModal ? closeEditModal : closeModal}
+    >
       {!isMobile && (
-        <IconButton onClick={closeModal} label="Close window">
+        <IconButton
+          onClick={editModal ? closeEditModal : closeModal}
+          label={t("modalAddTransaction.closewindow")}
+        >
           <GrClose className={s.close} />
         </IconButton>
       )}
-      <h2 className={s.title}>Add transaction</h2>
+      <h2 className={s.title}>
+        {editModal
+          ? t("modalEditTransaction.editTransaction")
+          : t("modalAddTransaction.addTransaction")}
+      </h2>
       <Formik
         initialValues={{
-          type: true,
-          categoryId: selectFields?.at(0)?.at(0),
-          amount: "",
-          transactionDate: "",
-          comment: "",
+          type: transaction?.type === "INCOME" ? false : true,
+          categoryId: editModal
+            ? transaction.categoryId
+            : selectFields?.at(0)?.at(0),
+          amount: editModal ? Math.abs(transaction?.amount) : "",
+          transactionDate: editModal
+            ? new Date(transaction?.transactionDate)
+            : new Date(),
+          comment: editModal ? transaction?.comment : "",
         }}
         onSubmit={onSubmit}
         validateOnBlur
-        validationSchema={transactionSchema}
+        validationSchema={TransactionSchema(t)}
       >
         {({ values, isValid, handleBlur, setFieldValue }) => (
           <Form className={s.form}>
@@ -120,7 +163,7 @@ const ModalAddTransaction = () => {
                 className={s.income}
                 style={values.type ? { color: "#e0e0e0" } : null}
               >
-                Income
+                {t("modalAddTransaction.income")}
               </span>
               <span className={s.wrapper}>
                 <Field type="checkbox" name="type" className={s.type} />
@@ -130,17 +173,15 @@ const ModalAddTransaction = () => {
                 className={s.expense}
                 style={!values.type ? { color: "#e0e0e0" } : null}
               >
-                Expense
+                {t("modalAddTransaction.expense")}
               </span>
             </label>
             {values.type && (
-              <Field name="categoryId" as="select" className={s.input}>
-                {selectFields.map(([categoryId, category]) => (
-                  <option value={categoryId} key={categoryId}>
-                    {category}
-                  </option>
-                ))}
-              </Field>
+              <Select
+                options={selectFields}
+                name="categoryId"
+                containerClassName={s.input}
+              />
             )}
             <div className={s.double}>
               <label className={s.wrapper}>
@@ -165,8 +206,9 @@ const ModalAddTransaction = () => {
                   name="transactionDate"
                   className={s.half}
                   maxDate={new Date()}
-                  placeholderText="Select a date"
+                  placeholderText={now}
                   dateFormat="dd.MM.yyyy"
+                  locale={datePickerLocale}
                   autoComplete="off"
                 />
                 <MdDateRange className={s.dateIcon} />
@@ -174,11 +216,10 @@ const ModalAddTransaction = () => {
             </div>
             <label className={s.wrapper}>
               <Field
-                className={s.textarea}
-                as="textarea"
+                className={s.input}
+                type="text"
                 name="comment"
-                rows="3"
-                placeholder="Comment"
+                placeholder={t("modalAddTransaction.comment")}
                 autoComplete="off"
               />
               <span className={s.error}>
@@ -186,15 +227,35 @@ const ModalAddTransaction = () => {
               </span>
             </label>
             <button className={s.btnConfirm} type="submit" disabled={!isValid}>
-              Add transaction
+              {editModal
+                ? t("modalEditTransaction.transaction")
+                : t("modalAddTransaction.transaction")}
             </button>
           </Form>
         )}
       </Formik>
-      <button type="button" onClick={closeModal} className={s.btnCancel}>
-        Cancel
+      <button
+        type="button"
+        onClick={editModal ? closeEditModal : closeModal}
+        className={s.btnCancel}
+      >
+        {t("modalAddTransaction.cancel")}
       </button>
     </Modal>
   ) : null;
 };
 export default ModalAddTransaction;
+
+ModalAddTransaction.propTypes = {
+  editModal: PropTypes.bool,
+  closeEditModal: PropTypes.func,
+  transaction: PropTypes.shape({
+    id: PropTypes.string,
+    transactionDate: PropTypes.string,
+    type: PropTypes.string,
+    categoryId: PropTypes.string,
+    comment: PropTypes.string,
+    amount: PropTypes.number,
+    balanceAfter: PropTypes.number,
+  }),
+};

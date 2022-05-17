@@ -3,12 +3,14 @@ import { useDispatch } from "react-redux";
 import { loggedOff, logoutModal } from "redux/session";
 import { useLogoutMutation } from "redux/wallet";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 import Modal from "components/Modal";
 // import { Spring, animated } from "react-spring";
 
 const ModalLogout = () => {
   const dispatch = useDispatch();
   const [logout] = useLogoutMutation();
+  const { t } = useTranslation();
 
   const confirm = async () => {
     try {
@@ -26,13 +28,13 @@ const ModalLogout = () => {
 
   return (
     <Modal closeModal={cancel} modalClassName={s.modal}>
-      <span className={s.text}>Are you sure you want to logout?</span>
+      <span className={s.text}>{t("modalLogout.logout")}</span>
       <div className={s.btnWrapper}>
         <button className={s.btnCancel} onClick={cancel}>
-          cancel
+          {t("modalLogout.cancel")}
         </button>
         <button className={s.btnConfirm} onClick={confirm}>
-          confirm
+          {t("modalLogout.confirm")}
         </button>
       </div>
     </Modal>
