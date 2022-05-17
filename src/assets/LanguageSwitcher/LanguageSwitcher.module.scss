@@ -1,0 +1,24 @@
+@import "stylesheet/mixin.scss";
+
+.wrapBtn {
+  padding-top: 20px;
+  padding-left: 20px;
+
+  @include mq(tablet-only) {
+    padding-top: 10px;
+    text-align: start;
+    margin-bottom: 20px;
+  }
+
+  .btn {
+    width: 25px;
+    height: 25px;
+    border: none;
+    outline: none;
+    margin-left: 10px;
+    background-color: inherit;
+  }
+  .btn:hover {
+    transform: scale(1.2);
+  }
+}

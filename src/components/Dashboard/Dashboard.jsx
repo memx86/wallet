@@ -16,6 +16,8 @@ import Container from "components/Container";
 import ButtonAddTransactions from "components/ButtonAddTransactions";
 import { getIsButtonShown } from "redux/isAddTransactionButtonShow/isAddTransactionButtonShownSelector";
 
+import LanguageSwitcher from "assets/LanguageSwitcher/LanguageSwitcher";
+
 const Dashboard = () => {
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isShown = useSelector(getIsButtonShown);
@@ -27,6 +29,7 @@ const Dashboard = () => {
   return (
     <Fragment>
       <section className={s.blur_container}>
+        <LanguageSwitcher />
         <Container className={s.container}>
           <div className={s.sidebar}>
             <div className={s.wrapper}>

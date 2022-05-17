@@ -3,6 +3,7 @@ import Modal from "components/Modal/Modal";
 import { useDeleteTransactionMutation } from "redux/wallet/wallet-api";
 import { useMediaQuery } from "react-responsive";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
+import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import spriteSvg from "assets/images/sprite.svg";
 import { useState } from "react";
@@ -15,6 +16,7 @@ const RemoveTransaction = ({ id }) => {
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const [removal] = useDeleteTransactionMutation();
 
+  const { t } = useTranslation();
   const openModal = () => {
     elementId = id;
     setIsOpen(!isOpen);
@@ -50,20 +52,22 @@ const RemoveTransaction = ({ id }) => {
           <use href={`${spriteSvg}#bin`}></use>
         </svg>
       )}
-
       {isOpen && (
         <Modal
           modalClassName={s.modal}
           closeModal={cancel}
           children={
             <div className={s.modal}>
-              <span className={s.text}>Please confirm removal</span>
+              <span className={s.text}>
+                {" "}
+                {t("removeTransaction.pleaseConfirm")}
+              </span>
               <div className={s.btnWrapper}>
                 <button className={s.btnCancel} onClick={cancel}>
-                  cancel
+                  {t("removeTransaction.cancel")}
                 </button>
                 <button className={s.btnConfirm} onClick={removeItem}>
-                  confirm
+                  {t("removeTransaction.confirm")}
                 </button>
               </div>
             </div>
