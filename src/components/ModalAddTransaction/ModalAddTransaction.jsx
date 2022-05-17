@@ -65,12 +65,12 @@ const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
   const now = dayjs().format("DD.MM.YYYY");
 
   const prepareDate = (date) => {
-    const currentDate = new Date();
-    const timeZone = currentDate.getTimezoneOffset();
-    const currentTime = (currentDate.getTime() - 60000 * timeZone) % 86400000;
-    const initialDate = new Date(date).getTime();
-    const result = new Date(initialDate + currentTime);
-    return result.toISOString();
+    // const currentDate = new Date();
+    // const timeZone = currentDate.getTimezoneOffset();
+    // const currentTime = (currentDate.getTime() - 60000 * timeZone) % 86400000;
+    // const initialDate = new Date(date).getTime();
+    // const result = new Date(initialDate + currentTime);
+    return date.toISOString();
   };
 
   const onSubmit = async (values) => {
@@ -85,14 +85,13 @@ const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
       const res = editModal
         ? await editTransaction({ ...data, id: transaction.id }).unwrap()
         : await addTransaction(data).unwrap();
-      if (res) {
+      if (res)
         toast.success(
           editModal
             ? t("modalEditTransaction.success")
             : t("modalAddTransaction.success")
         );
-        editModal ? closeEditModal() : closeModal();
-      }
+      editModal ? closeEditModal() : closeModal();
     } catch (error) {
       toast.error(
         editModal
@@ -147,7 +146,9 @@ const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
             ? transaction.categoryId
             : selectFields?.at(0)?.at(0),
           amount: editModal ? Math.abs(transaction?.amount) : "",
-          transactionDate: editModal ? transaction?.transactionDate : "",
+          transactionDate: editModal
+            ? new Date(transaction?.transactionDate)
+            : new Date(),
           comment: editModal ? transaction?.comment : "",
         }}
         onSubmit={onSubmit}

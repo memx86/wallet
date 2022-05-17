@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import { colorsChange } from "assets/constants/COLORS";
 import Chart from "components/Chart";
@@ -13,8 +14,16 @@ import {
   useGetTransactionsSummaryQuery,
 } from "redux/wallet";
 
+import { isButtonShown } from "redux/session";
+
 const DiagramTab = () => {
   const [object, setObject] = useState({ month: 0, year: 0 });
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(isButtonShown(false));
+  });
 
   const { data: diagData, isLoading: diagLoader } =
     useGetTransactionsSummaryQuery(object);
