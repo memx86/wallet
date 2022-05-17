@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { IoLogOutOutline } from "react-icons/io5";
 import { useMediaQuery } from "react-responsive";
-import { isAuthSelector, logoutModal } from "redux/session";
+import { isAuthSelector, setModal } from "redux/session";
 import { useRefreshQuery } from "redux/wallet";
 import { useTranslation } from "react-i18next";
 
@@ -21,7 +21,7 @@ const UserName = () => {
   const { username } = data;
 
   const onClick = () => {
-    dispatch(logoutModal(true));
+    dispatch(setModal({ isOpen: true, type: "logout" }));
   };
 
   if (isFetching) return <Loader />;

@@ -7,12 +7,12 @@ import { MdDateRange } from "react-icons/md";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-
-import { isTransactionModalSelector, transactionModal } from "redux/session";
+import { closeModal as setCloseModal } from "redux/session/session-slice";
 import {
   useAddTransactionMutation,
   useEditTransactionMutation,
 } from "redux/wallet";
+import { modalDataSelector } from "redux/session";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import TransactionSchema from "assets/schemas/transactionSchema";
@@ -31,15 +31,15 @@ const TYPES = {
   EXPENSE: "EXPENSE",
 };
 
-const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
+const ModalAddTransaction = ({ editModal }) => {
   const { t } = useTranslation();
   const categories = useCategoriesLocale();
   const isMobile = useMediaQuery(MOBILE_ONLY);
-  const isTransactionModal = useSelector(isTransactionModalSelector);
   const dispatch = useDispatch();
   const [addTransaction] = useAddTransactionMutation();
   const [editTransaction] = useEditTransactionMutation();
   const datePickerLocale = useDatePickerLocale();
+  const transaction = useSelector(modalDataSelector);
 
   const selectFields = categories
     ? []
@@ -60,7 +60,7 @@ const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
     });
 
   const closeModal = () => {
-    dispatch(transactionModal(false));
+    dispatch(setCloseModal());
   };
 
   const now = dayjs().format("DD.MM.YYYY");
@@ -92,7 +92,7 @@ const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
             ? t("modalEditTransaction.success")
             : t("modalAddTransaction.success")
         );
-      editModal ? closeEditModal() : closeModal();
+      closeModal();
     } catch (error) {
       toast.error(
         editModal
@@ -122,14 +122,11 @@ const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
     return value;
   };
 
-  return isTransactionModal || editModal ? (
-    <Modal
-      modalClassName={s.modal}
-      closeModal={editModal ? closeEditModal : closeModal}
-    >
+  return (
+    <Modal modalClassName={s.modal} closeModal={closeModal}>
       {!isMobile && (
         <IconButton
-          onClick={editModal ? closeEditModal : closeModal}
+          onClick={closeModal}
           label={t("modalAddTransaction.closewindow")}
         >
           <GrClose className={s.close} />
@@ -234,15 +231,11 @@ const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
           </Form>
         )}
       </Formik>
-      <button
-        type="button"
-        onClick={editModal ? closeEditModal : closeModal}
-        className={s.btnCancel}
-      >
+      <button type="button" onClick={closeModal} className={s.btnCancel}>
         {t("modalAddTransaction.cancel")}
       </button>
     </Modal>
-  ) : null;
+  );
 };
 export default ModalAddTransaction;
 

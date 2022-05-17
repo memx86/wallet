@@ -1,11 +1,13 @@
-import s from "./ModalLogout.module.scss";
 import { useDispatch } from "react-redux";
-import { loggedOff, logoutModal } from "redux/session";
-import { useLogoutMutation } from "redux/wallet";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+
+import { loggedOff, closeModal } from "redux/session";
+import { useLogoutMutation } from "redux/wallet";
+
 import Modal from "components/Modal";
-// import { Spring, animated } from "react-spring";
+
+import s from "./ModalLogout.module.scss";
 
 const ModalLogout = () => {
   const dispatch = useDispatch();
@@ -14,20 +16,20 @@ const ModalLogout = () => {
 
   const confirm = async () => {
     try {
-      await logout().unwrap();
-      dispatch(logoutModal(false));
+      await logout();
+      cancel();
       dispatch(loggedOff());
     } catch (error) {
-      toast.error("Can't log out");
+      toast.error(t("modalLogout.error"));
     }
   };
 
   const cancel = () => {
-    dispatch(logoutModal(false));
+    dispatch(closeModal());
   };
 
   return (
-    <Modal closeModal={cancel} modalClassName={s.modal}>
+    <Modal modalType={"logout"} closeModal={cancel} modalClassName={s.modal}>
       <span className={s.text}>{t("modalLogout.logout")}</span>
       <div className={s.btnWrapper}>
         <button className={s.btnCancel} onClick={cancel}>
