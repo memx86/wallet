@@ -8,7 +8,6 @@ import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
-import { categoriesSelector } from "redux/categories";
 import { isTransactionModalSelector, transactionModal } from "redux/session";
 import {
   useAddTransactionMutation,
@@ -17,7 +16,8 @@ import {
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import TransactionSchema from "assets/schemas/transactionSchema";
-import categoriesUa from "assets/constants/categories-ua";
+import useCategoriesLocale from "assets/hooks/useCategoriesLocale";
+import useDatePickerLocale from "assets/hooks/useDatePickerLocale";
 
 import Modal from "components/Modal/Modal";
 import IconButton from "components/IconButton";
@@ -32,39 +32,14 @@ const TYPES = {
 };
 
 const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
+  const categories = useCategoriesLocale();
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isTransactionModal = useSelector(isTransactionModalSelector);
-  const actualCategories = useSelector(categoriesSelector);
   const dispatch = useDispatch();
   const [addTransaction] = useAddTransactionMutation();
   const [editTransaction] = useEditTransactionMutation();
-
-  const language = i18n.language;
-
-  const getDatePickerLocale = (lang) => {
-    switch (lang) {
-      case "en":
-        return "en-US";
-      case "ua":
-        return "uk-UA";
-      default:
-        return "en-US";
-    }
-  };
-
-  const getCategoriesLocale = (lang) => {
-    switch (lang) {
-      case "en":
-        return actualCategories;
-      case "ua":
-        return categoriesUa;
-      default:
-        return actualCategories;
-    }
-  };
-
-  const categories = getCategoriesLocale(language);
+  const datePickerLocale = useDatePickerLocale();
 
   const selectFields = categories
     ? []
@@ -233,7 +208,7 @@ const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
                   maxDate={new Date()}
                   placeholderText={now}
                   dateFormat="dd.MM.yyyy"
-                  locale={getDatePickerLocale(language)}
+                  locale={datePickerLocale}
                   autoComplete="off"
                 />
                 <MdDateRange className={s.dateIcon} />
