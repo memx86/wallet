@@ -17,10 +17,14 @@ const ValidationsReg = (t) =>
       .required(t("authFormSchemas.valRegEmailRequired"))
       .min(10, t("authFormSchemas.valRegEmailMin"))
       .max(63, t("authFormSchemas.valRegEmailMax"))
-      .test("is-valid", t("authFormSchemas.valRegEmailEmail"), (value) =>
-        isEmailValidator(value, {
-          allow_utf8_local_part: false,
-        })
+      .test(
+        "is-valid",
+        t("authFormSchemas.valRegEmailEmail"),
+        (value) =>
+          value &&
+          isEmailValidator(value, {
+            allow_utf8_local_part: false,
+          })
       )
       .matches(
         /(^(?!-)([a-zA-Z0-9_-])(?=[^@]{2,}@)([a-z]))/,
@@ -48,10 +52,14 @@ const ValidationLogin = (t) =>
       .required(t("authFormSchemas.valLoginEmailRequired"))
       .min(10, t("authFormSchemas.valRegEmailMin"))
       .max(63, t("authFormSchemas.valRegEmailMax"))
-      .test("is-valid", t("authFormSchemas.valLoginEmailEmail"), (value) =>
-        isEmailValidator(value, {
-          allow_utf8_local_part: false,
-        })
+      .test(
+        "is-valid",
+        t("authFormSchemas.valLoginEmailEmail"),
+        (value) =>
+          value &&
+          isEmailValidator(value, {
+            allow_utf8_local_part: false,
+          })
       )
       .matches(
         /(^(?!-)([a-zA-Z0-9_-])(?=[^@]{2,}@)([a-z]))/,
