@@ -99,7 +99,8 @@
   },
   "selectors": {
     "month": "Місяць",
-    "year": "Рік"
+    "year": "Рік",
+    "reset": "Скинути місяць/рік"
   },
 
   "authFormSchemas": {

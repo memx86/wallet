@@ -1,23 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "react-toastify";
 import { GrClose } from "react-icons/gr";
 import { MdDateRange } from "react-icons/md";
 import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
-import { categoriesSelector } from "redux/categories";
 import { isTransactionModalSelector, transactionModal } from "redux/session";
 import {
   useAddTransactionMutation,
   useEditTransactionMutation,
 } from "redux/wallet";
 
-import { useTranslation } from "react-i18next";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import TransactionSchema from "assets/schemas/transactionSchema";
+import useCategoriesLocale from "assets/hooks/useCategoriesLocale";
+import useDatePickerLocale from "assets/hooks/useDatePickerLocale";
 
 import Modal from "components/Modal/Modal";
 import IconButton from "components/IconButton";
@@ -33,12 +33,13 @@ const TYPES = {
 
 const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
   const { t } = useTranslation();
+  const categories = useCategoriesLocale();
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isTransactionModal = useSelector(isTransactionModalSelector);
-  const categories = useSelector(categoriesSelector);
   const dispatch = useDispatch();
   const [addTransaction] = useAddTransactionMutation();
   const [editTransaction] = useEditTransactionMutation();
+  const datePickerLocale = useDatePickerLocale();
 
   const selectFields = categories
     ? []
@@ -207,6 +208,7 @@ const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
                   maxDate={new Date()}
                   placeholderText={now}
                   dateFormat="dd.MM.yyyy"
+                  locale={datePickerLocale}
                   autoComplete="off"
                 />
                 <MdDateRange className={s.dateIcon} />

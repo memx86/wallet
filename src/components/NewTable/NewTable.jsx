@@ -7,6 +7,9 @@ import PropTypes from "prop-types";
 
 import { isButtonShown } from "redux/session";
 
+import useCategoriesLocale, {
+  TYPES as CATEGORIES_TYPES,
+} from "assets/hooks/useCategoriesLocale";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 
 import RemoveTransaction from "components/RemoveTransaction";
@@ -33,15 +36,16 @@ const NewTable = ({
 }) => {
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isGeneral = type === TYPE.GENERAL;
-  const prepareDate = (date) => dayjs(date).format("DD.MM.YY");
-
+  const { t } = useTranslation();
   const dispatch = useDispatch();
+
+  const prepareDate = (date) => dayjs(date).format("DD.MM.YY");
+  const categoriesName = useCategoriesLocale(CATEGORIES_TYPES.NAME);
 
   useEffect(() => {
     dispatch(isButtonShown(true));
   }, [dispatch]);
 
-  const { t } = useTranslation();
   if (isMobile && isGeneral && data?.length)
     return (
       <ul className={s.list}>
@@ -163,7 +167,9 @@ const NewTable = ({
                           style={{ backgroundColor: color }}
                         ></span>
                       )}
-                      {isGeneral ? categories[categoryId] : name}
+                      {isGeneral
+                        ? categories[categoryId]
+                        : categoriesName[name]}
                     </div>
                   </td>
                   {isGeneral && <td className={s.comment}>{comment}</td>}
