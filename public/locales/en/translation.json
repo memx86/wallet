@@ -2,6 +2,10 @@
   "logo": {
     "wallet": "Wallet"
   },
+  "switcher": {
+    "en": "Change language to English",
+    "ua": "Change language to Ukrainian"
+  },
   "authForm": {
     "password": "password",
     "signUp": "Sign Up",
