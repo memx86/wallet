@@ -20,7 +20,7 @@ import PrivateRoute from "components/PrivateRoute";
 import CurrencyTab from "components/CurrencyTab";
 import ModalAddTransaction from "components/ModalAddTransaction";
 import ModalLogout from "components/ModalLogout";
-import LanguageSwitcher from "./assets/LanguageSwitcher/LanguageSwitcher";
+import LanguageSwitcher from "./components/LanguageSwitcher/LanguageSwitcher";
 
 const App = () => {
   const token = useSelector(tokenSelector);

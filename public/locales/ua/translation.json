@@ -132,7 +132,7 @@
     "typeRequired": "Тип обов’язковий",
     "categoryIdRequired": "Обов’язкова категорія",
 
-    "amountMatches": "Тільки числа , . дозволено, максимум 2 символи після крапки",
+    "amountMatches": "Тільки числа дозволено, максимум 2 символи після крапки",
     "amountRequired": "Необхідна сума",
 
     "transactionDateRequired": "Дата обов’язкова",
