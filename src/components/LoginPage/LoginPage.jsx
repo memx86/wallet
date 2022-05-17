@@ -5,7 +5,8 @@ import LanguageSwitcher from "components/LanguageSwitcher";
 import s from "./LoginPage.module.scss";
 
 const LoginPage = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const language = i18n.language;
   return (
     <>
       <section className={s.section}>
@@ -13,7 +14,9 @@ const LoginPage = () => {
         <div className={s.container}>
           <div className={s.wrapper}>
             <div className={s.hero}>
-              <h1 className={s.title}>{t("loginPage.financeApp")}</h1>
+              <h1 className={language === "en" ? s.title : s.titleLocale}>
+                {t("loginPage.financeApp")}
+              </h1>
             </div>
           </div>
           <div className={s.form}>

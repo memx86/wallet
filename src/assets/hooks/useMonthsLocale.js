@@ -1,6 +1,7 @@
+import { useTranslation } from "react-i18next";
+
 import monthsEn from "assets/locales/en/months-en";
 import monthsUa from "assets/locales/ua/months-ua";
-import { useTranslation } from "react-i18next";
 
 const useMonthsLocale = () => {
   const { i18n } = useTranslation();
