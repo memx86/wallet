@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { GrClose } from "react-icons/gr";
 import { MdDateRange } from "react-icons/md";
 import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
 import { categoriesSelector } from "redux/categories";
@@ -14,9 +15,9 @@ import {
   useEditTransactionMutation,
 } from "redux/wallet";
 
-import { useTranslation } from "react-i18next";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import TransactionSchema from "assets/schemas/transactionSchema";
+import categoriesUa from "assets/constants/categories-ua";
 
 import Modal from "components/Modal/Modal";
 import IconButton from "components/IconButton";
@@ -34,7 +35,7 @@ const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
   const { t, i18n } = useTranslation();
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isTransactionModal = useSelector(isTransactionModalSelector);
-  const categories = useSelector(categoriesSelector);
+  const actualCategories = useSelector(categoriesSelector);
   const dispatch = useDispatch();
   const [addTransaction] = useAddTransactionMutation();
   const [editTransaction] = useEditTransactionMutation();
@@ -51,6 +52,19 @@ const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
         return "en-US";
     }
   };
+
+  const getCategoriesLocale = (lang) => {
+    switch (lang) {
+      case "en":
+        return actualCategories;
+      case "ua":
+        return categoriesUa;
+      default:
+        return actualCategories;
+    }
+  };
+
+  const categories = getCategoriesLocale(language);
 
   const selectFields = categories
     ? []
