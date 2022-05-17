@@ -44,9 +44,6 @@ const NewTable = ({
             comment,
             amount,
             balanceAfter,
-            color,
-            name,
-            total,
           }) => (
             <li
               key={id}
@@ -101,7 +98,7 @@ const NewTable = ({
     );
 
   return (
-    <div className={s.wrapper}>
+    <div className={isGeneral ? s.wrapper : s.wrapperChart}>
       {!data.length ? (
         <p> {t("newTable.feelfree")}</p>
       ) : (

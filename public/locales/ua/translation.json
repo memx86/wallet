@@ -39,7 +39,23 @@
     "selectDate": "Виберіть дату",
     "comment": "Коментар",
     "transaction": "Додати транзакцію",
-    "cancel": "відміна"
+    "cancel": "відміна",
+    "nocategories": "Категорії не знайдено",
+    "success": "Транзакцію додано",
+    "error": "Не можу додати транзакцію",
+    "closewindow": "Закрити вікно"
+  },
+
+  "modalEditTransaction": {
+    "editTransaction": "Редагувати транзакцію",
+    "income": "Дохід",
+    "expense": "Витрати",
+    "selectDate": "Виберіть дату",
+    "comment": "Коментар",
+    "transaction": "Змінити транзакцію",
+    "cancel": "відміна",
+    "success": "Транзакцію змінено",
+    "error": "Не можу змінити транзакцію"
   },
 
   "modalLogout": {
@@ -81,15 +97,6 @@
     "year": "Рік"
   },
 
-  "modalEditTransaction": {
-    "addTransaction": "Редагувати транзакцію",
-    "income": "Дохід",
-    "expense": "Витрати",
-    "selectDate": "Виберіть дату",
-    "comment": "Коментар",
-    "transaction": "Змінити транзакцію",
-    "cancel": "відміна"
-  },
   "authFormSchemas": {
     "valRegPassRequired": "Потрібен пароль",
     "valRegPassMin": "Пароль має містити не менше 6 символів",

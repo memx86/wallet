@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 
 import { isAuthSelector } from "redux/session";
-import { useGetTransactionSummaryQuery, useRefreshQuery } from "redux/wallet";
+import { useGetTransactionsQuery, useRefreshQuery } from "redux/wallet";
 import {
   categoriesIsLoadingSelector,
   categoriesSelector,
@@ -23,7 +23,7 @@ const HomeTab = () => {
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isAuth = useSelector(isAuthSelector);
   const dispatch = useDispatch();
-  const { data, isFetching } = useGetTransactionSummaryQuery(null, {
+  const { data, isFetching } = useGetTransactionsQuery(null, {
     skip: !isAuth,
   });
   const { data: userData } = useRefreshQuery(null, {

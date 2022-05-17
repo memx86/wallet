@@ -19,7 +19,6 @@ const sessionSlice = createSlice({
     token: null,
     isLogout: false,
     isTransactionModal: false,
-    isEditModal: false,
   },
   reducers: {
     loggedIn(state) {

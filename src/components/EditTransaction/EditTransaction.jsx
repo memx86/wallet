@@ -3,19 +3,19 @@ import spriteSvg from "assets/images/sprite.svg";
 import s from "./EditTransaction.module.scss";
 import { useMediaQuery } from "react-responsive";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
-import ModalEditTransaction from "components/ModalEditTransaction";
 import { useState } from "react";
+import ModalAddTransaction from "components/ModalAddTransaction";
 
 const EditTransaction = ({ ...props }) => {
   const [editModal, setEditModal] = useState(false);
 
-  const handleClickEdit = (e) => {
+  const handleClickEdit = () => {
     setEditModal(!editModal);
   };
 
-  const onClose = () => {
-    setEditModal(!editModal);
-  };
+  // const onClose = () => {
+  //   setEditModal(!editModal);
+  // };
 
   const isMobile = useMediaQuery(MOBILE_ONLY);
 
@@ -33,7 +33,13 @@ const EditTransaction = ({ ...props }) => {
         </svg>
       )}
 
-      {editModal && <ModalEditTransaction el={props} onClose={onClose} />}
+      {editModal && (
+        <ModalAddTransaction
+          editModal={editModal}
+          transaction={props}
+          closeEditModal={handleClickEdit}
+        />
+      )}
     </>
   );
 };

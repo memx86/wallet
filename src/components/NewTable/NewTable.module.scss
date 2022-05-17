@@ -43,11 +43,23 @@
 }
 
 .wrapper {
-    position: relative;
+  position: relative;
+  @include mq(desktop) {
+      padding-top: 32px;
+  }
+}
+.wrapperChart{
+  composes: wrapper;
+  padding-top: 20px;
+  width: 280px;
+  margin: 0 auto;
 
-    @include mq(desktop) {
-        padding-top: 32px;
-    }
+  @include mq(tablet) {
+    width: 340px;
+  }
+  @include mq(desktop) {
+    width: 395px;
+  }
 }
 
 .table {
@@ -184,10 +196,6 @@
     display: block;
     width: 24px;
     height: 24px;
-}
-
-.optionButtons{
-  display: flex;
 }
 
 .totalAmount{

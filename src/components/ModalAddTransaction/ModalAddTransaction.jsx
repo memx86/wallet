@@ -5,38 +5,48 @@ import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "react-toastify";
 import { GrClose } from "react-icons/gr";
 import { MdDateRange } from "react-icons/md";
+import dayjs from "dayjs";
 
 import { categoriesSelector } from "redux/categories";
 import { isTransactionModalSelector, transactionModal } from "redux/session";
-import { useAddTransactionMutation } from "redux/wallet";
+import {
+  useAddTransactionMutation,
+  useEditTransactionMutation,
+} from "redux/wallet";
+
 import { useTranslation } from "react-i18next";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import TransactionSchema from "assets/schemas/transactionSchema";
 
 import Modal from "components/Modal/Modal";
 import IconButton from "components/IconButton";
+import Select from "components/Select";
 import DatePickerField from "components/DatePickerField";
-import dayjs from "dayjs";
 
 import s from "./ModalAddTransaction.module.scss";
-import Select from "components/Select";
 
 const TYPES = {
   INCOME: "INCOME",
   EXPENSE: "EXPENSE",
 };
 
-const ModalAddTransaction = () => {
+const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
   const { t } = useTranslation();
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isTransactionModal = useSelector(isTransactionModalSelector);
   const categories = useSelector(categoriesSelector);
   const dispatch = useDispatch();
   const [addTransaction] = useAddTransactionMutation();
+  const [editTransaction] = useEditTransactionMutation();
 
   const selectFields = categories
     ? []
-    : [["c9d9e447-1b83-4238-8712-edc77b18b739", "No categories found"]];
+    : [
+        [
+          "c9d9e447-1b83-4238-8712-edc77b18b739",
+          t("modalAddTransaction.nocategories"),
+        ],
+      ];
   let incomeCategoryId = "063f1132-ba5d-42b4-951d-44011ca46262";
   categories &&
     Object.entries(categories).forEach(([id, category]) => {
@@ -71,13 +81,23 @@ const ModalAddTransaction = () => {
       type: values.type ? TYPES.EXPENSE : TYPES.INCOME,
     };
     try {
-      const res = await addTransaction(data).unwrap();
+      const res = editModal
+        ? await editTransaction({ ...data, id: transaction.id }).unwrap()
+        : await addTransaction(data).unwrap();
       if (res) {
-        toast.success("Transaction added");
-        closeModal();
+        toast.success(
+          editModal
+            ? t("modalEditTransaction.success")
+            : t("modalAddTransaction.success")
+        );
+        editModal ? closeEditModal() : closeModal();
       }
     } catch (error) {
-      toast.error("Can't add transaction");
+      toast.error(
+        editModal
+          ? t("modalEditTransaction.error")
+          : t("modalAddTransaction.error")
+      );
     }
   };
 
@@ -101,21 +121,33 @@ const ModalAddTransaction = () => {
     return value;
   };
 
-  return isTransactionModal ? (
-    <Modal modalClassName={s.modal} closeModal={closeModal}>
+  return isTransactionModal || editModal ? (
+    <Modal
+      modalClassName={s.modal}
+      closeModal={editModal ? closeEditModal : closeModal}
+    >
       {!isMobile && (
-        <IconButton onClick={closeModal} label="Close window">
+        <IconButton
+          onClick={editModal ? closeEditModal : closeModal}
+          label={t("modalAddTransaction.closewindow")}
+        >
           <GrClose className={s.close} />
         </IconButton>
       )}
-      <h2 className={s.title}>{t("modalAddTransaction.addTransaction")}</h2>
+      <h2 className={s.title}>
+        {editModal
+          ? t("modalEditTransaction.editTransaction")
+          : t("modalAddTransaction.addTransaction")}
+      </h2>
       <Formik
         initialValues={{
-          type: true,
-          categoryId: selectFields?.at(0)?.at(0),
-          amount: "",
-          transactionDate: new Date(),
-          comment: "",
+          type: transaction?.type === "INCOME" ? false : true,
+          categoryId: editModal
+            ? transaction.categoryId
+            : selectFields?.at(0)?.at(0),
+          amount: editModal ? Math.abs(transaction?.amount) : "",
+          transactionDate: editModal ? transaction?.transactionDate : "",
+          comment: editModal ? transaction?.comment : "",
         }}
         onSubmit={onSubmit}
         validateOnBlur
@@ -191,12 +223,18 @@ const ModalAddTransaction = () => {
               </span>
             </label>
             <button className={s.btnConfirm} type="submit" disabled={!isValid}>
-              {t("modalAddTransaction.transaction")}
+              {editModal
+                ? t("modalEditTransaction.transaction")
+                : t("modalAddTransaction.transaction")}
             </button>
           </Form>
         )}
       </Formik>
-      <button type="button" onClick={closeModal} className={s.btnCancel}>
+      <button
+        type="button"
+        onClick={editModal ? closeEditModal : closeModal}
+        className={s.btnCancel}
+      >
         {t("modalAddTransaction.cancel")}
       </button>
     </Modal>
