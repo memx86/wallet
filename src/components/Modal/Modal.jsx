@@ -19,6 +19,13 @@ function Modal({ children, closeModal, modalClassName = "" }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    document.body.classList.add(s.body);
+    return () => {
+      document.body.classList.remove(s.body);
+    };
+  }, []);
+
   function onEsc(e) {
     if (e.code === "Escape") closeModal();
   }
@@ -29,12 +36,12 @@ function Modal({ children, closeModal, modalClassName = "" }) {
   return (
     <CSSTransition
       in={isOpen}
-      timeout={100}
+      timeout={{ enter: 100, exit: 1500 }}
       classNames={backdropAnimation}
       unmountOnExit={true}
       appear={true}
       onEntered={() => setStartModal(true)}
-      onExited={() => setStartModal(false)}
+      onExit={() => setStartModal(false)}
     >
       <div className={s.backdrop} onClick={onBackdropClick}>
         <CSSTransition
