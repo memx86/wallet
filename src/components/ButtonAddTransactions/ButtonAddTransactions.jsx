@@ -1,5 +1,6 @@
 import { AiFillPlusCircle } from "react-icons/ai";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { transactionModal } from "redux/session";
 
@@ -7,6 +8,7 @@ import IconButton from "components/IconButton";
 import s from "./ButtonAddTransactions.module.scss";
 
 const ButtonAddTransactions = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const openModal = () => {
     dispatch(transactionModal(true));
@@ -14,7 +16,7 @@ const ButtonAddTransactions = () => {
   return (
     <IconButton
       onClick={openModal}
-      label="Add transaction"
+      label={t("modalAddTransaction.addTransaction")}
       className={s.container}
     >
       <span className={s.wrapper}>

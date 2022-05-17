@@ -14,7 +14,7 @@ import s from "./Dashboard.module.scss";
 import Container from "components/Container";
 
 import ButtonAddTransactions from "components/ButtonAddTransactions";
-import { getIsButtonShown } from "redux/isAddTransactionButtonShow/isAddTransactionButtonShownSelector";
+import { getIsButtonShown } from "redux/session";
 
 import LanguageSwitcher from "assets/LanguageSwitcher/LanguageSwitcher";
 

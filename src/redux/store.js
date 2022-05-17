@@ -11,13 +11,10 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import diagramReducer from "./diagram/diagramSlice";
 import { categoriesReducer } from "./categories";
 
 import { sessionReducer } from "./session";
 import { walletApi } from "./wallet";
-
-import { isAddTransactionButtonReducer } from "./isAddTransactionButtonShow/isAddTransactionButtonShownSlice";
 
 const persistSession = {
   key: "wallet/session",
@@ -35,8 +32,6 @@ const store = configureStore({
   reducer: {
     session: persistReducer(persistSession, sessionReducer),
     categories: persistReducer(persistCategories, categoriesReducer),
-    diagram: diagramReducer,
-    isAddTransactionButtonShown: isAddTransactionButtonReducer,
     [walletApi.reducerPath]: walletApi.reducer,
   },
   middleware: (getDefaultMiddleware) => [

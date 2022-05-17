@@ -10,7 +10,7 @@ import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import RemoveTransaction from "components/RemoveTransaction/RemoveTransaction";
 import EditTransaction from "components/EditTransaction/EditTransaction";
 
-import { isButtonShown } from "redux/isAddTransactionButtonShow/isAddTransactionButtonShownSlice";
+import { isButtonShown } from "redux/session";
 
 import s from "./NewTable.module.scss";
 
@@ -54,9 +54,6 @@ const NewTable = ({
             comment,
             amount,
             balanceAfter,
-            color,
-            name,
-            total,
           }) => (
             <li
               key={id}
@@ -111,7 +108,7 @@ const NewTable = ({
     );
 
   return (
-    <div className={s.wrapper}>
+    <div className={isGeneral ? s.wrapper : s.wrapperChart}>
       {!data.length ? (
         <p> {t("newTable.feelfree")}</p>
       ) : (

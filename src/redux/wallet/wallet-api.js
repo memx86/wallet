@@ -30,9 +30,16 @@ export const walletApi = createApi({
       query: () => "/users/current",
       providesTags: ["User"],
     }),
-    getTransactionSummary: build.query({
+    getTransactions: build.query({
       query: () => "/transactions",
       providesTags: ["Transactions"],
+    }),
+    getTransactionsSummary: build.query({
+      query: ({ month, year }) =>
+        `/transactions-summary${
+          month && year ? `?month=${month}&year=${year}` : ""
+        }`,
+      providesTags: ["TransactionsSummary"],
     }),
     addTransaction: build.mutation({
       query: (data) => ({
@@ -64,7 +71,8 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useRefreshQuery,
-  useGetTransactionSummaryQuery,
+  useGetTransactionsQuery,
+  useGetTransactionsSummaryQuery,
   useDeleteTransactionMutation,
   useAddTransactionMutation,
   useEditTransactionMutation,

@@ -99,9 +99,9 @@
   @include mq(desktop) {
     display: flex;
     margin-left: auto;
-    margin-right: 40px;
+    margin-right: 35px;
     margin-bottom: 0px;
-    width: 37vw;
+    width: 35vw;
     align-items: center;
     justify-content: flex-end;
   }
@@ -191,7 +191,7 @@
 
   @include mq(desktop) {
     display: flex;
-    width: 57vw;
+    width: 55vw;
     justify-content: center;
     align-items: center;
     background: var(--authPage-secondary-bg-cl);

@@ -1,9 +1,5 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getTransactions,
-  getTransactionSummary,
-} from "redux/diagram/diagramThunk";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import { colorsChange } from "assets/constants/COLORS";
 import Chart from "components/Chart";
@@ -13,22 +9,29 @@ import { useTranslation } from "react-i18next";
 import s from "./DiagramTab.module.scss";
 import NewTable from "components/NewTable";
 import Selectors from "components/Selectors";
+import {
+  useGetTransactionsQuery,
+  useGetTransactionsSummaryQuery,
+} from "redux/wallet";
 
-import { isButtonShown } from "redux/isAddTransactionButtonShow/isAddTransactionButtonShownSlice";
+import { isButtonShown } from "redux/session";
 
 const DiagramTab = () => {
-  const dispatch = useDispatch();
-  const { diagData } = useSelector((state) => state.diagram);
-  const { diagLoader } = useSelector((state) => state);
-  const { transactions } = useSelector((state) => state.diagram);
   const [object, setObject] = useState({ month: 0, year: 0 });
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(isButtonShown(false));
-  }, [dispatch]);
+  });
+
+  const { data: diagData, isLoading: diagLoader } =
+    useGetTransactionsSummaryQuery(object);
+
+  const { data: transactions } = useGetTransactionsQuery();
 
   function changeData(data, colorsObj) {
-    if (!Object.keys(data).length) {
+    if (!Object.keys(data || {})?.length) {
       return false;
     }
     return {
@@ -53,11 +56,6 @@ const DiagramTab = () => {
     }
     setObject(obj);
   }
-
-  useEffect(() => {
-    dispatch(getTransactionSummary(object));
-    dispatch(getTransactions());
-  }, [dispatch, object]);
 
   const dataWithoutIncome =
     changedData?.categoriesSummary?.filter((item) => item.type !== "INCOME") ||

@@ -2,6 +2,10 @@
   "logo": {
     "wallet": "Wallet"
   },
+  "switcher": {
+    "en": "Change language to English",
+    "ua": "Change language to Ukrainian"
+  },
   "authForm": {
     "password": "password",
     "signUp": "Sign Up",
@@ -37,7 +41,23 @@
     "comment": "Comment",
     "transaction": "Add transaction",
     "cancel": "Cancel",
-    "selectDate": "Select a date"
+    "selectDate": "Select a date",
+    "nocategories": "No categories found",
+    "success": "Transaction added",
+    "error": "Can't add transaction",
+    "closewindow": "Close window"
+  },
+
+  "modalEditTransaction": {
+    "editTransaction": "Edit transaction",
+    "income": "Income",
+    "expense": "Expense",
+    "comment": "Comment",
+    "transaction": "Change transaction",
+    "cancel": "Cancel",
+    "selectDate": "Select a date",
+    "success": "Transaction edited",
+    "error": "Can't edit transaction"
   },
 
   "modalLogout": {
@@ -79,15 +99,6 @@
     "year": "Year"
   },
 
-  "modalEditTransaction": {
-    "addTransaction": "Edit transaction",
-    "income": "Income",
-    "expense": "Expense",
-    "comment": "Comment",
-    "transaction": "Change transaction",
-    "cancel": "Cancel",
-    "selectDate": "Select a date"
-  },
   "authFormSchemas": {
     "valRegPassRequired": "Password is required",
     "valRegPassMin": "Password must be at least 6 characters",
