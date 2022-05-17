@@ -130,6 +130,15 @@
     "valLoginPassMatches": "Пароль має містити шість символів, принаймні одну букву та одну цифру",
     "valLoginPassRequired": "Потрібен пароль"
   },
+
+  "passwordStrength": {
+    "short": "надто короткий",
+    "weak": "слабкий",
+    "okay": "норма",
+    "good": "добрий",
+    "strong": "сильний"
+  },
+
   "transactionSchema": {
     "typeRequired": "Тип обов’язковий",
     "categoryIdRequired": "Обов’язкова категорія",
