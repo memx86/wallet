@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { categoriesSelector } from "redux/categories";
 
+import categoriesIdEn from "assets/locales/en/categoriesId-en";
 import categoriesIdUa from "assets/locales/ua/categoriesId-ua";
 import categoriesNameEn from "assets/locales/en/categoriesName-en";
 import categoriesNameUa from "assets/locales/ua/categoriesName-ua";
@@ -15,7 +16,7 @@ export const TYPES = {
 const useCategoriesLocale = (type = TYPES.FULL) => {
   const { i18n } = useTranslation();
   const language = i18n.language;
-  const actualCategories = useSelector(categoriesSelector);
+  const actualCategories = useSelector(categoriesSelector) || categoriesIdEn;
 
   const getCategoriesFullLocale = (lang) => {
     switch (lang) {
