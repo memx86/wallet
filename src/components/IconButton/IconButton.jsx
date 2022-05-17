@@ -26,5 +26,6 @@ IconButton.propTypes = {
   type: PropTypes.string,
   label: PropTypes.string.isRequired,
   className: PropTypes.string,
+  disable: PropTypes.bool,
 };
 export default IconButton;

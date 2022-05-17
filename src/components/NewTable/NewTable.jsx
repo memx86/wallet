@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
+import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
+
+import { isButtonShown } from "redux/session";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 
-import RemoveTransaction from "components/RemoveTransaction/RemoveTransaction";
-import EditTransaction from "components/EditTransaction/EditTransaction";
-
-import { isButtonShown } from "redux/session";
+import RemoveTransaction from "components/RemoveTransaction";
+import EditTransaction from "components/EditTransaction";
 
 import s from "./NewTable.module.scss";
 
@@ -132,7 +132,7 @@ const NewTable = ({
               {isGeneral && <th className={s.last}>{t("newTable.options")}</th>}
             </tr>
           </thead>
-          <tbody>
+          <tbody className={s.tbody}>
             {data.map(
               ({
                 id,

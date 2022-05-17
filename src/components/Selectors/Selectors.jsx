@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
 
+import { useClickOutside } from "assets/hooks/HookCloseByWindow";
 import { month, years } from "assets/constants/MONTHS-YEARS";
 import spriteSvg from "assets/images/sprite.svg";
-import { useTranslation } from "react-i18next";
 
 import s from "./Selectors.module.scss";
-import { useClickOutside } from "assets/hooks/HookCloseByWindow";
 
 function filter(param) {
   const filterParam = param?.filter(
@@ -132,7 +133,7 @@ const Selectors = ({ transactions, selectDate }) => {
             selectMonth === "Month" && selectYear === "Year" ? true : false
           }
         >
-          Reset
+          Reset month/year
         </button>
       </div>
     </>
@@ -140,3 +141,14 @@ const Selectors = ({ transactions, selectDate }) => {
 };
 
 export default Selectors;
+
+Selectors.propTypes = {
+  month: PropTypes.arrayOf(PropTypes.string),
+  years: PropTypes.arrayOf(PropTypes.number),
+  transactions: PropTypes.arrayOf(
+    PropTypes.shape({
+      transactionDate: PropTypes.string,
+    })
+  ),
+  selectDate: PropTypes.func.isRequired,
+};
