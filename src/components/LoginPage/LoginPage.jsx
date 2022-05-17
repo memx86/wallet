@@ -1,8 +1,8 @@
-import AuthForm, { authType } from "components/AuthForm/AuthForm";
 import { useTranslation } from "react-i18next";
-import s from "./LoginPage.module.scss";
 
-import LanguageSwitcher from "assets/LanguageSwitcher/LanguageSwitcher";
+import AuthForm, { authType } from "components/AuthForm/AuthForm";
+import LanguageSwitcher from "components/LanguageSwitcher";
+import s from "./LoginPage.module.scss";
 
 const LoginPage = () => {
   const { t } = useTranslation();

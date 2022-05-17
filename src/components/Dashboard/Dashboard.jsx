@@ -4,19 +4,17 @@ import { useMediaQuery } from "react-responsive";
 import { useRefreshQuery } from "redux/wallet";
 import { useSelector } from "react-redux";
 import { isAuthSelector } from "redux/session";
+import { getIsButtonShown } from "redux/session";
 
+import LanguageSwitcher from "components/LanguageSwitcher";
+import Container from "components/Container";
+import Navigation from "components/Navigation";
 import Balance from "components/Balance";
 import Currency from "components/Currency";
-import Navigation from "components/Navigation";
+import ButtonAddTransactions from "components/ButtonAddTransactions";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import s from "./Dashboard.module.scss";
-import Container from "components/Container";
-
-import ButtonAddTransactions from "components/ButtonAddTransactions";
-import { getIsButtonShown } from "redux/session";
-
-import LanguageSwitcher from "assets/LanguageSwitcher/LanguageSwitcher";
 
 const Dashboard = () => {
   const isMobile = useMediaQuery(MOBILE_ONLY);
