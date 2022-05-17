@@ -1,21 +1,22 @@
-import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+
+import { setModal } from "redux/session/session-slice";
 
 import spriteSvg from "assets/images/sprite.svg";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 
-import ModalAddTransaction from "components/ModalAddTransaction";
 import IconButton from "components/IconButton/IconButton";
 
 import s from "./EditTransaction.module.scss";
 
-const EditTransaction = ({ ...props }) => {
-  const [editModal, setEditModal] = useState(false);
+const EditTransaction = (props) => {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
 
   const handleClickEdit = () => {
-    setEditModal(!editModal);
+    dispatch(setModal({ isOpen: true, type: "edit", data: props }));
   };
 
   const isMobile = useMediaQuery(MOBILE_ONLY);
@@ -42,14 +43,6 @@ const EditTransaction = ({ ...props }) => {
             <use href={`${spriteSvg}#icon_pencil2`}></use>
           </svg>
         </IconButton>
-      )}
-
-      {editModal && (
-        <ModalAddTransaction
-          editModal={editModal}
-          transaction={props}
-          closeEditModal={handleClickEdit}
-        />
       )}
     </>
   );
