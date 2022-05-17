@@ -130,7 +130,7 @@
     "typeRequired": "Type is required",
     "categoryIdRequired": "Category is required",
 
-    "amountMatches": "Only numbers and . allowed, max 2 symbols after dot",
+    "amountMatches": "Only numbers allowed, max 2 symbols after dot",
     "amountRequired": "Amount is required",
 
     "transactionDateRequired": "Date is required",
