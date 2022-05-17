@@ -3,10 +3,11 @@ import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
 import { useClickOutside } from "assets/hooks/HookCloseByWindow";
-import { month, years } from "assets/constants/MONTHS-YEARS";
+import { years } from "assets/constants/MONTHS-YEARS";
 import spriteSvg from "assets/images/sprite.svg";
 
 import s from "./Selectors.module.scss";
+import useMonthsLocale from "assets/hooks/useMonthsLocale";
 
 function filter(param) {
   const filterParam = param?.filter(
@@ -22,6 +23,7 @@ const Selectors = ({ transactions, selectDate }) => {
   const [selectYear, setSelectYear] = useState(`${t("selectors.year")}`);
   const [activeMonth, setIsActiveMonth] = useState(false);
   const [activeYear, setIsActiveYear] = useState(false);
+  const months = useMonthsLocale();
   const transactionYears = transactions?.map(
     (el) => +el.transactionDate.slice(0, 4)
   );
@@ -36,7 +38,7 @@ const Selectors = ({ transactions, selectDate }) => {
 
   useEffect(() => {
     if (selectDate) {
-      selectDate(month.indexOf(selectMonth) + 1, selectYear);
+      selectDate(months.indexOf(selectMonth) + 1, selectYear);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -56,10 +58,10 @@ const Selectors = ({ transactions, selectDate }) => {
         <div className={s.select_box}>
           {activeMonth && (
             <div ref={domNode} className={s.active}>
-              {month.map((el) => {
+              {months.map((el) => {
                 return (
                   <option
-                    disabled={!checkMonth.includes(month.indexOf(el) + 1)}
+                    disabled={!checkMonth.includes(months.indexOf(el) + 1)}
                     key={el}
                     className={s.item}
                     onClick={() => {
@@ -67,7 +69,7 @@ const Selectors = ({ transactions, selectDate }) => {
                       setIsActiveMonth(false);
                     }}
                     style={
-                      checkMonth.includes(month.indexOf(el) + 1)
+                      checkMonth.includes(months.indexOf(el) + 1)
                         ? { color: "black" }
                         : { color: "#D0D0D0" }
                     }
@@ -133,7 +135,7 @@ const Selectors = ({ transactions, selectDate }) => {
             selectMonth === "Month" && selectYear === "Year" ? true : false
           }
         >
-          Reset month/year
+          {t("selectors.reset")}
         </button>
       </div>
     </>

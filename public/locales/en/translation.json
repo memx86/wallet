@@ -97,7 +97,8 @@
   },
   "selectors": {
     "month": "Month",
-    "year": "Year"
+    "year": "Year",
+    "reset": "Reset month/year"
   },
 
   "authFormSchemas": {
