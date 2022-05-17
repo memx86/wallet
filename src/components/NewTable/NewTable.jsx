@@ -114,7 +114,7 @@ const NewTable = ({
   return (
     <div className={isGeneral ? s.wrapper : s.wrapperChart}>
       {!data.length ? (
-        <p> {t("newTable.feelfree")}</p>
+        <p> {t("newTable.feelFree")}</p>
       ) : (
         <table className={s.table}>
           <thead>
