@@ -1,10 +1,7 @@
 @import "stylesheet/_mixin.scss";
 
 .modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
   max-width: 320px;
   padding: 20px;
   border-radius: 20px;
@@ -79,7 +76,7 @@
   border-radius: 30px;
   transition: border-color 250ms linear;
 
-  .type:checked + & {
+  .type:checked+& {
     border-color: var(--reject-cl);
   }
 
@@ -100,7 +97,7 @@
     transition: transform 250ms linear, background-color 250ms linear;
   }
 
-  .type:checked + &::after {
+  .type:checked+&::after {
     content: "-";
     padding-bottom: 4px;
     transform: translate(40px);

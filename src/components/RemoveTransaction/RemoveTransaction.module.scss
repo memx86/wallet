@@ -1,44 +1,9 @@
 @import "stylesheet/mixin.scss";
 
-// .remove{
-//   width: 35px;
-//   height: 35px;
-// }
-// .removeIcon {
-//   // position: absolute;
-//   width: 30px;
-//     height: 30px;
-//   cursor: pointer;
-//   @include mq(mobile-only) {
-//     // top: 22px;
-//     // left: -15px;
-//     background-color: var(--main-bg-cl);
-//     border-radius: 50%;
-//     fill: #990000;
-//   }
-
-//   @include mq(tablet) {
-//     fill: #707070;
-//     // top: 18px;
-//     // left: 5px;
-//   }
-//   @include mq(desktop) {
-//     // top: 50%;
-//     // left: 0;
-//     transition: fill 250ms linear;
-//     // transform: translateY(-50%);
-
-//     &:hover {
-//       fill: #4b4b4b;
-//     }
-//   }
-// }
-
 .icon {
   width: 15px;
   height: 15px;
   cursor: pointer;
-  // margin-right: 15px;
   fill: var(--select-cl);
   transition: fill 250ms linear;
 

@@ -18,11 +18,11 @@
     }
 
     @include mq(tablet-only) {
-        right: calc(50% - 365px)
+        right: calc(50% - 380px)
     }
 
     @include mq(desktop) {
-        right: calc(50% - 625px)
+        right: calc(50% - 655px)
     }
 }
 
