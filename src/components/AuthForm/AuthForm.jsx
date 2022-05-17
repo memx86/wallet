@@ -11,7 +11,7 @@ import {
   ValidationsReg,
 } from "assets/schemas/authFormSchemas";
 import { Link } from "react-router-dom";
-import PasswordStrength from "components/PasswordStrength/PasswordStrength";
+import PasswordStrength from "components/PasswordStrength";
 import PropTypes from "prop-types";
 import Logo from "components/Logo";
 
