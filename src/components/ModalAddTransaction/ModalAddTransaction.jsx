@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { GrClose } from "react-icons/gr";
 import { MdDateRange } from "react-icons/md";
 import dayjs from "dayjs";
+import PropTypes from "prop-types";
 
 import { categoriesSelector } from "redux/categories";
 import { isTransactionModalSelector, transactionModal } from "redux/session";
@@ -242,3 +243,15 @@ const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
   ) : null;
 };
 export default ModalAddTransaction;
+
+ModalAddTransaction.propTypes = {
+  editModal: PropTypes.bool,
+  closeEditModal: PropTypes.func,
+  transaction: PropTypes.objectOf({
+    id: PropTypes.string,
+    transactionDate: PropTypes.string,
+    type: PropTypes.string,
+    categoryId: PropTypes.string,
+    comment: PropTypes.string,
+  }),
+};

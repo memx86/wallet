@@ -122,7 +122,7 @@ const NewTable = ({
               {isGeneral && <th className={s.last}>{t("newTable.options")}</th>}
             </tr>
           </thead>
-          <tbody>
+          <tbody className={s.tbody}>
             {data.map(
               ({
                 id,

@@ -15,7 +15,6 @@ const EditTransaction = ({ ...props }) => {
   };
 
   const isMobile = useMediaQuery(MOBILE_ONLY);
-  // const isMobile = false;
 
   return (
     <>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
 import { month, years } from "assets/constants/MONTHS-YEARS";
 import spriteSvg from "assets/images/sprite.svg";
@@ -6,7 +7,6 @@ import { useTranslation } from "react-i18next";
 
 import s from "./Selectors.module.scss";
 import { useClickOutside } from "assets/hooks/HookCloseByWindow";
-import IconButton from "components/IconButton";
 
 function filter(param) {
   const filterParam = param?.filter(
@@ -28,6 +28,8 @@ const Selectors = ({ transactions, selectDate }) => {
   const transactionMonths = transactions?.map(
     (el) => +el.transactionDate.slice(5, 7)
   );
+
+  console.log("transactions", transactions);
 
   let domNode = useClickOutside(() => {
     setIsActiveMonth(false);
@@ -141,3 +143,14 @@ const Selectors = ({ transactions, selectDate }) => {
 };
 
 export default Selectors;
+
+Selectors.propTypes = {
+  month: PropTypes.arrayOf(PropTypes.string),
+  years: PropTypes.arrayOf(PropTypes.number),
+  transactions: PropTypes.arrayOf(
+    PropTypes.shape({
+      transactionDate: PropTypes.string,
+    })
+  ),
+  selectDate: PropTypes.func.isRequired,
+};
