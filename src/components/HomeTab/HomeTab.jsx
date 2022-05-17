@@ -36,8 +36,6 @@ const HomeTab = () => {
     );
   };
 
-  console.log("data", data);
-
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);

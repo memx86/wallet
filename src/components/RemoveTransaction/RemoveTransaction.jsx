@@ -1,24 +1,25 @@
 import s from "./RemoveTransaction.module.scss";
-import { useDispatch, useSelector } from "react-redux";
+import Modal from "components/Modal/Modal";
 import { useDeleteTransactionMutation } from "redux/wallet/wallet-api";
-import { isRemovalSelector } from "redux/session/session-selectors";
-import { removalModal } from "redux/session";
 import { useMediaQuery } from "react-responsive";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
+import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import spriteSvg from "assets/images/sprite.svg";
+import { useState } from "react";
+import PropTypes from "prop-types";
 
 let elementId = null;
 
 const RemoveTransaction = ({ id }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const isMobile = useMediaQuery(MOBILE_ONLY);
-  const dispatch = useDispatch();
-  const isRemoval = useSelector((state) => isRemovalSelector(state));
   const [removal] = useDeleteTransactionMutation();
 
+  const { t } = useTranslation();
   const openModal = () => {
     elementId = id;
-    dispatch(removalModal(true));
+    setIsOpen(!isOpen);
   };
 
   const removeItem = async () => {
@@ -30,12 +31,12 @@ const RemoveTransaction = ({ id }) => {
     } catch (error) {
       toast.error(error.message);
     } finally {
-      dispatch(removalModal(false));
+      setIsOpen(false);
     }
   };
 
   const cancel = () => {
-    dispatch(removalModal(false));
+    setIsOpen(false);
   };
 
   return (
@@ -51,24 +52,34 @@ const RemoveTransaction = ({ id }) => {
           <use href={`${spriteSvg}#bin`}></use>
         </svg>
       )}
-
-      {isRemoval && (
-        <div className={s.backdrop}>
-          <div className={s.modal}>
-            <span className={s.text}>Please confirm removal</span>
-            <div className={s.btnWrapper}>
-              <button className={s.btnCancel} onClick={cancel}>
-                cancel
-              </button>
-              <button className={s.btnConfirm} onClick={removeItem}>
-                confirm
-              </button>
+      {isOpen && (
+        <Modal
+          modalClassName={s.modal}
+          closeModal={cancel}
+          children={
+            <div className={s.modal}>
+              <span className={s.text}>
+                {" "}
+                {t("removeTransaction.pleaseConfirm")}
+              </span>
+              <div className={s.btnWrapper}>
+                <button className={s.btnCancel} onClick={cancel}>
+                  {t("removeTransaction.cancel")}
+                </button>
+                <button className={s.btnConfirm} onClick={removeItem}>
+                  {t("removeTransaction.confirm")}
+                </button>
+              </div>
             </div>
-          </div>
-        </div>
+          }
+        />
       )}
     </>
   );
+};
+
+RemoveTransaction.propTypes = {
+  id: PropTypes.string.isRequired,
 };
 
 export default RemoveTransaction;

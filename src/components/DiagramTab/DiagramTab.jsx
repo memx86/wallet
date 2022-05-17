@@ -3,6 +3,7 @@ import { useState } from "react";
 import { colorsChange } from "assets/constants/COLORS";
 import Chart from "components/Chart";
 import Loader from "components/Loader";
+import { useTranslation } from "react-i18next";
 
 import s from "./DiagramTab.module.scss";
 import NewTable from "components/NewTable";
@@ -50,14 +51,14 @@ const DiagramTab = () => {
   const dataWithoutIncome =
     changedData?.categoriesSummary?.filter((item) => item.type !== "INCOME") ||
     [];
-
+  const { t } = useTranslation();
   return (
     <div>
       {diagLoader ? (
         <Loader />
       ) : (
         <>
-          <h2>Statistic</h2>
+          <h2>{t("diagram.statistic")}</h2>
           <div className={s.diagram}>
             <Chart data={changedData} />
             <div className={s.table}>
