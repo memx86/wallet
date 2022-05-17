@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import spriteSvg from "assets/images/sprite.svg";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import IconButton from "components/IconButton";
 
 let elementId = null;
 
@@ -43,14 +44,18 @@ const RemoveTransaction = ({ id }) => {
     <>
       {isMobile ? (
         <div className={s.remove}>
-          <svg className={s.removeIcon} onClick={openModal}>
-            <use href={`${spriteSvg}#bin`}></use>
-          </svg>
+          <IconButton onClick={openModal} label="Remove transaction">
+            <svg className={s.removeIcon}>
+              <use href={`${spriteSvg}#bin`}></use>
+            </svg>
+          </IconButton>
         </div>
       ) : (
-        <svg width="20px" height="20px" className={s.icon} onClick={openModal}>
-          <use href={`${spriteSvg}#bin`}></use>
-        </svg>
+        <IconButton onClick={openModal} label="Remove transaction">
+          <svg width="20px" height="20px" className={s.icon}>
+            <use href={`${spriteSvg}#bin`}></use>
+          </svg>
+        </IconButton>
       )}
       {isOpen && (
         <Modal

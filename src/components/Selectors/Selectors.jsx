@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 
 import s from "./Selectors.module.scss";
 import { useClickOutside } from "assets/hooks/HookCloseByWindow";
+import IconButton from "components/IconButton";
 
 function filter(param) {
   const filterParam = param?.filter(
@@ -132,7 +133,7 @@ const Selectors = ({ transactions, selectDate }) => {
             selectMonth === "Month" && selectYear === "Year" ? true : false
           }
         >
-          Reset
+          Reset month/year
         </button>
       </div>
     </>

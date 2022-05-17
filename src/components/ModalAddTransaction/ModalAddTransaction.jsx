@@ -33,6 +33,7 @@ const TYPES = {
 const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
   const { t } = useTranslation();
   const isMobile = useMediaQuery(MOBILE_ONLY);
+  // const isMobile = true;
   const isTransactionModal = useSelector(isTransactionModalSelector);
   const categories = useSelector(categoriesSelector);
   const dispatch = useDispatch();

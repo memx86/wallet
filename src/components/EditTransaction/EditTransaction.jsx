@@ -5,6 +5,7 @@ import { useMediaQuery } from "react-responsive";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import { useState } from "react";
 import ModalAddTransaction from "components/ModalAddTransaction";
+import IconButton from "components/IconButton/IconButton";
 
 const EditTransaction = ({ ...props }) => {
   const [editModal, setEditModal] = useState(false);
@@ -13,24 +14,25 @@ const EditTransaction = ({ ...props }) => {
     setEditModal(!editModal);
   };
 
-  // const onClose = () => {
-  //   setEditModal(!editModal);
-  // };
-
   const isMobile = useMediaQuery(MOBILE_ONLY);
+  // const isMobile = false;
 
   return (
     <>
       {isMobile ? (
         <div className={s.edit}>
-          <svg className={s.iconMobile} onClick={handleClickEdit}>
-            <use href={`${spriteSvg}#icon_pencil2`}></use>
-          </svg>
+          <IconButton onClick={handleClickEdit} label="Edit transaction">
+            <svg className={s.iconMobile}>
+              <use href={`${spriteSvg}#icon_pencil2`}></use>
+            </svg>
+          </IconButton>
         </div>
       ) : (
-        <svg className={s.icon} onClick={handleClickEdit}>
-          <use href={`${spriteSvg}#icon_pencil2`}></use>
-        </svg>
+        <IconButton onClick={handleClickEdit} label="Edit transaction">
+          <svg className={s.icon}>
+            <use href={`${spriteSvg}#icon_pencil2`}></use>
+          </svg>
+        </IconButton>
       )}
 
       {editModal && (
