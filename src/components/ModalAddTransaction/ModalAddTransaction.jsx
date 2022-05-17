@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "react-toastify";
 import { GrClose } from "react-icons/gr";
 import { MdDateRange } from "react-icons/md";
@@ -32,13 +31,26 @@ const TYPES = {
 };
 
 const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isTransactionModal = useSelector(isTransactionModalSelector);
   const categories = useSelector(categoriesSelector);
   const dispatch = useDispatch();
   const [addTransaction] = useAddTransactionMutation();
   const [editTransaction] = useEditTransactionMutation();
+
+  const language = i18n.language;
+
+  const getDatePickerLocale = (lang) => {
+    switch (lang) {
+      case "en":
+        return "en-US";
+      case "ua":
+        return "uk-UA";
+      default:
+        return "en-US";
+    }
+  };
 
   const selectFields = categories
     ? []
@@ -207,6 +219,7 @@ const ModalAddTransaction = ({ editModal, closeEditModal, transaction }) => {
                   maxDate={new Date()}
                   placeholderText={now}
                   dateFormat="dd.MM.yyyy"
+                  locale={getDatePickerLocale(language)}
                   autoComplete="off"
                 />
                 <MdDateRange className={s.dateIcon} />

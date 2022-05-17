@@ -34,14 +34,13 @@ const NewTable = ({
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isGeneral = type === TYPE.GENERAL;
   const prepareDate = (date) => dayjs(date).format("DD.MM.YY");
-
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(isButtonShown(true));
   }, [dispatch]);
 
-  const { t } = useTranslation();
   if (isMobile && isGeneral && data?.length)
     return (
       <ul className={s.list}>
