@@ -119,22 +119,14 @@
 
   @include mq(tablet) {
     background-image: url(../../assets/images/registrationPage/frame-tab-1x.png);
-    background-image: -webkit-image-set(
-      url(../../assets/images/registrationPage/frame-tab-1x.webp) 1x
-    );
-    background-image: image-set(
-      url(../../assets/images/registrationPage/frame-tab-1x.webp) 1x
-    );
+    background-image: -webkit-image-set(url(../../assets/images/registrationPage/frame-tab-1x.webp) 1x);
+    background-image: image-set(url(../../assets/images/registrationPage/frame-tab-1x.webp) 1x);
     background-repeat: no-repeat;
 
     @include mq(retina) {
       background-image: url(../../assets/images/registrationPage/frame-tab-2x.png);
-      background-image: -webkit-image-set(
-        url(../../assets/images/registrationPage/frame-tab-2x.webp) 2x
-      );
-      background-image: image-set(
-        url(../../assets/images/registrationPage/frame-tab-2x.webp) 2x
-      );
+      background-image: -webkit-image-set(url(../../assets/images/registrationPage/frame-tab-2x.webp) 2x);
+      background-image: image-set(url(../../assets/images/registrationPage/frame-tab-2x.webp) 2x);
     }
   }
 
@@ -146,21 +138,13 @@
     height: 493px;
     width: 436px;
     background-image: url(../../assets/images/registrationPage/frame-desk-1x.png);
-    background-image: -webkit-image-set(
-      url(../../assets/images/registrationPage/frame-desk-1x.webp) 1x
-    );
-    background-image: image-set(
-      url(../../assets/images/registrationPage/frame-desk-1x.webp) 1x
-    );
+    background-image: -webkit-image-set(url(../../assets/images/registrationPage/frame-desk-1x.webp) 1x);
+    background-image: image-set(url(../../assets/images/registrationPage/frame-desk-1x.webp) 1x);
 
     @include mq(retina) {
       background-image: url(../../assets/images/registrationPage/frame-desk-2x.png);
-      background-image: -webkit-image-set(
-        url(../../assets/images/registrationPage/frame-desk-2x.webp) 2x
-      );
-      background-image: image-set(
-        url(../../assets/images/registrationPage/frame-desk-2x.webp) 2x
-      );
+      background-image: -webkit-image-set(url(../../assets/images/registrationPage/frame-desk-2x.webp) 2x);
+      background-image: image-set(url(../../assets/images/registrationPage/frame-desk-2x.webp) 2x);
     }
   }
 }
@@ -179,6 +163,11 @@
     padding-top: 0;
     padding-bottom: 0;
   }
+}
+
+.titleLocale {
+  composes: title;
+  padding-right: 0;
 }
 
 .form {
