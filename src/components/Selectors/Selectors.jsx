@@ -19,8 +19,10 @@ function filter(param) {
 
 const Selectors = ({ transactions, selectDate }) => {
   const { t } = useTranslation();
-  const [selectMonth, setSelectMonth] = useState(`${t("selectors.month")}`);
-  const [selectYear, setSelectYear] = useState(`${t("selectors.year")}`);
+  const month = t("selectors.month");
+  const year = t("selectors.year");
+  const [selectMonth, setSelectMonth] = useState(month);
+  const [selectYear, setSelectYear] = useState(year);
   const [activeMonth, setIsActiveMonth] = useState(false);
   const [activeYear, setIsActiveYear] = useState(false);
   const months = useMonthsLocale();
@@ -44,13 +46,18 @@ const Selectors = ({ transactions, selectDate }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectYear, selectMonth]);
 
+  useEffect(() => {
+    setSelectMonth(month);
+    setSelectYear(year);
+  }, [month, year]);
+
   const checkYear = filter(transactionYears);
   const checkMonth = filter(transactionMonths);
 
   const resetClick = () => {
     selectDate(0, 0);
-    setSelectMonth("Month");
-    setSelectYear("Year");
+    setSelectMonth(month);
+    setSelectYear(year);
   };
   return (
     <>
@@ -131,9 +138,7 @@ const Selectors = ({ transactions, selectDate }) => {
           type="button"
           className={s.button}
           onClick={resetClick}
-          disabled={
-            selectMonth === "Month" && selectYear === "Year" ? true : false
-          }
+          disabled={selectMonth === month && selectYear === year ? true : false}
         >
           {t("selectors.reset")}
         </button>
