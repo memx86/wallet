@@ -36,7 +36,7 @@ function Modal({ children, closeModal, modalClassName = "" }) {
   return (
     <CSSTransition
       in={isOpen}
-      timeout={{ enter: 100, exit: 1500 }}
+      timeout={{ enter: 100, exit: 500 }}
       classNames={backdropAnimation}
       unmountOnExit={true}
       appear={true}
