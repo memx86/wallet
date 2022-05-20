@@ -72,14 +72,14 @@
     "error": "Не можу вийти"
   },
 
-  "newTable": {
+  "table": {
     "category": "Категорія",
     "comment": "Коментар",
     "date": "Дата",
     "type": "Тип",
     "amount": "Сума",
     "balance": "Баланс",
-    "options": "Опція",
+    "options": "Опції",
     "incomes": "Доходи:",
     "expenses": "Витрати:",
     "feelFree": "Не соромтесь додати кілька транзакцій!"

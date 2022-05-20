@@ -70,7 +70,7 @@
     "error": "Can't log out"
   },
 
-  "newTable": {
+  "table": {
     "category": "Category",
     "comment": "Comment",
     "date": "Date",
