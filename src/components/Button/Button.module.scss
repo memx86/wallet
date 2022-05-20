@@ -26,8 +26,8 @@
         opacity: 0.5;
     }
 
-    &:hover,
-    &:focus {
+    &:hover:not(:disabled),
+    &:focus:not(:disabled) {
         outline: none;
         background-color: var(--main-bg-cl);
         color: var(--accept-cl);
@@ -41,8 +41,8 @@
     background-color: var(--main-bg-cl);
     color: var(--accent-cl);
 
-    &:hover,
-    &:focus {
+    &:hover:not(:disabled),
+    &:focus:not(:disabled) {
         outline: none;
         background-color: var(--accent-cl);
         color: var(--main-bg-cl);
