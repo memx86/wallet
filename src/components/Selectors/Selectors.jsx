@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
-import { useClickOutside } from "assets/hooks/useClickOutside";
+import useClickOutside from "assets/hooks/useClickOutside";
+import useMonthsLocale from "assets/hooks/useMonthsLocale";
 import { years } from "assets/constants/MONTHS-YEARS";
 import spriteSvg from "assets/images/sprite.svg";
 
+import Button, { STYLE_TYPE } from "components/Button";
 import s from "./Selectors.module.scss";
-import useMonthsLocale from "assets/hooks/useMonthsLocale";
 
 function filter(param) {
   const filterParam = param?.filter(
@@ -133,16 +134,13 @@ const Selectors = ({ transactions, selectDate }) => {
           </div>
         </div>
       </div>
-      <div className={s.reset}>
-        <button
-          type="button"
-          className={s.button}
-          onClick={resetClick}
-          disabled={selectMonth === month && selectYear === year ? true : false}
-        >
-          {t("selectors.reset")}
-        </button>
-      </div>
+      <Button
+        styleType={STYLE_TYPE.SECONDARY}
+        className={s.reset}
+        onClick={resetClick}
+        disabled={selectMonth === month && selectYear === year ? true : false}
+        text={t("selectors.reset")}
+      />
     </>
   );
 };

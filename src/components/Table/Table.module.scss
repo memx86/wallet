@@ -43,15 +43,10 @@
 
 .wrapper {
   position: relative;
-
-  @include mq(desktop) {
-    padding-top: 32px;
-  }
 }
 
 .wrapperChart {
   composes: wrapper;
-  padding-top: 20px;
   width: 280px;
   margin: 0 auto;
 

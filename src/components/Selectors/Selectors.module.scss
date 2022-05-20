@@ -3,9 +3,11 @@
 .selectors {
     width: 100%;
     justify-content: space-between;
+
     @include mq(tablet) {
         display: flex;
     }
+
     @include mq(desktop) {
         width: 400px;
     }
@@ -19,16 +21,20 @@
     flex-direction: column;
     margin: 0;
     margin: 0 auto;
-        &:not(:last-child) {
-            margin-bottom: 16px;
-        }
+
+    &:not(:last-child) {
+        margin-bottom: 16px;
+    }
+
     @include mq(tablet) {
         width: 160px;
-        &:not(:last-child){
+
+        &:not(:last-child) {
             margin-right: 16px;
             margin-bottom: 0;
         }
     }
+
     @include mq(desktop) {
         width: 180px;
     }
@@ -68,7 +74,7 @@
     max-height: 150px;
     opacity: 1;
     overflow-y: scroll;
-    
+
 }
 
 
@@ -85,17 +91,20 @@
     margin-bottom: 3px;
     position: relative;
     order: 0;
-@include mq(tablet) {
+
+    @include mq(tablet) {
         width: 160px;
     }
+
     @include mq(desktop) {
         width: 100%
     }
-    
+
 }
+
 .mainSelect {
     margin-left: 20px;
-    
+
 }
 
 .item {
@@ -118,18 +127,12 @@
     fill: var(--main-text-cl);
     transition: all 0.4s;
 }
-.reset{
-    padding-top: 10px;
-    width: 100%;
-    text-align: center;
-}
 
-.button {
-    width: 280px;
-    background: none;
-    height: 50px;
-    border-radius: 25px;
+.reset {
+    margin: 16px auto;
+    text-transform: none;
+
     @include mq(tablet) {
-            width: 180px;
-        }
+        width: 250px;
+    }
 }

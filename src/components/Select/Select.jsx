@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useField, useFormikContext } from "formik";
 import PropTypes from "prop-types";
 
-import { useClickOutside } from "assets/hooks/useClickOutside";
+import useClickOutside from "assets/hooks/useClickOutside";
 
 import s from "./Select.module.scss";
 
