@@ -1,19 +1,23 @@
-import s from "./AuthForm.module.scss";
-import { Formik } from "formik";
-import spriteSvg from "assets/images/sprite.svg";
-import { useRegisterMutation, useLoginMutation } from "redux/wallet/wallet-api";
 import { useDispatch } from "react-redux";
-import { loggedIn, setToken } from "redux/session";
+import { Formik } from "formik";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
+import PropTypes from "prop-types";
+
+import { useRegisterMutation, useLoginMutation } from "redux/wallet/wallet-api";
+import { loggedIn, setToken } from "redux/session";
+
 import {
   ValidationLogin,
   ValidationsReg,
 } from "assets/schemas/authFormSchemas";
-import { Link } from "react-router-dom";
+import spriteSvg from "assets/images/sprite.svg";
+
 import PasswordStrength from "components/PasswordStrength";
-import PropTypes from "prop-types";
 import Logo from "components/Logo";
+import Button, { STYLE_TYPE } from "components/Button";
+
+import s from "./AuthForm.module.scss";
 
 export const authType = {
   login: "login",
@@ -165,24 +169,23 @@ const AuthForm = ({ type }) => {
               )}
             </>
           ) : null}
-          <button
+          <Button
             className={s.enterBtn}
             type="submit"
             disabled={!isValid && !dirty}
-          >
-            {isRegister
-              ? `${t("authForm.register")}`
-              : `${t("authForm.login")}`}
-          </button>
-          {isRegister ? (
-            <Link className={s.loginBtn} to="/login">
-              {t("authForm.loginReg")}
-            </Link>
-          ) : (
-            <Link className={s.loginBtn} to="/register">
-              {t("authForm.signUp")}
-            </Link>
-          )}
+            text={
+              isRegister
+                ? `${t("authForm.register")}`
+                : `${t("authForm.login")}`
+            }
+          />
+          <Button
+            type="link"
+            styleType={STYLE_TYPE.SECONDARY}
+            to={isRegister ? "/login" : "/register"}
+            className={s.loginBtn}
+            text={isRegister ? t("authForm.loginReg") : t("authForm.signUp")}
+          />
         </form>
       )}
     </Formik>
