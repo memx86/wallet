@@ -3,6 +3,7 @@ import english from "assets/images/english.png";
 import ukraine from "assets/images/ukrainian.png";
 import "./backend";
 import s from "./LanguageSwitcher.module.scss";
+import IconButton from "components/IconButton";
 
 export default function LanguageSwitchers() {
   const { t, i18n } = useTranslation();
@@ -11,20 +12,20 @@ export default function LanguageSwitchers() {
   };
   return (
     <div className={s.wrapBtn}>
-      <button
+      <IconButton
         onClick={() => changeLanguage("en")}
         className={s.btn}
-        aria-label={t("switcher.en")}
+        label={t("switcher.en")}
       >
-        <img src={english} alt="" />
-      </button>
-      <button
+        <img src={english} alt="English" />
+      </IconButton>
+      <IconButton
         onClick={() => changeLanguage("ua")}
         className={s.btn}
-        aria-label={t("switcher.ua")}
+        label={t("switcher.ua")}
       >
-        <img src={ukraine} alt="" />
-      </button>
+        <img src={ukraine} alt="Ukrainian" />
+      </IconButton>
     </div>
   );
 }

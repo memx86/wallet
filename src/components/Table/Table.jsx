@@ -191,18 +191,16 @@ const Table = ({
                   )}
                   {isGeneral && (
                     <td className={s.last}>
-                      <div className={s.optionButtons}>
-                        <EditTransaction
-                          id={id}
-                          transactionDate={transactionDate}
-                          type={type}
-                          categoryId={categoryId}
-                          comment={comment}
-                          amount={amount}
-                          balanceAfter={balanceAfter}
-                        />
-                        <RemoveTransaction id={id} />
-                      </div>
+                      <EditTransaction
+                        id={id}
+                        transactionDate={transactionDate}
+                        type={type}
+                        categoryId={categoryId}
+                        comment={comment}
+                        amount={amount}
+                        balanceAfter={balanceAfter}
+                      />
+                      <RemoveTransaction id={id} />
                     </td>
                   )}
                 </tr>

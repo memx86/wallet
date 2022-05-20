@@ -11,6 +11,7 @@
     text-align: start;
     margin-bottom: 20px;
   }
+
   @include mq(desktop) {
     width: 10vw;
   }
@@ -19,11 +20,6 @@
 .btn {
   width: 25px;
   height: 25px;
-  border: none;
-  outline: none;
-  margin-left: 10px;
-  background-color: inherit;
-  transition: transform 250ms linear;
 
   &:focus,
   &:hover {
