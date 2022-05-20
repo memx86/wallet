@@ -1,17 +1,21 @@
 @import "stylesheet/_mixin.scss";
-.icon {
-    width: 15px;
-    height: 15px;
-    cursor: pointer;
+
+.button {
     margin-right: 15px;
-    fill: var(--select-cl);
-    transition: fill 250ms linear;
-    &:hover {
-        fill: var(--main-text-cl);
+    color: var(--select-cl);
+
+    &:hover,
+    &:focus {
+        color: var(--main-text-cl);
     }
 }
 
-.edit{
+.icon {
+    width: 15px;
+    height: 15px;
+}
+
+.edit {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -19,6 +23,8 @@
     margin: auto auto;
     width: 35px;
     height: 35px;
+    color: var(--edit-cl);
+
     border: 3px solid var(--edit-cl);
     border-radius: 50%;
     background-color: var(--faded-cl);
@@ -26,13 +32,10 @@
     left: 0;
     transform: translate(-50%, -30%);
 }
+
 .iconMobile {
     width: 30px;
     height: 30px;
     padding: 5px;
     margin: 0 auto;
-    fill: var(--edit-cl);
-    
 }
-
-

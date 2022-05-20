@@ -7,44 +7,30 @@ import { setModal } from "redux/session/session-slice";
 import spriteSvg from "assets/images/sprite.svg";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 
-import IconButton from "components/IconButton/IconButton";
+import IconButton from "components/IconButton";
 
 import s from "./EditTransaction.module.scss";
 
-const EditTransaction = (props) => {
+const EditTransaction = ({ transaction }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
   const handleClickEdit = () => {
-    dispatch(setModal({ isOpen: true, type: "edit", data: props }));
+    dispatch(setModal({ isOpen: true, type: "edit", data: transaction }));
   };
 
   const isMobile = useMediaQuery(MOBILE_ONLY);
 
   return (
-    <>
-      {isMobile ? (
-        <div className={s.edit}>
-          <IconButton
-            onClick={handleClickEdit}
-            label={t("modalEditTransaction.editTransaction")}
-          >
-            <svg className={s.iconMobile}>
-              <use href={`${spriteSvg}#icon_pencil2`}></use>
-            </svg>
-          </IconButton>
-        </div>
-      ) : (
-        <IconButton
-          onClick={handleClickEdit}
-          label={t("modalEditTransaction.editTransaction")}
-        >
-          <svg className={s.icon}>
-            <use href={`${spriteSvg}#icon_pencil2`}></use>
-          </svg>
-        </IconButton>
-      )}
-    </>
+    <IconButton
+      onClick={handleClickEdit}
+      className={isMobile ? s.edit : s.button}
+      label={t("modalEditTransaction.editTransaction")}
+    >
+      <svg className={isMobile ? s.iconMobile : s.icon}>
+        <use href={`${spriteSvg}#icon_pencil2`}></use>
+      </svg>
+    </IconButton>
   );
 };
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 
@@ -16,8 +15,6 @@ const Chart = ({ data: { categoriesSummary, periodTotal } }) => {
   const data = {
     datasets: [
       {
-        // label: nameCat?.slice(1),
-        // id: nameCat,
         data: !!amountCat.length ? amountCat : [1],
         backgroundColor: !!colorCat.length ? colorCat : ["#4a56e2"],
         borderWidth: 0,

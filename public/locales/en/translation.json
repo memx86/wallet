@@ -60,14 +60,17 @@
     "error": "Can't edit transaction"
   },
 
+  "modalConfirm": {
+    "cancel": "cancel",
+    "confirm": "confirm"
+  },
+
   "modalLogout": {
     "logout": "Are you sure you want to logout?",
-    "cancel": "cancel",
-    "confirm": "confirm",
     "error": "Can't log out"
   },
 
-  "newTable": {
+  "table": {
     "category": "Category",
     "comment": "Comment",
     "date": "Date",
@@ -89,10 +92,8 @@
   },
   "removeTransaction": {
     "remove": "Remove transaction",
-    "pleaseConfirm": "Please confirm removal",
-    "cancel": "cancel",
-    "confirm": "confirm",
-    "success": "Transaction successfully removed",
+    "pleaseConfirm": "Please confirm deleting a transaction",
+    "success": "Transaction successfully deleted",
     "error": "Can't delete"
   },
   "userName": {

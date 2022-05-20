@@ -1,18 +1,22 @@
 @import "stylesheet/mixin.scss";
 
-.icon {
-  width: 15px;
-  height: 15px;
-  cursor: pointer;
-  fill: var(--select-cl);
-  transition: fill 250ms linear;
+.button {
+  color: var(--select-cl);
 
-  &:hover {
-    fill: var(--main-text-cl);
+  &:hover,
+  &:focus {
+    color: var(--main-text-cl);
   }
 }
 
+.icon {
+  width: 15px;
+  height: 15px;
+
+}
+
 .remove {
+  composes: button;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -33,6 +37,4 @@
   height: 30px;
   padding: 5px;
   margin: 0 auto;
-  fill: var(--remove-cl);
-
 }

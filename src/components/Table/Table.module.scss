@@ -1,4 +1,3 @@
-
 @import "stylesheet/_mixin.scss";
 
 .list {
@@ -22,7 +21,7 @@
   border-left: 5px solid var(--reject-cl);
 }
 
-.listInside{
+.listInside {
   position: relative;
 }
 
@@ -44,11 +43,13 @@
 
 .wrapper {
   position: relative;
+
   @include mq(desktop) {
-      padding-top: 32px;
+    padding-top: 32px;
   }
 }
-.wrapperChart{
+
+.wrapperChart {
   composes: wrapper;
   padding-top: 20px;
   width: 280px;
@@ -57,6 +58,7 @@
   @include mq(tablet) {
     width: 340px;
   }
+
   @include mq(desktop) {
     width: 395px;
   }
@@ -75,20 +77,22 @@
 }
 
 .row {
-    position: relative;
-    height: 52px;
-    font-weight: 400;
-    &:not(:last-child)::after {
-        content: "";
-        height: 1px;
-        width: 100%;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        z-index: 10;
-        background-color: var(--faded-cl);
-        box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
-    }
+  position: relative;
+  height: 52px;
+  font-weight: 400;
+
+  &:not(:last-child)::after {
+    content: "";
+    height: 1px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+    background-color: var(--faded-cl);
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
+  }
+
   position: relative;
   height: 52px;
   font-weight: 400;
@@ -154,19 +158,23 @@
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
 }
-.chartTable{
-    margin: 0 auto;
-    width: 280px;
-    @include mq(tablet) {
+
+.chartTable {
+  margin: 0 auto;
+  width: 280px;
+
+  @include mq(tablet) {
     width: 340px;
-    }
-    @include mq(desktop) {
-       width: 390px;
-    }
+  }
+
+  @include mq(desktop) {
+    width: 390px;
+  }
 }
-.chartRow{
-    composes:row;
-    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
+
+.chartRow {
+  composes: row;
+  box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
 }
 
 .chartWrapper {
@@ -188,30 +196,30 @@
   width: 25%;
 }
 
-.balance{
-    composes: cell;
+.balance {
+  composes: cell;
 }
 
 .marker {
-    display: block;
-    width: 24px;
-    height: 24px;
+  display: block;
+  width: 24px;
+  height: 24px;
 }
 
-.totalAmount{
-    padding: 0 20px;
-}
-.amountItem{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
+.totalAmount {
+  padding: 0 20px;
 }
 
-.expenseAmount{
-    color: var(--reject-cl);
+.amountItem {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
 }
 
-.incomeAmount{
-    color: var(--accept-cl);
+.expenseAmount {
+  color: var(--reject-cl);
 }
 
+.incomeAmount {
+  color: var(--accept-cl);
+}

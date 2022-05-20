@@ -15,7 +15,7 @@ import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import RemoveTransaction from "components/RemoveTransaction";
 import EditTransaction from "components/EditTransaction";
 
-import s from "./NewTable.module.scss";
+import s from "./Table.module.scss";
 
 export const TYPE = {
   GENERAL: "general",
@@ -27,7 +27,7 @@ const TYPES = {
   EXPENSE: "EXPENSE",
 };
 
-const NewTable = ({
+const Table = ({
   type = TYPE.GENERAL,
   data,
   categories = false,
@@ -36,7 +36,9 @@ const NewTable = ({
 }) => {
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isGeneral = type === TYPE.GENERAL;
-  const { t } = useTranslation();
+  const { t } = useTranslation("translation", {
+    keyPrefix: "table",
+  });
   const dispatch = useDispatch();
 
   const prepareDate = (date) => dayjs(date).format("DD.MM.YY");
@@ -49,8 +51,8 @@ const NewTable = ({
   if (isMobile && isGeneral && data?.length)
     return (
       <ul className={s.list}>
-        {data?.map(
-          ({
+        {data?.map((transaction) => {
+          const {
             id,
             transactionDate,
             type,
@@ -58,30 +60,31 @@ const NewTable = ({
             comment,
             amount,
             balanceAfter,
-          }) => (
+          } = transaction;
+          return (
             <li
               key={id}
               className={type === TYPES.INCOME ? s.income : s.expense}
             >
               <ul className={s.listInside}>
                 <li className={s.element}>
-                  <span className={s.title}>{t("newTable.date")}</span>
+                  <span className={s.title}>{t("date")}</span>
                   <span>{prepareDate(transactionDate)}</span>
                 </li>
                 <li className={s.element}>
-                  <span className={s.title}>{t("newTable.type")}</span>
+                  <span className={s.title}>{t("type")}</span>
                   <span>{type === TYPES.INCOME ? "+" : "-"}</span>
                 </li>
                 <li className={s.element}>
-                  <span className={s.title}>{t("newTable.category")}</span>
+                  <span className={s.title}>{t("category")}</span>
                   <span>{categories[categoryId]}</span>
                 </li>
                 <li className={s.element}>
-                  <span className={s.title}>{t("newTable.comment")}</span>
+                  <span className={s.title}>{t("comment")}</span>
                   <span>{comment}</span>
                 </li>
                 <li className={s.element}>
-                  <span className={s.title}>{t("newTable.amount")}</span>
+                  <span className={s.title}>{t("amount")}</span>
                   <span
                     style={{
                       color: type === TYPES.INCOME ? "#24cca7" : "#ff6596",
@@ -91,49 +94,37 @@ const NewTable = ({
                   </span>
                 </li>
                 <li className={s.element}>
-                  <span className={s.title}>{t("newTable.balance")}</span>
+                  <span className={s.title}>{t("balance")}</span>
                   <span>{balanceAfter?.toFixed(2)}</span>
-                  <EditTransaction
-                    id={id}
-                    transactionDate={transactionDate}
-                    type={type}
-                    categoryId={categoryId}
-                    comment={comment}
-                    amount={amount}
-                    balanceAfter={balanceAfter}
-                  />
+                  <EditTransaction transaction={transaction} />
                   <RemoveTransaction id={id} />
                 </li>
               </ul>
             </li>
-          )
-        )}
+          );
+        })}
       </ul>
     );
 
   return (
     <div className={isGeneral ? s.wrapper : s.wrapperChart}>
       {!data.length ? (
-        <p> {t("newTable.feelFree")}</p>
+        <p> {t("feelFree")}</p>
       ) : (
         <table className={s.table}>
           <thead>
             <tr className={s.head}>
-              {isGeneral && <th className={s.first}>{t("newTable.date")}</th>}
-              {isGeneral && <th className={s.center}>{t("newTable.type")}</th>}
+              {isGeneral && <th className={s.first}>{t("date")}</th>}
+              {isGeneral && <th className={s.center}>{t("type")}</th>}
               <th className={isGeneral ? s.category : s.chartCategory}>
-                {t("newTable.category")}
+                {t("category")}
               </th>
-              {isGeneral && (
-                <th className={s.comment}>{t("newTable.comment")}</th>
-              )}
+              {isGeneral && <th className={s.comment}>{t("comment")}</th>}
               <th className={isGeneral ? s.right : s.chartAmount}>
-                {t("newTable.amount")}
+                {t("amount")}
               </th>
-              {isGeneral && (
-                <th className={s.balance}>{t("newTable.balance")}</th>
-              )}
-              {isGeneral && <th className={s.last}>{t("newTable.options")}</th>}
+              {isGeneral && <th className={s.balance}>{t("balance")}</th>}
+              {isGeneral && <th className={s.last}>{t("options")}</th>}
             </tr>
           </thead>
           <tbody className={s.tbody}>
@@ -191,18 +182,18 @@ const NewTable = ({
                   )}
                   {isGeneral && (
                     <td className={s.last}>
-                      <div className={s.optionButtons}>
-                        <EditTransaction
-                          id={id}
-                          transactionDate={transactionDate}
-                          type={type}
-                          categoryId={categoryId}
-                          comment={comment}
-                          amount={amount}
-                          balanceAfter={balanceAfter}
-                        />
-                        <RemoveTransaction id={id} />
-                      </div>
+                      <EditTransaction
+                        transaction={{
+                          id,
+                          transactionDate,
+                          type,
+                          categoryId,
+                          comment,
+                          amount,
+                          balanceAfter,
+                        }}
+                      />
+                      <RemoveTransaction id={id} />
                     </td>
                   )}
                 </tr>
@@ -214,13 +205,13 @@ const NewTable = ({
       {!isGeneral && (
         <ul className={s.totalAmount}>
           <li className={s.amountItem}>
-            <b>{t("newTable.expenses")}</b>
+            <b>{t("expenses")}</b>
             <b className={s.expenseAmount}>
               {Math.abs(expense)?.toFixed(2) || "--"}
             </b>
           </li>
           <li className={s.amountItem}>
-            <b>{t("newTable.incomes")}</b>
+            <b>{t("incomes")}</b>
             <b className={s.incomeAmount}>{income?.toFixed(2) || "--"}</b>
           </li>
         </ul>
@@ -229,7 +220,7 @@ const NewTable = ({
   );
 };
 
-NewTable.propTypes = {
+Table.propTypes = {
   type: PropTypes.string,
   data: PropTypes.arrayOf(
     PropTypes.shape({
@@ -245,4 +236,4 @@ NewTable.propTypes = {
   categories: PropTypes.objectOf(PropTypes.string),
 };
 
-export default NewTable;
+export default Table;

@@ -7,7 +7,7 @@ import Loader from "components/Loader";
 import { useTranslation } from "react-i18next";
 
 import s from "./DiagramTab.module.scss";
-import NewTable from "components/NewTable";
+import Table from "components/Table";
 import Selectors from "components/Selectors";
 import {
   useGetTransactionsQuery,
@@ -72,7 +72,7 @@ const DiagramTab = () => {
             <Chart data={changedData} />
             <div className={s.table}>
               <Selectors transactions={transactions} selectDate={selectDate} />
-              <NewTable
+              <Table
                 type="chart"
                 data={dataWithoutIncome}
                 selectDate={selectDate}

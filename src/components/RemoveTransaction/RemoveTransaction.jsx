@@ -19,23 +19,15 @@ const RemoveTransaction = ({ id }) => {
   };
 
   return (
-    <>
-      {isMobile ? (
-        <div className={s.remove}>
-          <IconButton onClick={openModal} label={t("removeTransaction.remove")}>
-            <svg className={s.removeIcon}>
-              <use href={`${spriteSvg}#bin`}></use>
-            </svg>
-          </IconButton>
-        </div>
-      ) : (
-        <IconButton onClick={openModal} label={t("removeTransaction.remove")}>
-          <svg width="20px" height="20px" className={s.icon}>
-            <use href={`${spriteSvg}#bin`}></use>
-          </svg>
-        </IconButton>
-      )}
-    </>
+    <IconButton
+      onClick={openModal}
+      label={t("removeTransaction.remove")}
+      className={isMobile ? s.remove : s.button}
+    >
+      <svg className={isMobile ? s.removeIcon : s.icon}>
+        <use href={`${spriteSvg}#bin`}></use>
+      </svg>
+    </IconButton>
   );
 };
 

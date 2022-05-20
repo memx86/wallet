@@ -82,7 +82,7 @@
     border-bottom: 1px solid var(--accept-cl);
   }
 
-  &:focus + .iconSvg {
+  &:focus+.iconSvg {
     --color1: var(--accept-cl);
   }
 
@@ -97,39 +97,13 @@
 }
 
 .enterBtn {
-  display: block;
-  width: 280px;
-  min-height: 50px;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-top: 10px;
-  padding-bottom: 10px;
   margin: 0 auto;
   margin-bottom: 20px;
-  border: none;
-  background-color: var(--accept-cl);
-  border-radius: 20px;
-
-  font-family: Circe;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.5;
-  text-align: center;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--main-bg-cl);
-
-  @include mq(tablet) {
-    width: 300px;
-  }
 }
 
 .loginBtn {
-  composes: enterBtn;
+  margin: 0 auto;
   margin-bottom: 0;
-  border: 1px solid var(--accent-cl);
-  background-color: var(--main-bg-cl);
-  color: var(--accent-cl);
 }
 
 .errorWrapper {
