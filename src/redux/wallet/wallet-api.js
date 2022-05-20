@@ -12,19 +12,18 @@ export const walletApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["User", "Transactions"],
+  tagTypes: ["User", "Transactions", "TransactionsSummary"],
   endpoints: (build) => ({
     register: build.mutation({
       query: (data) => ({ url: "/auth/sign-up", method: "POST", body: data }),
-      invalidatesTags: ["User", "Transactions"],
+      invalidatesTags: ["User", "Transactions", "TransactionsSummary"],
     }),
     login: build.mutation({
       query: (data) => ({ url: "/auth/sign-in", method: "POST", body: data }),
-      invalidatesTags: ["User", "Transactions"],
+      invalidatesTags: ["User", "Transactions", "TransactionsSummary"],
     }),
     logout: build.mutation({
       query: () => ({ url: "/auth/sign-out", method: "DELETE" }),
-      invalidatesTags: ["User", "Transactions"],
     }),
     refresh: build.query({
       query: () => "/users/current",
@@ -47,11 +46,11 @@ export const walletApi = createApi({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["Transactions", "User"],
+      invalidatesTags: ["Transactions", "User", "TransactionsSummary"],
     }),
     deleteTransaction: build.mutation({
       query: (id) => ({ url: `/transactions/${id}`, method: "DELETE" }),
-      invalidatesTags: ["Transactions", "User"],
+      invalidatesTags: ["Transactions", "User", "TransactionsSummary"],
     }),
     editTransaction: build.mutation({
       query: ({ id, ...patch }) => ({
@@ -59,7 +58,7 @@ export const walletApi = createApi({
         method: "PATCH",
         body: patch,
       }),
-      invalidatesTags: ["Transactions", "User"],
+      invalidatesTags: ["Transactions", "User", "TransactionsSummary"],
     }),
   }),
   // refetchOnFocus: true,
