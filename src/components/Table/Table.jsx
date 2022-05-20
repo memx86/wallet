@@ -15,7 +15,7 @@ import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import RemoveTransaction from "components/RemoveTransaction";
 import EditTransaction from "components/EditTransaction";
 
-import s from "./NewTable.module.scss";
+import s from "./Table.module.scss";
 
 export const TYPE = {
   GENERAL: "general",
@@ -27,7 +27,7 @@ const TYPES = {
   EXPENSE: "EXPENSE",
 };
 
-const NewTable = ({
+const Table = ({
   type = TYPE.GENERAL,
   data,
   categories = false,
@@ -229,7 +229,7 @@ const NewTable = ({
   );
 };
 
-NewTable.propTypes = {
+Table.propTypes = {
   type: PropTypes.string,
   data: PropTypes.arrayOf(
     PropTypes.shape({
@@ -245,4 +245,4 @@ NewTable.propTypes = {
   categories: PropTypes.objectOf(PropTypes.string),
 };
 
-export default NewTable;
+export default Table;

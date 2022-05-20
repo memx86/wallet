@@ -10,7 +10,7 @@ import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import useCategoriesLocale from "assets/hooks/useCategoriesLocale";
 
 import Loader from "components/Loader";
-import NewTable from "components/NewTable";
+import Table from "components/Table";
 import Balance from "components/Balance";
 import ButtonAddTransactions from "components/ButtonAddTransactions";
 // import s from './HomeTab.module.scss'
@@ -42,7 +42,7 @@ const HomeTab = () => {
   return (
     <Fragment>
       {isMobile && <Balance balance={userData.balance} />}
-      <NewTable data={filteredData(data)} categories={categories} />
+      <Table data={filteredData(data)} categories={categories} />
       {isMobile && <ButtonAddTransactions />}
     </Fragment>
   );
