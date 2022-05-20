@@ -14,7 +14,6 @@ const Button = ({
   styleType = "main",
   text,
   onClick,
-  onSubmit,
   disabled = false,
   to = "/",
 }) => {
@@ -29,7 +28,6 @@ const Button = ({
       className={`${s[styleType]} ${className}`}
       type={type}
       onClick={onClick ? onClick : null}
-      onSubmit={onSubmit ? onSubmit : null}
       disabled={disabled}
     >
       {text}
@@ -42,7 +40,6 @@ Button.propTypes = {
   styleType: PropTypes.string,
   text: PropTypes.string.isRequired,
   onClick: PropTypes.func,
-  onSubmit: PropTypes.func,
   disabled: PropTypes.bool,
   to: PropTypes.string,
 };
