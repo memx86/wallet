@@ -49,8 +49,8 @@ const Table = ({
   if (isMobile && isGeneral && data?.length)
     return (
       <ul className={s.list}>
-        {data?.map(
-          ({
+        {data?.map((transaction) => {
+          const {
             id,
             transactionDate,
             type,
@@ -58,7 +58,8 @@ const Table = ({
             comment,
             amount,
             balanceAfter,
-          }) => (
+          } = transaction;
+          return (
             <li
               key={id}
               className={type === TYPES.INCOME ? s.income : s.expense}
@@ -93,21 +94,13 @@ const Table = ({
                 <li className={s.element}>
                   <span className={s.title}>{t("newTable.balance")}</span>
                   <span>{balanceAfter?.toFixed(2)}</span>
-                  <EditTransaction
-                    id={id}
-                    transactionDate={transactionDate}
-                    type={type}
-                    categoryId={categoryId}
-                    comment={comment}
-                    amount={amount}
-                    balanceAfter={balanceAfter}
-                  />
+                  <EditTransaction transaction={transaction} />
                   <RemoveTransaction id={id} />
                 </li>
               </ul>
             </li>
-          )
-        )}
+          );
+        })}
       </ul>
     );
 
@@ -192,13 +185,15 @@ const Table = ({
                   {isGeneral && (
                     <td className={s.last}>
                       <EditTransaction
-                        id={id}
-                        transactionDate={transactionDate}
-                        type={type}
-                        categoryId={categoryId}
-                        comment={comment}
-                        amount={amount}
-                        balanceAfter={balanceAfter}
+                        transaction={{
+                          id,
+                          transactionDate,
+                          type,
+                          categoryId,
+                          comment,
+                          amount,
+                          balanceAfter,
+                        }}
                       />
                       <RemoveTransaction id={id} />
                     </td>
