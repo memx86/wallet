@@ -1,6 +1,6 @@
 import { modalTypeSelector } from "redux/session";
 import { useSelector } from "react-redux";
-import ModalAddTransaction from "components/ModalAddTransaction";
+import ModalTransaction from "components/ModalTransaction";
 import ModalRemoveTransaction from "components/ModalRemoveTransaction";
 import ModalLogout from "components/ModalLogout";
 
@@ -15,11 +15,11 @@ const GlobalModal = () => {
   const type = useSelector(modalTypeSelector);
 
   if (type === TYPES.ADD) {
-    return <ModalAddTransaction />;
+    return <ModalTransaction />;
   }
 
   if (type === TYPES.EDIT) {
-    return <ModalAddTransaction editModal={true} />;
+    return <ModalTransaction editModal={true} />;
   }
 
   if (type === TYPES.REMOVE) {

@@ -23,15 +23,16 @@ import Modal from "components/Modal/Modal";
 import IconButton from "components/IconButton";
 import Select from "components/Select";
 import DatePickerField from "components/DatePickerField";
+import Button, { STYLE_TYPE } from "components/Button";
 
-import s from "./ModalAddTransaction.module.scss";
+import s from "./ModalTransaction.module.scss";
 
 const TYPES = {
   INCOME: "INCOME",
   EXPENSE: "EXPENSE",
 };
 
-const ModalAddTransaction = ({ editModal }) => {
+const ModalTransaction = ({ editModal }) => {
   const { t } = useTranslation();
   const categories = useCategoriesLocale();
   const isMobile = useMediaQuery(MOBILE_ONLY);
@@ -63,14 +64,9 @@ const ModalAddTransaction = ({ editModal }) => {
     dispatch(setCloseModal());
   };
 
-  const now = dayjs().format("DD.MM.YYYY");
+  const placeholder = dayjs().format("DD.MM.YYYY");
 
   const prepareDate = (date) => {
-    // const currentDate = new Date();
-    // const timeZone = currentDate.getTimezoneOffset();
-    // const currentTime = (currentDate.getTime() - 60000 * timeZone) % 86400000;
-    // const initialDate = new Date(date).getTime();
-    // const result = new Date(initialDate + currentTime);
     return date.toISOString();
   };
 
@@ -203,7 +199,7 @@ const ModalAddTransaction = ({ editModal }) => {
                   name="transactionDate"
                   className={s.half}
                   maxDate={new Date()}
-                  placeholderText={now}
+                  placeholderText={placeholder}
                   dateFormat="dd.MM.yyyy"
                   locale={datePickerLocale}
                   autoComplete="off"
@@ -223,23 +219,31 @@ const ModalAddTransaction = ({ editModal }) => {
                 <ErrorMessage name="comment" />
               </span>
             </label>
-            <button className={s.btnConfirm} type="submit" disabled={!isValid}>
-              {editModal
-                ? t("modalEditTransaction.transaction")
-                : t("modalAddTransaction.transaction")}
-            </button>
+            <Button
+              type="submit"
+              disabled={!isValid}
+              className={s.button}
+              text={
+                editModal
+                  ? t("modalEditTransaction.transaction")
+                  : t("modalAddTransaction.transaction")
+              }
+            />
           </Form>
         )}
       </Formik>
-      <button type="button" onClick={closeModal} className={s.btnCancel}>
-        {t("modalAddTransaction.cancel")}
-      </button>
+      <Button
+        styleType={STYLE_TYPE.SECONDARY}
+        className={s.button}
+        onClick={closeModal}
+        text={t("modalAddTransaction.cancel")}
+      />
     </Modal>
   );
 };
-export default ModalAddTransaction;
+export default ModalTransaction;
 
-ModalAddTransaction.propTypes = {
+ModalTransaction.propTypes = {
   editModal: PropTypes.bool,
   closeEditModal: PropTypes.func,
   transaction: PropTypes.shape({
