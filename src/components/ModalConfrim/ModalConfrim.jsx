@@ -15,12 +15,12 @@ const ModalConfrim = ({ text, confirm, cancel }) => {
       <div className={s.btnWrapper}>
         <Button
           className={s.button}
+          styleType={STYLE_TYPE.SECONDARY}
           onClick={cancel}
           text={t("modalConfirm.cancel")}
         />
         <Button
           className={s.button}
-          styleType={STYLE_TYPE.SECONDARY}
           onClick={confirm}
           text={t("modalConfirm.confirm")}
         />
