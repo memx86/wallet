@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
-import { useClickOutside } from "assets/hooks/HookCloseByWindow";
+import { useClickOutside } from "assets/hooks/useClickOutside";
 import { years } from "assets/constants/MONTHS-YEARS";
 import spriteSvg from "assets/images/sprite.svg";
 
