@@ -1,3 +1,3 @@
-# Team project React
+# Wallet project React
 
-https://memx86-team-project-wallet.netlify.app/
+https://memx86-wallet.netlify.app/
