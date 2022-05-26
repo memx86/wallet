@@ -5,8 +5,8 @@ import { toast } from "react-toastify";
 import { GrClose } from "react-icons/gr";
 import { MdDateRange } from "react-icons/md";
 import dayjs from "dayjs";
-import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
+
 import { closeModal as setCloseModal } from "redux/session/session-slice";
 import {
   useAddTransactionMutation,
@@ -14,10 +14,12 @@ import {
 } from "redux/wallet";
 import { modalDataSelector } from "redux/session";
 
-import { MOBILE_ONLY } from "assets/constants/MEDIA";
-import TransactionSchema from "assets/schemas/transactionSchema";
+import useTranslation from "assets/hooks/useTranslation";
 import useCategoriesLocale from "assets/hooks/useCategoriesLocale";
 import useDatePickerLocale from "assets/hooks/useDatePickerLocale";
+
+import { MOBILE_ONLY } from "assets/constants/MEDIA";
+import TransactionSchema from "assets/schemas/transactionSchema";
 
 import Modal from "components/Modal/Modal";
 import IconButton from "components/IconButton";
@@ -47,7 +49,7 @@ const ModalTransaction = ({ editModal }) => {
     : [
         [
           "c9d9e447-1b83-4238-8712-edc77b18b739",
-          t("modalAddTransaction.nocategories"),
+          t.modalAddTransaction.nocategories,
         ],
       ];
   let incomeCategoryId = "063f1132-ba5d-42b4-951d-44011ca46262";
@@ -85,15 +87,13 @@ const ModalTransaction = ({ editModal }) => {
       if (res)
         toast.success(
           editModal
-            ? t("modalEditTransaction.success")
-            : t("modalAddTransaction.success")
+            ? t.modalEditTransaction.success
+            : t.modalAddTransaction.success
         );
       closeModal();
     } catch (error) {
       toast.error(
-        editModal
-          ? t("modalEditTransaction.error")
-          : t("modalAddTransaction.error")
+        editModal ? t.modalEditTransaction.error : t.modalAddTransaction.error
       );
     }
   };
@@ -123,15 +123,15 @@ const ModalTransaction = ({ editModal }) => {
       {!isMobile && (
         <IconButton
           onClick={closeModal}
-          label={t("modalAddTransaction.closewindow")}
+          label={t.modalAddTransaction.closewindow}
         >
           <GrClose className={s.close} />
         </IconButton>
       )}
       <h2 className={s.title}>
         {editModal
-          ? t("modalEditTransaction.editTransaction")
-          : t("modalAddTransaction.addTransaction")}
+          ? t.modalEditTransaction.editTransaction
+          : t.modalAddTransaction.addTransaction}
       </h2>
       <Formik
         initialValues={{
@@ -156,7 +156,7 @@ const ModalTransaction = ({ editModal }) => {
                 className={s.income}
                 style={values.type ? { color: "#e0e0e0" } : null}
               >
-                {t("modalAddTransaction.income")}
+                {t.modalAddTransaction.income}
               </span>
               <span className={s.wrapper}>
                 <Field type="checkbox" name="type" className={s.type} />
@@ -166,7 +166,7 @@ const ModalTransaction = ({ editModal }) => {
                 className={s.expense}
                 style={!values.type ? { color: "#e0e0e0" } : null}
               >
-                {t("modalAddTransaction.expense")}
+                {t.modalAddTransaction.expense}
               </span>
             </label>
             {values.type && (
@@ -212,7 +212,7 @@ const ModalTransaction = ({ editModal }) => {
                 className={s.input}
                 type="text"
                 name="comment"
-                placeholder={t("modalAddTransaction.comment")}
+                placeholder={t.modalAddTransaction.comment}
                 autoComplete="off"
               />
               <span className={s.error}>
@@ -225,8 +225,8 @@ const ModalTransaction = ({ editModal }) => {
               className={s.button}
               text={
                 editModal
-                  ? t("modalEditTransaction.transaction")
-                  : t("modalAddTransaction.transaction")
+                  ? t.modalEditTransaction.transaction
+                  : t.modalAddTransaction.transaction
               }
             />
           </Form>
@@ -236,7 +236,7 @@ const ModalTransaction = ({ editModal }) => {
         styleType={STYLE_TYPE.SECONDARY}
         className={s.button}
         onClick={closeModal}
-        text={t("modalAddTransaction.cancel")}
+        text={t.modalAddTransaction.cancel}
       />
     </Modal>
   );

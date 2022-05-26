@@ -1,25 +1,27 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import { colorsChange } from "assets/constants/COLORS";
-import Chart from "components/Chart";
-import Loader from "components/Loader";
-import { useTranslation } from "react-i18next";
-
-import s from "./DiagramTab.module.scss";
-import Table from "components/Table";
-import Selectors from "components/Selectors";
 import {
   useGetTransactionsQuery,
   useGetTransactionsSummaryQuery,
 } from "redux/wallet";
-
 import { isButtonShown } from "redux/session";
+
+import useTranslation from "assets/hooks/useTranslation";
+
+import { colorsChange } from "assets/constants/COLORS";
+
+import Chart from "components/Chart";
+import Loader from "components/Loader";
+import Table from "components/Table";
+import Selectors from "components/Selectors";
+
+import s from "./DiagramTab.module.scss";
 
 const DiagramTab = () => {
   const [object, setObject] = useState({ month: 0, year: 0 });
-
   const dispatch = useDispatch();
+  const { t } = useTranslation("diagram");
 
   useEffect(() => {
     dispatch(isButtonShown(false));
@@ -60,14 +62,13 @@ const DiagramTab = () => {
   const dataWithoutIncome =
     changedData?.categoriesSummary?.filter((item) => item.type !== "INCOME") ||
     [];
-  const { t } = useTranslation();
   return (
     <div>
       {diagLoader ? (
         <Loader />
       ) : (
         <>
-          <h2>{t("diagram.statistic")}</h2>
+          <h2>{t.statistic}</h2>
           <div className={s.diagram}>
             <Chart data={changedData} />
             <div className={s.table}>

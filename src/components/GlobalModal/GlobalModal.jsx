@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 
 import {
@@ -9,6 +8,8 @@ import {
   modalTypeSelector,
 } from "redux/session";
 import { useDeleteTransactionMutation, useLogoutMutation } from "redux/wallet";
+
+import useTranslation from "assets/hooks/useTranslation";
 
 import ModalTransaction from "components/ModalTransaction";
 import ModalConfrim from "components/ModalConfrim";
@@ -34,10 +35,10 @@ const GlobalModal = () => {
     try {
       const response = await remove(id).unwrap();
       if (response) {
-        toast.success(t("removeTransaction.success"));
+        toast.success(t.removeTransaction.success);
       }
     } catch (error) {
-      toast.error(t("removeTransaction.error"));
+      toast.error(t.removeTransaction.error);
     } finally {
       cancel();
     }
@@ -48,7 +49,7 @@ const GlobalModal = () => {
       await logout();
       dispatch(loggedOff());
     } catch (error) {
-      toast.error(t("modalLogout.error"));
+      toast.error(t.modalLogout.error);
     } finally {
       cancel();
     }
@@ -69,7 +70,7 @@ const GlobalModal = () => {
   if (type === TYPES.REMOVE) {
     return (
       <ModalConfrim
-        text={t("removeTransaction.pleaseConfirm")}
+        text={t.removeTransaction.pleaseConfirm}
         confirm={removeItem}
         cancel={cancel}
       />
@@ -79,7 +80,7 @@ const GlobalModal = () => {
   if (type === TYPES.LOGOUT) {
     return (
       <ModalConfrim
-        text={t("modalLogout.logout")}
+        text={t.modalLogout.logout}
         confirm={confirmLogout}
         cancel={cancel}
       />

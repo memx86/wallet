@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { TailSpin } from "react-loader-spinner";
-import { useTranslation } from "react-i18next";
+import useTranslation from "assets/hooks/useTranslation";
 import fetchCurrency from "api/currencyApi";
 
 import s from "./Currency.module.scss";
@@ -17,7 +17,7 @@ const Currency = () => {
     SUCCESS: "success",
     ERROR: "error",
   };
-  const { t } = useTranslation();
+  const { t } = useTranslation("currency");
   const [currencies, setCurrencies] = useState("");
   const [status, setStatus] = useState(STATUS.IDLE);
 
@@ -76,7 +76,7 @@ const Currency = () => {
   if (status === STATUS.ERROR) {
     return (
       <div className={s.wrapper}>
-        <p className={s.text}>{t("currency.server")}</p>
+        <p className={s.text}>{t.server}</p>
       </div>
     );
   }
@@ -86,9 +86,9 @@ const Currency = () => {
       <table className={s.table}>
         <thead className={s.thead}>
           <tr>
-            <th className={s.thLeft}>{t("currency.currency")}</th>
-            <th className={s.thCenter}>{t("currency.buyingRate")}</th>
-            <th className={s.thRight}>{t("currency.sellingRate")}</th>
+            <th className={s.thLeft}>{t.currency}</th>
+            <th className={s.thCenter}>{t.buyingRate}</th>
+            <th className={s.thRight}>{t.sellingRate}</th>
           </tr>
         </thead>
         <tbody className={s.tbody}>

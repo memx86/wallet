@@ -1,12 +1,12 @@
-import { useTranslation } from "react-i18next";
+import useTranslation from "assets/hooks/useTranslation";
 
 import AuthForm, { authType } from "components/AuthForm/AuthForm";
 import LanguageSwitcher from "components/LanguageSwitcher";
+
 import s from "./LoginPage.module.scss";
 
 const LoginPage = () => {
-  const { t, i18n } = useTranslation();
-  const language = i18n.language;
+  const { t, language } = useTranslation("loginPage");
   return (
     <>
       <section className={s.section}>
@@ -15,7 +15,7 @@ const LoginPage = () => {
           <div className={s.wrapper}>
             <div className={s.hero}>
               <h1 className={language === "en" ? s.title : s.titleLocale}>
-                {t("loginPage.financeApp")}
+                {t.financeApp}
               </h1>
             </div>
           </div>

@@ -84,8 +84,9 @@
     "feelFree": "Feel free to add some transactions!"
   },
   "navigation": {
-    "homes": "Home",
-    "diagram": "Diagram"
+    "home": "Home",
+    "diagram": "Diagram",
+    "currency": "Currency"
   },
   "registrationPage": {
     "regPage": "Finance App"

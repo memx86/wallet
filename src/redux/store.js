@@ -11,10 +11,11 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { categoriesReducer } from "./categories";
 
+import { categoriesReducer } from "./categories";
 import { sessionReducer } from "./session";
 import { walletApi } from "./wallet";
+import { localeReducer } from "./locale";
 
 const persistSession = {
   key: "wallet/session",
@@ -28,11 +29,17 @@ const persistCategories = {
   whitelist: ["data"],
 };
 
+const persistLocale = {
+  key: "wallet/locale",
+  storage,
+};
+
 const store = configureStore({
   reducer: {
     session: persistReducer(persistSession, sessionReducer),
     categories: persistReducer(persistCategories, categoriesReducer),
     [walletApi.reducerPath]: walletApi.reducer,
+    locale: persistReducer(persistLocale, localeReducer),
   },
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({

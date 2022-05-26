@@ -1,13 +1,14 @@
-import { useTranslation } from "react-i18next";
+import useTranslation from "./useTranslation";
+
+import LANGUAGES from "assets/constants/LANGUAGES";
 
 const useDatePickerLocale = () => {
-  const { i18n } = useTranslation();
-  const language = i18n.language;
+  const { language } = useTranslation();
   const getDatePickerLocale = (lang) => {
     switch (lang) {
-      case "en":
+      case LANGUAGES.EN:
         return "en-US";
-      case "ua":
+      case LANGUAGES.UA:
         return "uk-UA";
       default:
         return "en-US";

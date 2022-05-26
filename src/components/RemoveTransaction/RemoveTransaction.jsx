@@ -1,16 +1,20 @@
-import s from "./RemoveTransaction.module.scss";
+import { useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
-import { MOBILE_ONLY } from "assets/constants/MEDIA";
-import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
+
+import { setModal } from "redux/session";
+
+import useTranslation from "assets/hooks/useTranslation";
 
 import spriteSvg from "assets/images/sprite.svg";
-import PropTypes from "prop-types";
+import { MOBILE_ONLY } from "assets/constants/MEDIA";
+
 import IconButton from "components/IconButton";
-import { setModal } from "redux/session";
-import { useDispatch } from "react-redux";
+
+import s from "./RemoveTransaction.module.scss";
 
 const RemoveTransaction = ({ id }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("removeTransaction");
   const dispatch = useDispatch();
   const isMobile = useMediaQuery(MOBILE_ONLY);
 
@@ -21,7 +25,7 @@ const RemoveTransaction = ({ id }) => {
   return (
     <IconButton
       onClick={openModal}
-      label={t("removeTransaction.remove")}
+      label={t.remove}
       className={isMobile ? s.remove : s.button}
     >
       <svg className={isMobile ? s.removeIcon : s.icon}>

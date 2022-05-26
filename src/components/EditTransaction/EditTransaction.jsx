@@ -1,8 +1,9 @@
 import { useMediaQuery } from "react-responsive";
-import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
 import { setModal } from "redux/session/session-slice";
+
+import useTranslation from "assets/hooks/useTranslation";
 
 import spriteSvg from "assets/images/sprite.svg";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
@@ -13,7 +14,7 @@ import s from "./EditTransaction.module.scss";
 
 const EditTransaction = ({ transaction }) => {
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const { t } = useTranslation("modalEditTransaction");
 
   const handleClickEdit = () => {
     dispatch(setModal({ isOpen: true, type: "edit", data: transaction }));
@@ -25,7 +26,7 @@ const EditTransaction = ({ transaction }) => {
     <IconButton
       onClick={handleClickEdit}
       className={isMobile ? s.edit : s.button}
-      label={t("modalEditTransaction.editTransaction")}
+      label={t.editTransaction}
     >
       <svg className={isMobile ? s.iconMobile : s.icon}>
         <use href={`${spriteSvg}#icon_pencil2`}></use>

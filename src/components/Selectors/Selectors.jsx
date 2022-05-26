@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
+import useTranslation from "assets/hooks/useTranslation";
 import useClickOutside from "assets/hooks/useClickOutside";
 import useMonthsLocale from "assets/hooks/useMonthsLocale";
+
 import { years } from "assets/constants/MONTHS-YEARS";
 import spriteSvg from "assets/images/sprite.svg";
 
 import Button, { STYLE_TYPE } from "components/Button";
+
 import s from "./Selectors.module.scss";
 
 function filter(param) {
@@ -19,9 +21,9 @@ function filter(param) {
 }
 
 const Selectors = ({ transactions, selectDate }) => {
-  const { t } = useTranslation();
-  const month = t("selectors.month");
-  const year = t("selectors.year");
+  const { t } = useTranslation("selectors");
+  const month = t.month;
+  const year = t.year;
   const [selectMonth, setSelectMonth] = useState(month);
   const [selectYear, setSelectYear] = useState(year);
   const [activeMonth, setIsActiveMonth] = useState(false);
@@ -139,7 +141,7 @@ const Selectors = ({ transactions, selectDate }) => {
         className={s.reset}
         onClick={resetClick}
         disabled={selectMonth === month && selectYear === year ? true : false}
-        text={t("selectors.reset")}
+        text={t.reset}
       />
     </>
   );

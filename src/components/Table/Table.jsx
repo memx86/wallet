@@ -1,15 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
-import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 
 import { isButtonShown } from "redux/session";
 
+import useTranslation from "assets/hooks/useTranslation";
 import useCategoriesLocale, {
   TYPES as CATEGORIES_TYPES,
 } from "assets/hooks/useCategoriesLocale";
+
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 
 import RemoveTransaction from "components/RemoveTransaction";
@@ -36,9 +37,7 @@ const Table = ({
 }) => {
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const isGeneral = type === TYPE.GENERAL;
-  const { t } = useTranslation("translation", {
-    keyPrefix: "table",
-  });
+  const { t } = useTranslation("table");
   const dispatch = useDispatch();
 
   const prepareDate = (date) => dayjs(date).format("DD.MM.YY");
@@ -68,23 +67,23 @@ const Table = ({
             >
               <ul className={s.listInside}>
                 <li className={s.element}>
-                  <span className={s.title}>{t("date")}</span>
+                  <span className={s.title}>{t.date}</span>
                   <span>{prepareDate(transactionDate)}</span>
                 </li>
                 <li className={s.element}>
-                  <span className={s.title}>{t("type")}</span>
+                  <span className={s.title}>{t.type}</span>
                   <span>{type === TYPES.INCOME ? "+" : "-"}</span>
                 </li>
                 <li className={s.element}>
-                  <span className={s.title}>{t("category")}</span>
+                  <span className={s.title}>{t.category}</span>
                   <span>{categories[categoryId]}</span>
                 </li>
                 <li className={s.element}>
-                  <span className={s.title}>{t("comment")}</span>
+                  <span className={s.title}>{t.comment}</span>
                   <span>{comment}</span>
                 </li>
                 <li className={s.element}>
-                  <span className={s.title}>{t("amount")}</span>
+                  <span className={s.title}>{t.amount}</span>
                   <span
                     style={{
                       color: type === TYPES.INCOME ? "#24cca7" : "#ff6596",
@@ -94,7 +93,7 @@ const Table = ({
                   </span>
                 </li>
                 <li className={s.element}>
-                  <span className={s.title}>{t("balance")}</span>
+                  <span className={s.title}>{t.balance}</span>
                   <span>{balanceAfter?.toFixed(2)}</span>
                   <EditTransaction transaction={transaction} />
                   <RemoveTransaction id={id} />
@@ -109,22 +108,22 @@ const Table = ({
   return (
     <div className={isGeneral ? s.wrapper : s.wrapperChart}>
       {!data.length ? (
-        <p> {t("feelFree")}</p>
+        <p> {t.feelFree}</p>
       ) : (
         <table className={s.table}>
           <thead>
             <tr className={s.head}>
-              {isGeneral && <th className={s.first}>{t("date")}</th>}
-              {isGeneral && <th className={s.center}>{t("type")}</th>}
+              {isGeneral && <th className={s.first}>{t.date}</th>}
+              {isGeneral && <th className={s.center}>{t.type}</th>}
               <th className={isGeneral ? s.category : s.chartCategory}>
-                {t("category")}
+                {t.category}
               </th>
-              {isGeneral && <th className={s.comment}>{t("comment")}</th>}
+              {isGeneral && <th className={s.comment}>{t.comment}</th>}
               <th className={isGeneral ? s.right : s.chartAmount}>
-                {t("amount")}
+                {t.amount}
               </th>
-              {isGeneral && <th className={s.balance}>{t("balance")}</th>}
-              {isGeneral && <th className={s.last}>{t("options")}</th>}
+              {isGeneral && <th className={s.balance}>{t.balance}</th>}
+              {isGeneral && <th className={s.last}>{t.options}</th>}
             </tr>
           </thead>
           <tbody className={s.tbody}>
@@ -205,13 +204,13 @@ const Table = ({
       {!isGeneral && (
         <ul className={s.totalAmount}>
           <li className={s.amountItem}>
-            <b>{t("expenses")}</b>
+            <b>{t.expenses}</b>
             <b className={s.expenseAmount}>
               {Math.abs(expense)?.toFixed(2) || "--"}
             </b>
           </li>
           <li className={s.amountItem}>
-            <b>{t("incomes")}</b>
+            <b>{t.incomes}</b>
             <b className={s.incomeAmount}>{income?.toFixed(2) || "--"}</b>
           </li>
         </ul>

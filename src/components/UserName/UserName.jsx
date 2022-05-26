@@ -1,12 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { IoLogOutOutline } from "react-icons/io5";
 import { useMediaQuery } from "react-responsive";
+
 import { isAuthSelector, setModal } from "redux/session";
 import { useRefreshQuery } from "redux/wallet";
-import { useTranslation } from "react-i18next";
+
+import useTranslation from "assets/hooks/useTranslation";
+
+import { MOBILE_ONLY, TABLET } from "assets/constants/MEDIA";
 
 import Loader from "components/Loader";
-import { MOBILE_ONLY, TABLET } from "assets/constants/MEDIA";
 
 import s from "./UserName.module.scss";
 
@@ -17,7 +20,7 @@ const UserName = () => {
   const dispatch = useDispatch();
   const isTablet = useMediaQuery(TABLET);
   const isMobile = useMediaQuery(MOBILE_ONLY);
-  const { t } = useTranslation();
+  const { t } = useTranslation("userName");
   const { username } = data;
 
   const onClick = () => {
@@ -32,10 +35,10 @@ const UserName = () => {
         type="button"
         className={s.button}
         onClick={onClick}
-        aria-label={isMobile ? t("userName.logout") : null}
+        aria-label={isMobile ? t.logout : null}
       >
         <IoLogOutOutline style={{ width: "18px", height: "18px" }} />
-        {isTablet && <span>{t("userName.logout")}</span>}
+        {isTablet && <span>{t.logout}</span>}
       </button>
     </div>
   );

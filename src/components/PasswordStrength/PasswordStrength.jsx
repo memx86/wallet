@@ -1,23 +1,18 @@
 import PasswordStrengthBar from "react-password-strength-bar";
-import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
+
+import useTranslation from "assets/hooks/useTranslation";
 
 import s from "./PasswordStrength.module.scss";
 
 const PasswordStrength = ({ password }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("passwordStrength");
   return (
     <PasswordStrengthBar
       className={s.bar}
       password={password}
-      shortScoreWord={t("passwordStrength.short")}
-      scoreWords={[
-        t("passwordStrength.weak"),
-        t("passwordStrength.weak"),
-        t("passwordStrength.okay"),
-        t("passwordStrength.good"),
-        t("passwordStrength.strong"),
-      ]}
+      shortScoreWord={t.short}
+      scoreWords={[t.weak, t.weak, t.okay, t.good, t.strong]}
     />
   );
 };

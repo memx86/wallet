@@ -85,8 +85,9 @@
     "feelFree": "Не соромтесь додати кілька транзакцій!"
   },
   "navigation": {
-    "homes": "Головна",
-    "diagram": "Діаграма"
+    "home": "Головна",
+    "diagram": "Діаграма",
+    "currency": "Валюта"
   },
 
   "registrationPage": {

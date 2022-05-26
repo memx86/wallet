@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import { Formik } from "formik";
-import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 
@@ -12,6 +11,8 @@ import {
   ValidationsReg,
 } from "assets/schemas/authFormSchemas";
 import spriteSvg from "assets/images/sprite.svg";
+
+import useTranslation from "assets/hooks/useTranslation";
 
 import PasswordStrength from "components/PasswordStrength";
 import Logo from "components/Logo";
@@ -27,7 +28,8 @@ export const authType = {
 const AuthForm = ({ type }) => {
   const dispatch = useDispatch();
   const isRegister = type === authType.registration;
-  const { t } = useTranslation();
+  const { t } = useTranslation("authForm");
+  const { t: translation } = useTranslation();
   const initialValues = isRegister
     ? {
         username: "",
@@ -60,13 +62,13 @@ const AuthForm = ({ type }) => {
           dispatch(setToken(response.token));
           dispatch(loggedIn());
         } catch (error) {
-          const message = isRegister
-            ? `${t("authForm.already")}`
-            : `${t("authForm.emailPassError")}`;
+          const message = isRegister ? t.already : t.emailPassError;
           toast.error(message);
         }
       }}
-      validationSchema={isRegister ? ValidationsReg(t) : ValidationLogin(t)}
+      validationSchema={
+        isRegister ? ValidationsReg(translation) : ValidationLogin(translation)
+      }
     >
       {({
         values,
@@ -85,7 +87,7 @@ const AuthForm = ({ type }) => {
               className={s.input}
               type="email"
               name="email"
-              placeholder={t("authForm.email")}
+              placeholder={t.email}
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.email}
@@ -105,7 +107,7 @@ const AuthForm = ({ type }) => {
               className={s.input}
               type="password"
               name="password"
-              placeholder={t("authForm.password")}
+              placeholder={t.password}
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.password}
@@ -128,7 +130,7 @@ const AuthForm = ({ type }) => {
                   className={s.input}
                   type="password"
                   name="confirmPassword"
-                  placeholder={t("authForm.confirmPassword")}
+                  placeholder={t.confirmPassword}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.confirmPassword}
@@ -152,7 +154,7 @@ const AuthForm = ({ type }) => {
                   className={s.input}
                   type="username"
                   name="username"
-                  placeholder={t("authForm.enterYourName")}
+                  placeholder={t.enterYourName}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.username}
@@ -173,18 +175,14 @@ const AuthForm = ({ type }) => {
             className={s.enterBtn}
             type="submit"
             disabled={!isValid && !dirty}
-            text={
-              isRegister
-                ? `${t("authForm.register")}`
-                : `${t("authForm.login")}`
-            }
+            text={isRegister ? t.register : t.login}
           />
           <Button
             type="link"
             styleType={STYLE_TYPE.SECONDARY}
             to={isRegister ? "/login" : "/register"}
             className={s.loginBtn}
-            text={isRegister ? t("authForm.loginReg") : t("authForm.signUp")}
+            text={isRegister ? t.loginReg : t.signUp}
           />
         </form>
       )}
