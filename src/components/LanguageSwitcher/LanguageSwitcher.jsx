@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+import getUserLocale from "get-user-locale";
+
 import useTranslation from "assets/hooks/useTranslation";
 
 import LANGUAGES from "assets/constants/LANGUAGES";
@@ -11,12 +14,19 @@ import { setLocale } from "redux/locale";
 import s from "./LanguageSwitcher.module.scss";
 
 export default function LanguageSwitchers() {
-  const { t } = useTranslation("switcher");
+  const userLocale = getUserLocale();
+  const { t, language } = useTranslation("switcher");
   const dispatch = useDispatch();
 
   const changeLanguage = (lang) => {
     dispatch(setLocale(lang));
   };
+
+  useEffect(() => {
+    if (language) return;
+    changeLanguage(userLocale);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className={s.wrapBtn}>

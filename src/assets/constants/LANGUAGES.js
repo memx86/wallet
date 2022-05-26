@@ -1,5 +1,5 @@
 const LANGUAGES = {
-  EN: "en",
-  UA: "ua",
+  EN: "en-US",
+  UA: "ua-UK",
 };
 export default LANGUAGES;
